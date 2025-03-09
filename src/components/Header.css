@@ -1,0 +1,57 @@
+.header {
+    background-color: #ffffff; /* Fondo blanco */
+    color: #1e3a8a; /* Texto azul */
+    padding-left: 100px; /* Padding izquierdo */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px; /* Ajustar la altura si es necesario */
+    position: fixed; /* Hacer que el header sea fijo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10; /* Asegurar que el header esté por encima de otros elementos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir una sombra para destacar el header */
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem; /* Ajustar el tamaño del texto */
+    color: #1e3a8a; /* Texto azul */
+    text-decoration: none;
+  }
+  
+  .nav-link:hover {
+    color: #93c5fd; /* Hover color */
+  }
+  
+  .nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-button {
+    display: none; /* Ocultar el botón del menú en pantallas grandes */
+  }
+  
+  @media (max-width: 768px) {
+    .nav {
+      display: none; /* Ocultar el menú en pantallas pequeñas */
+    }
+  
+    .menu-button {
+      display: block; /* Mostrar el botón del menú en pantallas pequeñas */
+    }
+  
+    .nav.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 80px;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 20; /* Asegurar que el nav esté por encima de otros elementos */
+    }
+  }
