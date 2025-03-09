@@ -15,7 +15,7 @@
   }
   
   .nav-link {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem; /* Ajustar el padding */
     font-size: 1.2rem; /* Ajustar el tamaño del texto */
     color: #1e3a8a; /* Texto azul */
     text-decoration: none;
@@ -28,10 +28,15 @@
   .nav {
     display: flex;
     align-items: center;
+    padding-right: 10%;;
   }
   
   .menu-button {
     display: none; /* Ocultar el botón del menú en pantallas grandes */
+  }
+  
+  .logo {
+    padding: 10px; /* Agregar padding al logo */
   }
   
   @media (max-width: 768px) {

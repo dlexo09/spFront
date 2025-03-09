@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import banners from "../data/banners.json";
+import './Banner.css'; // Importar el archivo CSS personalizado
 
 const Banner = () => {
   const [index, setIndex] = useState(0);
@@ -12,11 +13,11 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-64">
+    <div className="banner-container">
       <img 
         src={banners[index].image} 
         alt={banners[index].alt} 
-        className="w-full h-full object-cover transition-opacity duration-500"
+        className="banner-image"
       />
     </div>
   );
