@@ -1,5 +1,4 @@
 [
-    { "id": 1, "image": "/src/assets/img/homeHero1.png", "alt": "Impresora Oficina" },
-    { "id": 2, "image": "/src/assets/img/homeHero2.jpg", "alt": "Ploter" }
+    { "id": 1, "image": "/src/assets/img/homeHero1.png", "alt": "Impresora Oficina" }
   ]
   

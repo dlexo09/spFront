@@ -1,0 +1,120 @@
+.productHome-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  background-color: #ffffff; /* Fondo blanco */
+}
+
+.productHome-content {
+  text-align: center;
+  margin-bottom: 50px; /* Agregar 50px de separación entre el texto y el Swiper */
+}
+
+.productHome-title {
+  font-size: 2.5rem; /* Aumentar tamaño de la tipografía */
+  color: #1e3a8a; /* Texto azul */
+  margin-bottom: 20px;
+}
+
+.productHome-text {
+  font-size: 1.5rem; /* Aumentar tamaño de la tipografía */
+  color: #1e3a8a; /* Texto azul */
+}
+
+.banner-streaming-home {
+  margin-bottom: 50px; /* Agregar margen inferior para evitar que se encimen */
+}
+
+.swiper-container {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  margin: 40px 0; /* Agregar margen de 40px arriba y abajo */
+  position: relative; /* Para posicionar los botones de navegación */
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  color: #1e3a8a; /* Color azul */
+}
+
+.swiper-button-prev {
+  left: 10px;
+}
+
+.swiper-button-next {
+  right: 10px;
+}
+
+.swiper-img-container {
+  height: 500px;
+  width: 500px;
+  border-radius: 40px;
+  box-shadow: 0 0 20px 2px #00000029;
+  overflow: hidden;
+  position: relative;
+}
+
+.swiper-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.swiper-content h3 {
+  color: #ffffff; /* Texto blanco */
+}
+
+.swiper-content p {
+  color: #ffffff; /* Texto blanco */
+  margin-bottom: 20px; /* Agregar margen inferior para separar del botón */
+}
+
+.swiper-content .swiper-button {
+  margin-top: 20px; /* Agregar margen superior para separar del texto */
+  padding: 10px 20px;
+  background-color: #ffffff; /* Fondo blanco */
+  color: #1e3a8a; /* Texto azul */
+  border: 2px solid #1e3a8a; /* Borde azul */
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.swiper-content .swiper-button:hover {
+  background-color: #1e3a8a; /* Fondo azul al pasar el ratón */
+  color: #ffffff; /* Texto blanco al pasar el ratón */
+}
+
+.catalog-button {
+  margin-top: 50px; /* Agregar margen superior para separar del Swiper */
+  padding: 15px 30px; /* Aumentar padding del botón */
+  background-color: #1e3a8a; /* Fondo azul */
+  color: #ffffff; /* Texto blanco */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1.5rem; /* Aumentar tamaño de la tipografía */
+}
+
+.catalog-button:hover {
+  background-color: #163a6a; /* Fondo azul oscuro al pasar el ratón */
+}

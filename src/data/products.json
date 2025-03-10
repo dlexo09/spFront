@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "Surecolor F170",
+    "family": "Sublimación",
+    "category": "Ploters",
+    "subCategory": "Semi-Profesional",
+    "brand": "Epson",
+    "price": 1000,
+    "image": "/src/assets/img/productos/Epson/F170/F170.jpg",
+    "sku": "C11CJ80201"
+  },
+  {
+    "id": 1,
+    "name": "Surecolor F570",
+    "family": "Sublimación",
+    "category": "Ploters",
+    "subCategory": "Semi-Profesional",
+    "brand": "Epson",
+    "price": 1001,
+    "image": "/src/assets/img/productos/Epson/F570/F570.jpg",
+    "sku": "SCF570LA"
+  }
+]
