@@ -7,7 +7,7 @@ const ProductCatalog = () => {
   const [filters, setFilters] = useState({ family: "", brand: "", category: "" });
 
   useEffect(() => {
-    fetch("/src/data/products.json") // Asegúrate de que esta ruta sea correcta
+    fetch("/products.json") // Asegúrate de que esta ruta sea correcta
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");

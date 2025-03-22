@@ -1,0 +1,192 @@
+[
+  {
+    "id": 1,
+    "name": "Surecolor F170",
+    "family": "Sublimación",
+    "category": "Ploters",
+    "subCategory": "Semi-Profesional",
+    "brand": "Epson",
+    "image": "/img/productos/Epson/F170/F170.jpg",
+    "galeria":[
+      "/img/productos/Epson/F170/F170.jpg",
+      "/img/productos/Epson/F170/F170_1.jpg",
+      "/img/productos/Epson/F170/F170_2.jpg"
+    ],
+    "descripcionCorta": "La solución completa de sublimación de tinta, tamaño carta, que brinda resultados de gran calidad con respaldo desde el principio.",
+    "datasheet": "/img/productos/Epson/F170/SURECOLOR-F170-WEB.pdf",
+    "sku": "epson-f170",
+    "pn": "C11CJ80201"
+
+
+    },
+  {
+    "id": 2,
+    "name": "Surecolor F570",
+    "family": "Sublimación",
+    "category": "Ploters",
+    "subCategory": "Semi-Profesional",
+    "brand": "Epson",
+    "price": 1001,
+    "image": "/img/productos/Epson/F570/F570.jpg",
+    "galeria": [
+      "/img/productos/Epson/F570/F570.jpg",
+      "/img/productos/Epson/F570/F570_2.jpg",
+      "/img/productos/Epson/F570/F570_3.jpg",
+      "/img/productos/Epson/F570/F570_4.jpg"
+    ],
+    "descripcionCorta": "Solución completa de 24 pulgadas para impresiones de sublimación rápidas y eficientes",
+    "datasheet": "/img/productos/Epson/F571/SURECOLOR-F570-WEB.pdf",
+    "sku": "impresora-epson-surecolor-f570",
+    "pn": "SCF570LA"
+  },
+  {
+    "id": 3,
+    "name": "Surecolor F571",
+    "family": "Sublimación",
+    "category": "Ploters",
+    "subCategory": "Semi-Profesional",
+    "brand": "Epson",
+    "price": 1002,
+    "image": "/img/productos/Epson/F571/F571.jpg",
+    "galeria": [
+      "/img/productos/Epson/F571/F571.jpg",
+      "/img/productos/Epson/F571/F571_1.jpg",
+      "/img/productos/Epson/F571/F571_2.jpg"
+    ],
+    "descripcionCorta": "Obtenga impresiones rápidas y confiables con la SureColor® F571 de 24. Ideal para personalizar premios, tazas, almohadillas y más, esta impresora de sublimación de tinta de alto rendimiento ofrece calidad profesional utilizando la potente tecnología PrecisionCore®.",
+    "datasheet": "/img/productos/Epson/F571/SURECOLOR-F571-WEB.pdf",
+    "sku": "epson-f571",
+    "pn": "SCF571LA"
+  },
+  {
+    "id": 4,
+    "name": "Surecolor F6470",
+    "family": "Sublimación",
+    "category": "Ploters",
+    "subCategory": "Profesional",
+    "brand": "Epson",
+    "price": 2001,
+    "image": "/img/productos/Epson/F6470/F6470.jpg",
+    "galeria": [
+      "/img/productos/Epson/F6470/F6470.jpg",
+      "/img/productos/Epson/F6470/F6470_1.jpg",
+      "/img/productos/Epson/F6470/F6470_2.jpg"
+    ],
+    "descripcionCorta": "Impresora digital de sublimación de tinta de 4 colores versátil y de alto rendimiento",
+    "datasheet": "/img/productos/Epson/F6470/SURECOLOR-F6470.pdf",
+    "sku": "epson-F6470",
+    "pn": "SCF6470PE"
+  },
+  {
+    "id": 5,
+    "name": "Surecolor F6470H",
+    "family": "Sublimación",
+    "category": "Ploters",
+    "subCategory": "Profesional",
+    "brand": "Epson",
+    "price": 2001,
+    "image": "/img/productos/Epson/F6470H/F6470H.jpg",
+    "galeria": [
+      "/img/productos/Epson/F6470H/F6470H.jpg",
+      "/img/productos/Epson/F6470H/F6470H_1.jpg",
+      "/img/productos/Epson/F6470H/F6470H_2.jpg"
+    ],
+    "descripcionCorta": "Maximice la productividad de su empresa con la impresora digital de alto rendimiento Epson SureColor F6470H",
+    "datasheet": "/img/productos/Epson/F6470H/SURECOLOR-F6470H-WEB.pdf",
+    "sku": "epson-F6470H",
+    "pn": "SCF6470HPE"
+  },
+  {
+    "id": 6,
+    "name": "SureColor F7200",
+    "family": "Sublimación",
+    "category": "Ploters",
+    "subCategory": "Profesional",
+    "brand": "Epson",
+    "price": 2001,
+    "image": "/img/productos/Epson/F7200/F7200.jpg",
+    "galeria": [
+      "/img/productos/Epson/F7200/F7200.jpg",
+      "/img/productos/Epson/F7200/F7200_1.jpg",
+      "/img/productos/Epson/F7200/F7200_2.jpg"
+    ],
+    "descripcionCorta": "Maximice la productividad de su empresa con la impresora digital de alto rendimiento Epson SureColor F6470H",
+    "datasheet": "/img/productos/Epson/F7200/SURECOLOR-F7200-WEB.pdf",
+    "sku": "impresora-epson-surecolor-f7200-64¨",
+    "pn": "SCF7200PS"
+  },
+  {
+    "id": 7,
+    "name": "Surecolor F9470",
+    "family": "Sublimación",
+    "category": "Ploters",
+    "subCategory": "Profesional",
+    "brand": "Epson",
+    "price": 2001,
+    "image": "/img/productos/Epson/F9470/F9470.jpg",
+    "galeria": [
+      "/img/productos/Epson/F9470/F9470.jpg"
+    ],
+    "descripcionCorta": "Productividad confiable y de alta velocidad para transferencias digitales de sublimación de tinta",
+    "datasheet": "/img/productos/Epson/F9470/SURECOLOR-F9470-WEB.pdf",
+    "sku": "epson-f9470",
+    "pn": "SCF9470PE"
+  },
+  {
+    "id": 8,
+    "name": "Surecolor F9470H",
+    "family": "Sublimación",
+    "category": "Ploters",
+    "subCategory": "Profesional",
+    "brand": "Epson",
+    "price": 2001,
+    "image": "/img/productos/Epson/F9470H/F9470H.jpg",
+    "galeria": [
+      "/img/productos/Epson/F9470H/F9470H.jpg"
+    ],
+    "descripcionCorta": "Productividad confiable y de alta velocidad para transferencias digitales de sublimación de tinta",
+    "datasheet": "/img/productos/Epson/F9470H/SURECOLOR-F9470H-WEB.pdf",
+    "sku": "epson-f9470h",
+    "pn": "SCF9470HPE"
+  },
+  {
+    "id": 9,
+    "name": "Surecolor F10070",
+    "family": "Sublimación",
+    "category": "Ploters",
+    "subCategory": "Industrial",
+    "brand": "Epson",
+    "price": 2001,
+    "image": "/img/productos/Epson/F10070/F10070.jpg",
+    "galeria": [
+      "/img/productos/Epson/F10070/F10070.jpg",
+      "/img/productos/Epson/F10070/F10070_1.jpg",
+      "/img/productos/Epson/F10070/F10070_2.jpg",
+      "/img/productos/Epson/F10070/F10070_3.jpg",
+      "/img/productos/Epson/F10070/F10070_4.jpg"
+    ],
+    "descripcionCorta": "Productividad confiable y de alta velocidad para transferencias digitales de sublimación de tinta",
+    "datasheet": "/img/productos/Epson/F10070/SURECOLOR-F9470H-WEB.pdf",
+    "sku": "epson-F10070",
+    "pn": "epson-F10070"
+  },
+  {
+    "id": 10,
+    "name": "Surecolor F10070H",
+    "family": "Sublimación",
+    "category": "Ploters",
+    "subCategory": "Industrial",
+    "brand": "Epson",
+    "price": 2001,
+    "image": "/img/productos/Epson/F10070H/F10070H.jpg",
+    "galeria": [
+      "/img/productos/Epson/F10070H/F10070H.jpg",
+      "/img/productos/Epson/F10070H/F10070H_1.jpg",
+      "/img/productos/Epson/F10070H/F10070H_2.jpg"
+    ],
+    "descripcionCorta": "Productividad confiable y de alta velocidad para transferencias digitales de sublimación de tinta",
+    "datasheet": "/img/productos/Epson/F10070H/SURECOLOR-F10070H-WEB.pdf",
+    "sku": "epson-F10070H",
+    "pn": "epson-F10070H"
+  }
+]

@@ -1,0 +1,56 @@
+.product-detail {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 80px; /* Ajusta este valor según la altura de tu navbar */
+  }
+  
+  .product-detail-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .product-detail-image {
+    flex: 1;
+    padding: 1rem;
+  }
+  
+  .product-detail-info {
+    flex: 1;
+    padding: 1rem;
+  }
+  
+  .product-gallery img {
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  
+  .product-gallery img:hover {
+    border-color: #007bff; /* Color azul */
+  }
+  
+  .btn-download {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff; /* Color azul */
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-download:hover {
+    background-color: #0056b3; /* Color azul oscuro */
+  }
+  
+  #ccs-feature-icons,
+  #ccs-logos,
+  #ccs-inline-content,
+  #ccs-explore-product {
+    max-width: 1200px;
+    margin: 2rem auto;
+  }
