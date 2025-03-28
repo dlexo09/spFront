@@ -1,23 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import RelatedProducts from "../components/RelatedProducts"; // Importar el componente
 import './ProductDetail.css'; // Importar el archivo CSS personalizado
 
 const ProductDetail = () => {
-  const { sku } = useParams();
+  const { sku } = useParams(); // Obtener el SKU desde la URL
   const [product, setProduct] = useState(null);
+  const [gallery, setGallery] = useState([]); // Estado para la galería de imágenes
   const [selectedImage, setSelectedImage] = useState("");
 
   useEffect(() => {
-    fetch("/products.json") // Asegúrate de que esta ruta sea correcta
-      .then((res) => res.json())
-      .then((data) => {
-        const foundProduct = data.find((p) => p.sku === sku);
-        setProduct(foundProduct);
-        setSelectedImage(foundProduct?.image || "");
+    // Cargar datos del producto
+    fetch("/products.json")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("No se pudo cargar el archivo products.json");
+        }
+        return res.json();
       })
-      .catch((error) => console.error("Error fetching the product:", error));
+      .then((data) => {
+        const foundProduct = data.find((item) => item.sku === sku);
+        if (foundProduct) {
+          setProduct(foundProduct);
+          setSelectedImage(foundProduct.imagen); // Establecer la imagen principal
+        } else {
+          console.error("Producto no encontrado");
+        }
+      })
+      .catch((error) => console.error("Error al cargar los datos del producto:", error));
+
+    // Cargar datos de la galería
+    fetch("/galeriaproductos.json")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("No se pudo cargar el archivo galeriaproductos.json");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        const productGallery = data.filter((item) => item.sku === sku);
+        setGallery(productGallery.map((item) => item.image_url)); // Guardar las URLs de las imágenes
+      })
+      .catch((error) => console.error("Error al cargar los datos de la galería:", error));
   }, [sku]);
 
+  // Agregar el script dinámico cuando el producto esté disponible
   useEffect(() => {
     if (product) {
       const script = document.createElement("script");
@@ -26,8 +53,8 @@ const ProductDetail = () => {
       script.innerHTML = `
         var ccs_cc_args = ccs_cc_args || [];
         ccs_cc_args.push(['cpn', '${product.sku}']);
-        ccs_cc_args.push(['mf', '${product.brand}']);
-        ccs_cc_args.push(['pn', '${product.pn}']);
+        ccs_cc_args.push(['mf', '${product.marca}']);
+        ccs_cc_args.push(['pn', '${product.pn || "N/A"}']);
         ccs_cc_args.push(['upcean', 'UPC_EAN_CODE']);
         ccs_cc_args.push(['ccid', 'CATALOG_CODE']);
         ccs_cc_args.push(['lang', 'ES']);
@@ -44,40 +71,62 @@ const ProductDetail = () => {
   }, [product]);
 
   if (!product) {
-    return <div>Loading...</div>;
+    return <div>Cargando producto...</div>; // Mostrar un mensaje de carga mientras se obtienen los datos
   }
 
   return (
     <>
       <div className="container mx-auto p-4 product-detail">
         <div className="product-detail-content grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Imagen principal del producto */}
           <div className="product-detail-image">
-            <img src={selectedImage} alt={product.name} className="w-full h-auto object-contain" />
+            <img
+              src={`/img/productos/${selectedImage}`}
+              alt={product.nombre}
+              className="w-full h-auto object-contain"
+            />
+            {/* Galería de imágenes */}
             <div className="product-gallery mt-4 grid grid-cols-4 gap-2">
-              {product.galeria.map((img, index) => (
+              {gallery.map((img, index) => (
                 <img
                   key={index}
-                  src={img}
+                  src={`/img/productos/${img}`}
                   alt={`Gallery ${index + 1}`}
                   className="w-full h-24 object-cover cursor-pointer"
-                  onClick={() => setSelectedImage(img)}
+                  onClick={() => setSelectedImage(img)} // Cambiar la imagen principal al hacer clic
                 />
               ))}
             </div>
           </div>
+          {/* Información del producto */}
           <div className="product-detail-info">
-            <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
-            <p className="text-gray-600 text-lg mb-4">{product.category}</p>
-            <p className="text-green-500 font-bold text-2xl mb-4">${product.price || "Cotización"}</p>
+            <h1 className="text-4xl font-bold mb-4">{product.nombre}</h1>
+            <p className="text-gray-600 text-lg mb-4">Categoría: {product.categoria}</p>
+            <p className="text-gray-600 text-lg mb-4">Marca: {product.marca}</p>
+            <br />
+            <p className="text-gray-600 text-lg mb-4">SKU: {product.pn}</p>
+            <br />
             <p className="text-lg mb-4">{product.descripcionCorta}</p>
-            <a href={product.datasheet} className="btn-download" target="_blank" rel="noopener noreferrer">Descargar Ficha Técnica</a>
+            <p className="text-lg mb-4">{product.descripcionLarga}</p>
+            <a
+              href={product.datasheet}
+              className="btn-download"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Descargar Ficha Técnica
+            </a>
           </div>
         </div>
       </div>
-      <div id="ccs-feature-icons" className="my-8"></div>
-      <div id="ccs-logos" className="my-8"></div>
-      <div id="ccs-inline-content" className="my-8"></div>
-      <div id="ccs-explore-product" className="my-8"></div>
+      {/* Componente para productos relacionados */}
+      <RelatedProducts currentSku={sku} />
+      
+      {/* Bloque HTML adicional */}
+      <div id="ccs-feature-icons"></div>
+      <div id="ccs-logos"></div>
+      <div id="ccs-inline-content"></div>
+      <div id="ccs-explore-product"></div>
     </>
   );
 };

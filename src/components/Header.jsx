@@ -19,8 +19,9 @@ const Header = () => {
       </button>
       <nav className={`nav ${isOpen ? "open" : ""}`}>
         <Link to="/" className="nav-link">Inicio</Link>
+        <Link to="/about" className="nav-link">Nosotros</Link>
         <Link to="/productos" className="nav-link">Productos</Link>
-        <Link to="/servicios" className="nav-link">Servicios</Link>
+        {/* <Link to="/servicios" className="nav-link">Servicios</Link> */}
         <Link to="/contacto" className="nav-link">Contacto</Link>
       </nav>
     </header>

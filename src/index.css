@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.text-blue-epson {
+    color: #003399; /* Azul tipo Epson */
+  }

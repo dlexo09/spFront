@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import About from './components/About';
+import About from './pages/About';
 import Productos from "./pages/Productos";
 import ProductDetail from "./pages/ProductDetail";
 import ZohoChat from "./components/ZohoChat"; // Importar el componente del chat

@@ -6,8 +6,8 @@ const FilterBar = ({ filters, setFilters }) => {
     <div className="filter-bar flex space-x-4 mb-4">
       <select
         className="p-2 border rounded"
-        value={filters.family}
-        onChange={(e) => setFilters({ ...filters, family: e.target.value })}
+        value={filters.familia}
+        onChange={(e) => setFilters({ ...filters, familia: e.target.value })}
       >
         <option value="">Familia</option>
         <option value="Sublimación">Sublimación</option>
@@ -25,8 +25,8 @@ const FilterBar = ({ filters, setFilters }) => {
 
       <select
         className="p-2 border rounded"
-        value={filters.brand}
-        onChange={(e) => setFilters({ ...filters, brand: e.target.value })}
+        value={filters.marca}
+        onChange={(e) => setFilters({ ...filters, marca: e.target.value })}
       >
         <option value="">Marca</option>
         <option value="Epson">Epson</option>
@@ -38,8 +38,8 @@ const FilterBar = ({ filters, setFilters }) => {
 
       <select
         className="p-2 border rounded"
-        value={filters.category}
-        onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+        value={filters.categoria}
+        onChange={(e) => setFilters({ ...filters, categoria: e.target.value })}
       >
         <option value="">Categoría</option>
         <option value="Impresoras">Impresoras</option>

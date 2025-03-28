@@ -1,12 +1,12 @@
 import Banner from "../components/Banner";
-import About from "../components/About";
+import AboutContent from "../components/AboutContent";
 import Swiper2 from "../components/Swiper2";
 
 
 const Home = () => {
   return (
     <div>
-      <About />
+      <AboutContent />
       <Swiper2 />
       <Banner />
      
