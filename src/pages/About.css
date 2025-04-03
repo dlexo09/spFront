@@ -1,76 +1,69 @@
-.about-section-page {
-  padding: 2rem 1rem;
-  background-color: #f9f9f9;
+/* Estilos generales */
+.bg-gray-100 {
+  background-color: #f7f7f7;
+}
+
+.text-gray-800 {
   color: #333;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem; /* Espaciado entre secciones */
 }
 
-.about-content {
-  max-width: 800px;
-  text-align: center;
+.text-blue-epson {
+  color: #003399; /* Azul tipo Epson */
 }
 
-.about-title {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  /* Encabezado */
+  .text-5xl {
+    font-size: 2rem; /* Reducir el tamaño del título principal */
+  }
 
-.about-text {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  margin-bottom: 1rem;
-}
+  .text-xl {
+    font-size: 1rem; /* Reducir el tamaño del texto */
+  }
 
-.about-image-container {
-  width: 100%;
-  max-width: 1200px;
-  text-align: center;
-}
+  .mb-12 {
+    margin-bottom: 2rem; /* Reducir el margen inferior */
+  }
 
-.about-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+  /* Sección de Historia */
+  .grid {
+    display: flex;
+    flex-direction: column; /* Cambiar a diseño vertical */
+    gap: 1.5rem; /* Reducir el espacio entre elementos */
+  }
 
-.values-section {
-  width: 100%;
-  background-color: #ffffff;
-  padding: 2rem 1rem;
-  text-align: center;
-}
+  .rounded-lg {
+    border-radius: 0; /* Eliminar bordes redondeados en imágenes */
+  }
 
-.values-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
+  .shadow-lg {
+    box-shadow: none; /* Eliminar sombras en imágenes */
+  }
 
-.values-list {
-  list-style: none;
-  padding: 0;
-  max-width: 800px;
-  margin: 0 auto;
-}
+  /* Sección de Misión y Visión */
+  .mt-16 {
+    margin-top: 2rem; /* Reducir el margen superior */
+  }
 
-.value-item {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  text-align: left;
-  padding-left: 1rem;
-  position: relative;
-}
+  .py-6 {
+    padding: 1rem 0; /* Reducir el padding vertical */
+  }
 
-.value-item::before {
-  content: "✔";
-  color: #007bff;
-  font-weight: bold;
-  position: absolute;
-  left: 0;
-  top: 0;
+  /* Sección de Valores */
+  .grid-cols-2 {
+    grid-template-columns: 1fr; /* Cambiar a una sola columna en móviles */
+  }
+
+  .gap-6 {
+    gap: 1rem; /* Reducir el espacio entre elementos */
+  }
+
+  .text-xl {
+    font-size: 1rem; /* Reducir el tamaño del texto */
+  }
+
+  .p-4 {
+    padding: 1rem; /* Ajustar el padding interno */
+  }
 }

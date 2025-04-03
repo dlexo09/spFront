@@ -9,7 +9,7 @@ const AboutContent = () => {
     <section className="about-section-component">
       <div className="about-content-component">
         <h1 className="about-title-component">Donde la creatividad se encuentra con la tecnología</h1>
-        <p className="about-text-component">
+        <p className="about-text-component text-justify">
         Potenciamos la creatividad con soluciones de impresión innovadoras. Ya sea en papel, textil o etiquetas, nuestra tecnología convierte tus ideas en realidad.
         </p>
         

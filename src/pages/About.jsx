@@ -1,8 +1,7 @@
 import React from "react";
 import AboutContent from "../components/AboutContent";
 
-
-const AboutUs = () => {
+const About = () => {
   return (
     <>
       <AboutContent />
@@ -17,7 +16,7 @@ const AboutUs = () => {
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
           <div>
             <h3 className="text-5xl font-semibold text-blue-epson">Nuestra Historia</h3>
-            <p className="text-xl mt-4 text-gray-700 py-6">
+            <p className="text-xl mt-4 text-gray-700 py-6 text-justify">
               Desde 2002, Siscoprint ha sido pionero en impresión digital, expandiéndose a lo largo de México con 8 sucursales y miles de clientes satisfechos.
             </p>
           </div>
@@ -29,12 +28,12 @@ const AboutUs = () => {
           <img src="/img/Vision.png" alt="Misión y Visión" className="rounded-lg shadow-lg" />
           <div>
             <h3 className="text-4xl font-semibold text-blue-epson">Nuestra Misión</h3>
-            <p className="text-xl mt-4 text-gray-700 py-6">
-              Satisfacer las necesidades y expectativas de nuestros socios de negocio, al ofrecer respaldo con productos y servicios diferenciados de alta calidad
+            <p className="text-xl mt-4 text-gray-700 py-6 text-justify">
+              Satisfacer las necesidades y expectativas de nuestros socios de negocio, al ofrecer respaldo con productos y servicios diferenciados de alta calidad.
             </p>
             <h3 className="text-4xl font-semibold text-blue-epson mt-6">Nuestra Visión</h3>
-            <p className="text-xl mt-4 text-gray-700 py-6">
-              Convertirnos en un socio de negocios integral, comprometidos a ofrecer un servicio rápido y confiable, en la búsqueda de generar una relación de valor y largo plazo para nuestros socios de negocio y colaboradores. Sustentada en nuestros valores, siempre buscando superar sus expectativas
+            <p className="text-xl mt-4 text-gray-700 py-6 text-justify">
+              Convertirnos en un socio de negocios integral, comprometidos a ofrecer un servicio rápido y confiable, en la búsqueda de generar una relación de valor y largo plazo para nuestros socios de negocio y colaboradores. Sustentada en nuestros valores, siempre buscando superar sus expectativas.
             </p>
           </div>
         </div>
@@ -42,7 +41,7 @@ const AboutUs = () => {
         {/* Sección de Valores */}
         <div className="max-w-4xl mx-auto text-center mt-16 py-12">
           <h3 className="text-4xl font-semibold text-blue-epson">Nuestros Valores</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-6 py-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-6 py-6 sm:grid-cols-1">
             {[
               "Honestidad",
               "Compromiso",
@@ -65,4 +64,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default About;
