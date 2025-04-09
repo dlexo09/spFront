@@ -67,6 +67,13 @@ const ProductDetail = () => {
         })();
       `;
       document.body.appendChild(script);
+
+      // Ocultar el elemento específico
+      const elementToHide = document.querySelector('a.ccs-cc-ficons-item.ccs-cc-active[title="Haga clic para ver Documentos"]');
+      if (elementToHide) {
+        elementToHide.style.display = "none";
+      }
+
     }
   }, [product]);
 
@@ -121,7 +128,7 @@ const ProductDetail = () => {
       </div>
       {/* Componente para productos relacionados */}
       <RelatedProducts currentSku={sku} />
-      
+
       {/* Bloque HTML adicional */}
       <div id="ccs-feature-icons"></div>
       <div id="ccs-logos"></div>

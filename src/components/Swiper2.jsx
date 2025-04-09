@@ -83,7 +83,7 @@ const BannerStreamingHome = () => {
                 spaceBetween: -200,
               },
               1440: {
-                slidesPerView: 3,
+                slidesPerView: 5,
                 spaceBetween: -60,
               },
             }}
