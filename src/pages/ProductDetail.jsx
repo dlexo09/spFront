@@ -60,20 +60,26 @@ const ProductDetail = () => {
         ccs_cc_args.push(['lang', 'ES']);
         ccs_cc_args.push(['market', 'MX']);
         (function () {
-          var o = ccs_cc_args; o.push(['_SKey', '5157b54c']); o.push(['_ZoneId', '0c97a52814']);
+          var o = ccs_cc_args; o.push(['_SKey', '5157b54c']); o.push(['_ZoneId', '223e25779a']);
           var sc = document.createElement('script'); sc.type = 'text/javascript'; sc.async = true;
           sc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.cs.1worldsync.com/jsc/h1ws.js';
           var n = document.getElementsByTagName('script')[0]; n.parentNode.insertBefore(sc, n);
         })();
       `;
       document.body.appendChild(script);
-
-      // Ocultar el elemento específico
-      const elementToHide = document.querySelector('a.ccs-cc-ficons-item.ccs-cc-active[title="Haga clic para ver Documentos"]');
-      if (elementToHide) {
-        elementToHide.style.display = "none";
-      }
-
+  
+      // Intentar ocultar el elemento después de que el script se haya ejecutado
+      const hideElement = () => {
+        const elementToHide = document.querySelector('a.ccs-cc-ficons-item.ccs-cc-active[title="Haga clic para ver Documentos"]');
+        if (elementToHide) {
+          elementToHide.style.display = "none";
+        } else {
+          // Si el elemento no está disponible, intentar nuevamente después de un breve retraso
+          setTimeout(hideElement, 500);
+        }
+      };
+  
+      hideElement();
     }
   }, [product]);
 
