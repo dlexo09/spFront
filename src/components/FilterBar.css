@@ -1,3 +1,20 @@
+ /* Estilo general para los filtros */
 .filter-bar {
-    margin-top: 50px; /* Ajusta este valor según sea necesario */
+  margin-top: 50px; /* Ajusta este valor según sea necesario */
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas */
+  gap: 1rem; /* Espaciado entre los filtros */
+}
+
+/* Estilo para pantallas pequeñas */
+@media (max-width: 768px) {
+  .filter-bar {
+    flex-direction: column; /* Cambia la dirección a columna */
+    align-items: stretch; /* Asegura que los filtros ocupen todo el ancho */
   }
+
+  .filter-bar select,
+  .filter-bar button {
+    width: 100%; /* Los filtros y el botón ocupan todo el ancho */
+  }
+}

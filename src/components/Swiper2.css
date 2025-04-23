@@ -3,17 +3,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 50px 20px;
+  padding: 100px 10px;
   background-color: #ffffff; /* Fondo blanco */
+  max-width: 1440px; /* Limitar el ancho máximo */
+  margin: 0 auto; /* Centrar horizontalmente */
 }
 
 .productHome-content {
   text-align: center;
-  margin-bottom: 50px; /* Agregar 50px de separación entre el texto y el Swiper */
+  margin-bottom: 0px; /* Agregar 50px de separación entre el texto y el Swiper */
 }
 
 .productHome-title {
-  font-size: 2.5rem; /* Aumentar tamaño de la tipografía */
+  font-size: 2.6rem; /* Aumentar tamaño de la tipografía */
   color: #1e3a8a; /* Texto azul */
   margin-bottom: 20px;
 }
@@ -31,7 +33,9 @@
   display: flex;
   justify-content: center; /* Centrar horizontalmente */
   align-items: center; /* Centrar verticalmente */
-  margin: 40px 0; /* Agregar margen de 40px arriba y abajo */
+  width: 80%;
+  max-width: 1400px; /* Ajusta según tus necesidades */
+  margin: 0 auto; /* Centrar el Swiper */
   position: relative; /* Para posicionar los botones de navegación */
 }
 
@@ -72,10 +76,12 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.5);
+  /* background: rgba(0, 0, 0, 0.5); */
   color: white;
   padding: 10px;
   text-align: center;
+  margin-top: 20px; /* Agregar margen superior para separar del texto */
+  margin-bottom: 8px;
 }
 
 .swiper-content h3 {

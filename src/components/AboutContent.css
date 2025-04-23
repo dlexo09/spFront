@@ -8,7 +8,8 @@
   padding: 1rem;
   max-width: 1200px; /* Limitar el ancho máximo */
   margin: 0 auto; /* Centrar horizontalmente */
-  margin-top: 4rem; /* Agregar espacio para evitar que el título quede debajo del menú */
+  margin-top: 2rem; /* Agregar espacio para evitar que el título quede debajo del menú */
+  margin-bottom: 4rem;;
 }
 
 .about-content-component {

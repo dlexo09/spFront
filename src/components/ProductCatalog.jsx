@@ -4,7 +4,7 @@ import FilterBar from "./FilterBar";
 
 const ProductCatalog = () => {
   const [products, setProducts] = useState([]);
-  const [filters, setFilters] = useState({ familia: "", marca: "", categoria: "" });
+  const [filters, setFilters] = useState({ familia: "", marca: "", categoria: "", subcategoria: "" });
   const [loading, setLoading] = useState(true); // Estado de carga
   const [error, setError] = useState(null); // Estado de error
 
@@ -31,9 +31,11 @@ const ProductCatalog = () => {
 
   const filteredProducts = products.filter(
     (product) =>
+      product.status === "1" && // Filtrar solo productos con status igual a "1"
       (filters.familia ? product.familia === filters.familia : true) &&
       (filters.marca ? product.marca === filters.marca : true) &&
-      (filters.categoria ? product.categoria === filters.categoria : true)
+      (filters.categoria ? product.categoria === filters.categoria : true) &&
+      (filters.subcategoria ? product.subcategoria === filters.subcategoria : true)
   );
 
   if (loading) {

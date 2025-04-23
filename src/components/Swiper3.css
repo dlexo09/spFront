@@ -1,0 +1,76 @@
+.swiper3-container {
+  width: 80%;
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.swiper3-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.swiper3-image {
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.swiper3-content {
+  margin-top: 10px;
+}
+
+.swiper3-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1e3a8a;
+}
+
+.swiper3-description {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.swiper3-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #1e3a8a;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.swiper3-button:hover {
+  background-color: #164a96;
+}
+
+.swiper3-button-prev,
+.swiper3-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.swiper3-button-prev {
+  left: 10px;
+}
+
+.swiper3-button-next {
+  right: 10px;
+}

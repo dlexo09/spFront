@@ -1,12 +1,97 @@
 .banner-container {
   position: relative;
   width: 100%;
-  height: 70vh; /* Ajustar la altura al 70% de la altura de la ventana */
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.banner-header {
+  position: absolute;
+  top: 35%;
+  left: 0;
+  width: 40%;
+  height: 150px;
+  /* Asegúrate de que ocupe toda la altura del contenedor padre */
+  display: flex;
+  flex-direction: column;
+  /* Cambiar a columna si el contenido debe apilarse */
+  justify-content: center;
+  /* Centrar verticalmente */
+  align-items: flex-start;
+  /* Alinear el contenido a la izquierda */
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  /* Fondo semitransparente */
+  z-index: 9;
+}
+
+.banner-header-left {
+  flex: 1;
+  text-align: left;
+}
+
+.banner-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1e3a8a;
+  /* Azul Epson */
+  margin: 0;
+}
+
+.banner-subtitle {
+  font-size: 2.5rem;
+  color: #1e3a8a;
+  /* Azul Epson */
+  margin: 5px 0 0;
+}
+
+.banner-header-right {
+  flex: 0;
+  text-align: right;
+}
+
+.banner-logo {
+  width: 80px;
+  /* Tamaño del logo */
+  height: auto;
 }
 
 .banner-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* Asegurar que la imagen mantenga sus proporciones y se recorte si es necesario */
-  transition: opacity 0.5s ease-in-out;
+  height: auto;
+  display: block;
+}
+
+/* Tamaño de texto para pantallas pequeñas */
+@media (max-width: 768px) {
+  .banner-title {
+    font-size: 1.6rem;
+    /* Reducir aún más el tamaño del título */
+  }
+
+  .banner-subtitle {
+    font-size: 2.2rem;
+    /* Reducir aún más el tamaño del subtítulo */
+  }
+
+  .banner-header {
+    top: 25%;
+  }
+}
+
+/* Tamaño de texto para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .banner-title {
+    font-size: 1rem;
+    /* Ajustar para pantallas muy pequeñas */
+  }
+
+  .banner-subtitle {
+    font-size: 1.2rem;
+    /* Ajustar para pantallas muy pequeñas */
+  }
+
+  .banner-header {
+    top: 15%;
+  }
 }

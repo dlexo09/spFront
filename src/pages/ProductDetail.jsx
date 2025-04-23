@@ -1,13 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import RelatedProducts from "../components/RelatedProducts"; // Importar el componente
+import QuotationForm from "../components/QuotationForm"; // Importar el formulario
+
 import './ProductDetail.css'; // Importar el archivo CSS personalizado
 
 const ProductDetail = () => {
+  const [showQuotationForm, setShowQuotationForm] = useState(false); // Estado para mostrar el formulario
+  const [showPdfViewer, setShowPdfViewer] = useState(false); // Estado para mostrar el visor de PDF
   const { sku } = useParams(); // Obtener el SKU desde la URL
   const [product, setProduct] = useState(null);
   const [gallery, setGallery] = useState([]); // Estado para la galería de imágenes
   const [selectedImage, setSelectedImage] = useState("");
+
+  const handleQuotationClick = () => {
+    setShowQuotationForm(true); // Mostrar el formulario
+  };
+
+  const handleCloseForm = () => {
+    setShowQuotationForm(false); // Cerrar el formulario
+  };
+
+  const handleViewPdf = () => {
+    setShowPdfViewer(true); // Mostrar el visor de PDF
+  };
+
+  const handleClosePdf = () => {
+    setShowPdfViewer(false); // Cerrar el visor de PDF
+  };
+
 
   useEffect(() => {
     // Cargar datos del producto
@@ -67,7 +88,7 @@ const ProductDetail = () => {
         })();
       `;
       document.body.appendChild(script);
-  
+
       // Intentar ocultar el elemento después de que el script se haya ejecutado
       const hideElement = () => {
         const elementToHide = document.querySelector('a.ccs-cc-ficons-item.ccs-cc-active[title="Haga clic para ver Documentos"]');
@@ -78,7 +99,7 @@ const ProductDetail = () => {
           setTimeout(hideElement, 500);
         }
       };
-  
+
       hideElement();
     }
   }, [product]);
@@ -97,6 +118,7 @@ const ProductDetail = () => {
               src={`/img/productos/${selectedImage}`}
               alt={product.nombre}
               className="w-full h-auto object-contain"
+              onError={(e) => (e.target.src = "/img/noDisponible.jpg")} // Imagen por defecto en caso de error
             />
             {/* Galería de imágenes */}
             <div className="product-gallery mt-4 grid grid-cols-4 gap-2">
@@ -107,39 +129,82 @@ const ProductDetail = () => {
                   alt={`Gallery ${index + 1}`}
                   className="w-full h-24 object-cover cursor-pointer"
                   onClick={() => setSelectedImage(img)} // Cambiar la imagen principal al hacer clic
+                  onError={(e) => (e.target.src = "/img/noDisponible.jpg")} // Imagen por defecto en caso de error
                 />
               ))}
             </div>
           </div>
           {/* Información del producto */}
           <div className="product-detail-info">
+            {/* Mostrar el video si el campo linkYoutube no está vacío */}
+            {product.linkYoutube && (
+              <div className="product-video mt-8">
+                <iframe
+                  width="100%"
+                  height="315"
+                  src={`https://www.youtube.com/embed/${new URLSearchParams(new URL(product.linkYoutube).search).get('v')}`}
+                  title="Video del Producto"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            )}
             <h1 className="text-4xl font-bold mb-4">{product.nombre}</h1>
+            <div className="flex space-x-4">
+              {product.datasheet && (
+                <button onClick={handleViewPdf} className="btn-download">
+                  Ver Ficha Técnica
+                </button>
+              )}
+              <button
+                onClick={handleQuotationClick}
+                className="btn-quote"
+              >
+                Solicitar Cotización
+              </button>
+            </div>
+            <br />
             <p className="text-gray-600 text-lg mb-4">Categoría: {product.categoria}</p>
             <p className="text-gray-600 text-lg mb-4">Marca: {product.marca}</p>
-            <br />
             <p className="text-gray-600 text-lg mb-4">SKU: {product.pn}</p>
-            <br />
             <p className="text-lg mb-4">{product.descripcionCorta}</p>
             <p className="text-lg mb-4">{product.descripcionLarga}</p>
-            <a
-              href={product.datasheet}
-              className="btn-download"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Descargar Ficha Técnica
-            </a>
+
+
           </div>
         </div>
       </div>
       {/* Componente para productos relacionados */}
-      <RelatedProducts currentSku={sku} />
+      {/* <RelatedProducts currentSku={sku} /> */}
+
+      {/* Mostrar el visor de PDF */}
+      {showPdfViewer && (
+        <div className="pdf-viewer-overlay">
+          <div className="pdf-viewer-container">
+            <iframe
+              src={product.datasheet}
+              title="Ficha Técnica"
+              width="100%"
+              height="600px"
+            ></iframe>
+            <button onClick={handleClosePdf} className="btn-close">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Bloque HTML adicional */}
       <div id="ccs-feature-icons"></div>
       <div id="ccs-logos"></div>
       <div id="ccs-inline-content"></div>
       <div id="ccs-explore-product"></div>
+
+      {/* Mostrar el formulario de cotización */}
+      {showQuotationForm && (
+        <QuotationForm product={product} onClose={handleCloseForm} />
+      )}
     </>
   );
 };
