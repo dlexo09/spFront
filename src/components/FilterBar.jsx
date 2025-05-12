@@ -22,6 +22,7 @@ const FilterBar = ({ filters, setFilters }) => {
         <option value="">Familia</option>
         <option value="Corte">Corte</option>
         <option value="DTG">DTG</option>
+        <option value="Direct-to-Object">Direct-to-Object</option>
         <option value="Eco-solvente">Eco-solvente</option>
         <option value="Fotografía">Fotografía</option>
         <option value="Impresión laser">Impresión laser</option>
@@ -45,6 +46,7 @@ const FilterBar = ({ filters, setFilters }) => {
         <option value="GBC">GBC</option>
         <option value="Graphtec">Graphtec</option>
         <option value="Konica Minolta">Konica Minolta</option>
+        <option value="LSINC">LSINC</option>
         <option value="Siscoprint">Siscoprint</option>
         <option value="Stratojet">Stratojet</option>
       </select>
@@ -59,6 +61,7 @@ const FilterBar = ({ filters, setFilters }) => {
         <option value="Cama plana de corte">Cama plana de corte</option>
         <option value="Finalizadora">Finalizadora</option>
         <option value="Impresoras">Impresoras</option>
+        <option value="Impresoras Direct-to-Object">Impresoras Direct-to-Object</option>
         <option value="Laminadoras">Laminadoras</option>
         <option value="Planchas">Planchas</option>
         <option value="Ploter de corte">Ploter de corte</option>

@@ -31,7 +31,7 @@ if (!$responseKeys["success"]) {
 }
 
 // Opcional: Enviar un correo con los datos del formulario
-$to = "destinatario@tudominio.com"; // Cambia esto por el correo donde recibirás los mensajes
+$to = "dlexo0909@gmail.com"; // Cambia esto por el correo donde recibirás los mensajes
 $subject = "Nuevo mensaje de contacto - $contactType";
 $body = "Nombre: $name\nCorreo: $email\nTeléfono: $phone\nMensaje:\n$message";
 $headers = "From: $email";

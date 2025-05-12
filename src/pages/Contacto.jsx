@@ -7,12 +7,12 @@ const Contacto = () => {
     email: "",
     phone: "",
     message: "",
-    contactType: "soporte", // Por defecto, soporte
+    contactType: "soporte",
   });
-  const [captchaToken, setCaptchaToken] = useState(null); // Estado para el token de reCAPTCHA
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const handleCaptchaChange = (token) => {
-    setCaptchaToken(token); // Guardar el token del reCAPTCHA
+    setCaptchaToken(token);
   };
 
   const handleSubmit = (e) => {
@@ -37,8 +37,8 @@ const Contacto = () => {
       return;
     }
 
-    // Enviar los datos al servidor
-    fetch("https://www.vite.siscoprint.com/api/contacto.php", {
+    // Enviar los datos al webhook de Make
+    fetch("https://hook.us2.make.com/6uoxld9q525vw77fl3079952qjtwn1lz", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...formData, captchaToken }),
@@ -47,9 +47,9 @@ const Contacto = () => {
         if (!res.ok) {
           throw new Error("Error al enviar el formulario.");
         }
-        return res.json();
+        return res.text(); // Make responde con texto plano
       })
-      .then((data) => {
+      .then(() => {
         alert("Gracias por contactarnos. Nos pondremos en contacto contigo pronto.");
         setFormData({
           name: "",
@@ -58,7 +58,7 @@ const Contacto = () => {
           message: "",
           contactType: "soporte",
         });
-        setCaptchaToken(null); // Reiniciar el token de reCAPTCHA
+        setCaptchaToken(null);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -75,7 +75,7 @@ const Contacto = () => {
     },
     {
       nombre: "Sucursal Guadalajara",
-      direccion: "JJ Martínez Aguirre 4488 Col. Ciudad de los niños C.P. 45030",
+      direccion: "Martin Gonzales 3967 Col. Rancho nueva, CP: 44240 Guadalajara, Jalisco.",
       telefono: "(33) 3335-2216 | (33) 3335-2854",
       correo: "ventasgdl@siscoprint.com",
     },
@@ -110,7 +110,7 @@ const Contacto = () => {
       {/* Imagen del mapa */}
       <div className="mb-8">
         <img
-          src="/img/mapa.png" // Cambia esta ruta según la ubicación de tu imagen
+          src="/img/mapa.png"
           alt="Mapa de sucursales"
           className="w-full h-auto object-cover"
         />
@@ -213,13 +213,14 @@ const Contacto = () => {
           </div>
           <div className="mb-4">
             <ReCAPTCHA
-              sitekey="6Le0OyErAAAAAOAVaYfWOqug_RQrtcXVj6TUm9Ue" // Reemplaza con tu clave de sitio de reCAPTCHA
+              sitekey="6Le0OyErAAAAAOAVaYfWOqug_RQrtcXVj6TUm9Ue"
               onChange={handleCaptchaChange}
             />
           </div>
           <button
             type="submit"
             className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 w-full"
+            disabled={!captchaToken}
           >
             Enviar
           </button>

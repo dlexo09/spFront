@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import RelatedProducts from "../components/RelatedProducts"; // Importar el componente
 import QuotationForm from "../components/QuotationForm"; // Importar el formulario
+import { Link } from "react-router-dom";
+
 
 import './ProductDetail.css'; // Importar el archivo CSS personalizado
 
@@ -157,11 +159,13 @@ const ProductDetail = () => {
                   Ver Ficha Técnica
                 </button>
               )}
-              <button
-                onClick={handleQuotationClick}
-                className="btn-quote"
-              >
-                Solicitar Cotización
+              <button className="btn-quote">
+                <Link
+                  to={`/cotizacion?sku=${product.sku}&nombre=${product.nombre}`}
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
+                  Solicitar Cotización
+                </Link>
               </button>
             </div>
             <br />

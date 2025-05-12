@@ -44,7 +44,7 @@ const BannerStreamingHome = () => {
         <div className="productHome-content">
           <h1 className="productHome-title">Productos destacados</h1>
           <p className="productHome-text">
-            Conoce todo el catalogo disponible, y descubre por que siscoprint es tu mejor aliado.
+            Conoce todo el catalogo disponible, y descubre por que Siscoprint es tu mejor aliado.
           </p>
         </div>
 
@@ -85,13 +85,14 @@ const BannerStreamingHome = () => {
               },
               1440: {
                 slidesPerView: 5,
-                spaceBetween: -80,
+                spaceBetween: -60,
               },
             }}
           >
              <SwiperSlide >
                 <div className="swiper-img-container">
-                  <img src="/img/Swiper/1.png" alt="Colorado Serie M" className="w-full h-96 object-cover" />
+                  {/* Elimina h-96 */}
+                  <img src="/img/Swiper/1.png" alt="Colorado Serie M" className="w-full object-cover" /> 
                   <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
                    
                     <a href="/product/Colorado-Serie-M" className="swiper-button">Conocer más</a>
@@ -100,16 +101,19 @@ const BannerStreamingHome = () => {
               </SwiperSlide>
               <SwiperSlide >
                 <div className="swiper-img-container">
-                  <img src="/img/Swiper/2.png" alt="SureColor F6470" className="w-full h-96 object-cover" />
+                   {/* Elimina h-96 */}
+                  <img src="/img/Swiper/2.png" alt="SureColor F6470" className="w-full object-cover" />
                   <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
                    
                     <a href="/product/Surecolor-F6470" className="swiper-button">Conocer más</a>
                   </div>
                 </div>
               </SwiperSlide>
+              {/* Repite la eliminación de h-96 para las demás imágenes */}
               <SwiperSlide >
                 <div className="swiper-img-container">
-                  <img src="/img/Swiper/3.png" alt="SureColor F9570H" className="w-full h-96 object-cover" />
+                   {/* Elimina h-96 */}
+                  <img src="/img/Swiper/3.png" alt="SureColor F9570H" className="w-full object-cover" />
                   <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
                    
                     <a href="/product/Surecolor-F9570H" className="swiper-button">Conocer más</a>
@@ -118,7 +122,8 @@ const BannerStreamingHome = () => {
               </SwiperSlide>
               <SwiperSlide >
                 <div className="swiper-img-container">
-                  <img src="/img/Swiper/4.png" alt="AcuarioPrint C4065" className="w-full h-96 object-cover" />
+                   {/* Elimina h-96 */}
+                  <img src="/img/Swiper/4.png" alt="AcuarioPrint C4065" className="w-full object-cover" />
                   <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
                    
                     <a href="/product/AccurioPrint-C4065" className="swiper-button">Conocer más</a>
@@ -127,7 +132,8 @@ const BannerStreamingHome = () => {
               </SwiperSlide>
               <SwiperSlide >
                 <div className="swiper-img-container">
-                  <img src="/img/Swiper/5.png" alt="Jaguar" className="w-full h-96 object-cover" />
+                   {/* Elimina h-96 */}
+                  <img src="/img/Swiper/5.png" alt="Jaguar" className="w-full object-cover" />
                   <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
                    
                     <a href="/product/Jaguar" className="swiper-button">Conocer más</a>
@@ -136,15 +142,14 @@ const BannerStreamingHome = () => {
               </SwiperSlide>
               <SwiperSlide >
                 <div className="swiper-img-container">
-                  <img src="/img/Swiper/6.png" alt="SureColor V7000" className="w-full h-96 object-cover" />
+                   {/* Elimina h-96 */}
+                  <img src="/img/Swiper/6.png" alt="SureColor V7000" className="w-full object-cover" />
                   <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
                     
                     <a href="/product/Surecolor-V7000" className="swiper-button">Conocer más</a>
                   </div>
                 </div>
               </SwiperSlide>
-
-              
 
 
             {/* {cards.map(card => (
