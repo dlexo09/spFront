@@ -7,7 +7,6 @@ const Home = () => {
     <div>
       <Swiper2 />
       <AboutContent />
-      
       <Banner />
      
       {/* <section className="p-6 text-center">

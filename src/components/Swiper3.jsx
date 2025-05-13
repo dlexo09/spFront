@@ -1,13 +1,12 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules"; // Importar Autoplay
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./Swiper3.css"; // Archivo CSS para estilos personalizados
 
-const Swiper3 = ({  }) => {
-
+const Swiper3 = () => {
   const slides = [
     {
       image: "/img/Swiper/1.png",
@@ -58,7 +57,11 @@ const Swiper3 = ({  }) => {
           prevEl: ".swiper3-button-prev",
         }}
         pagination={{ clickable: true }}
-        modules={[Navigation, Pagination]}
+        autoplay={{
+          delay: 3000, // Cambiar cada 3 segundos
+          disableOnInteraction: false, // Continuar después de la interacción
+        }}
+        modules={[Navigation, Pagination, Autoplay]} // Agregar Autoplay como módulo
         breakpoints={{
           0: {
             slidesPerView: 1,
