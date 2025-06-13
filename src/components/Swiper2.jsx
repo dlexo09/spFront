@@ -64,49 +64,49 @@ const BannerStreamingHome = () => {
             {/* Diapositivas manuales */}
             <SwiperSlide>
               <div className="swiper-img-container">
-                <img src="/img/Swiper/1.png" alt="Colorado Serie M" className="w-full object-cover" />
+                <img src="/img/Swiper/01_CARRUSEL_EPSON F2270.png" alt="Surecolor F2270" className="w-full object-cover" />
                 <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
-                  <a href="/product/Colorado-Serie-M" className="swiper-button">Conocer más</a>
+                  <a href="/product/SCF2270SE" className="swiper-button">Conocer más</a>
                 </div>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="swiper-img-container">
-                <img src="/img/Swiper/2.png" alt="SureColor F6470" className="w-full object-cover" />
+                <img src="/img/Swiper/02_CARRUSEL_EPSON G6070.png" alt="Surecolor G6070" className="w-full object-cover" />
                 <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
-                  <a href="/product/Surecolor-F6470" className="swiper-button">Conocer más</a>
+                  <a href="/product/SCG6070SE" className="swiper-button">Conocer más</a>
                 </div>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="swiper-img-container">
-                <img src="/img/Swiper/3.png" alt="SureColor F9570H" className="w-full object-cover" />
+                <img src="/img/Swiper/03_CARRUSEL_LSINC PERIONE.png" alt="LSINC PeriOne" className="w-full object-cover" />
                 <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
-                  <a href="/product/Surecolor-F9570H" className="swiper-button">Conocer más</a>
+                  <a href="/product/PeriOne" className="swiper-button">Conocer más</a>
                 </div>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="swiper-img-container">
-                <img src="/img/Swiper/4.png" alt="AcuarioPrint C4065" className="w-full object-cover" />
+                <img src="/img/Swiper/04_CARRUSEL_GBC FOTON 30.png" alt="Foton 30" className="w-full object-cover" />
                 <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
-                  <a href="/product/AccurioPrint-C4065" className="swiper-button">Conocer más</a>
+                  <a href="/product/56-072" className="swiper-button">Conocer más</a>
                 </div>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="swiper-img-container">
-                <img src="/img/Swiper/5.png" alt="Jaguar" className="w-full object-cover" />
+                <img src="/img/Swiper/05_CARRUSEL_STRATOJET FALCON 3300.png" alt="Stratojet Falcon XL 3300" className="w-full object-cover" />
                 <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
-                  <a href="/product/Jaguar" className="swiper-button">Conocer más</a>
+                  <a href="/product/Falcon-XL-3300" className="swiper-button">Conocer más</a>
                 </div>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="swiper-img-container">
-                <img src="/img/Swiper/6.png" alt="SureColor V7000" className="w-full object-cover" />
+                <img src="/img/Swiper/06_CARRUSEL_GRAPHTEC CE7000.png" alt="Graphtec CE7000" className="w-full object-cover" />
                 <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
-                  <a href="/product/Surecolor-V7000" className="swiper-button">Conocer más</a>
+                  <a href="/product/69-035" className="swiper-button">Conocer más</a>
                 </div>
               </div>
             </SwiperSlide>

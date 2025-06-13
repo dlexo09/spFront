@@ -35,7 +35,10 @@ const Cotizacion = () => {
     console.log("Datos enviados:", { ...formData, sku, productName });
 
     try {
-      const res = await fetch("https://hook.us2.make.com/6uoxld9q525vw77fl3079952qjtwn1lz", {
+      
+      const res = await fetch("https://hook.us2.make.com/dya0asae7m1wcgju7qcmypyuqtvq2got", { /* webhook de prueba */
+        // const res = await fetch("https://hook.us2.make.com/6uoxld9q525vw77fl3079952qjtwn1lz", { /* webhook de producción */
+      // const res = await fetch("https://hook.us2.make.com/6uoxld9q525vw77fl3079952qjtwn1lz", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, sku, productName }),

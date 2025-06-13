@@ -9,6 +9,8 @@ import Productos from "./pages/Productos";
 import ProductDetail from "./pages/ProductDetail";
 import ZohoChat from "./components/ZohoChat"; // Importar el componente del chat
 import Footer from "./components/Footer";
+import RecursosClientes from "./pages/RecursosClientes";
+
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/product/:sku" element={<ProductDetail />} />
         <Route path="/cotizacion" element={<Cotizacion />} />
+        <Route path="/recursos-clientes" element={<RecursosClientes />} />
       </Routes>
       <Footer />
     </Router>
