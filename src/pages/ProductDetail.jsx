@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import RelatedProducts from "../components/RelatedProducts"; // Importar el componente
 import QuotationForm from "../components/QuotationForm"; // Importar el formulario
+import AddToCartButton from "../components/AddToCartButton"; // Importar el botón del carrito
 import { Link } from "react-router-dom";
-
 
 import './ProductDetail.css'; // Importar el archivo CSS personalizado
 
@@ -30,7 +30,6 @@ const ProductDetail = () => {
   const handleClosePdf = () => {
     setShowPdfViewer(false); // Cerrar el visor de PDF
   };
-
 
   useEffect(() => {
     // Cargar datos del producto
@@ -110,6 +109,8 @@ const ProductDetail = () => {
     return <div>Cargando producto...</div>; // Mostrar un mensaje de carga mientras se obtienen los datos
   }
 
+  const tienePrec = product.precio && product.precio > 0 && product.disponibleParaVenta === "TRUE";
+
   return (
     <>
       <div className="container mx-auto p-4 product-detail">
@@ -120,7 +121,7 @@ const ProductDetail = () => {
               src={`/img/productos/${selectedImage}`}
               alt={product.nombre}
               className="w-full h-auto object-contain"
-              onError={(e) => (e.target.src = "/img/noDisponible.jpg")} // Imagen por defecto en caso de error
+              onError={(e) => (e.target.src = "/img/noDisponible.jpg")}
             />
             {/* Galería de imágenes */}
             <div className="product-gallery mt-4 grid grid-cols-4 gap-2">
@@ -130,8 +131,8 @@ const ProductDetail = () => {
                   src={`/img/productos/${img}`}
                   alt={`Gallery ${index + 1}`}
                   className="w-full h-24 object-cover cursor-pointer"
-                  onClick={() => setSelectedImage(img)} // Cambiar la imagen principal al hacer clic
-                  onError={(e) => (e.target.src = "/img/noDisponible.jpg")} // Imagen por defecto en caso de error
+                  onClick={() => setSelectedImage(img)}
+                  onError={(e) => (e.target.src = "/img/noDisponible.jpg")}
                 />
               ))}
             </div>
@@ -153,32 +154,75 @@ const ProductDetail = () => {
               </div>
             )}
             <h1 className="text-4xl font-bold mb-4">{product.nombre}</h1>
-            <div className="flex space-x-4">
-              {product.datasheet && (
-                <button onClick={handleViewPdf} className="btn-download">
-                  Ver Ficha Técnica
-                </button>
+
+            {/* Mostrar precio si está disponible - SOLO EL PRECIO */}
+            {tienePrec && (
+              <div className="mb-6">
+                <span className="text-3xl font-bold text-green-600">
+                  ${product.precio.toLocaleString('es-MX')}
+                </span>
+              </div>
+            )}
+
+            {/* Botones de acción */}
+            <div className="flex flex-col space-y-4 mb-6">
+              <div className="flex space-x-4">
+                {product.datasheet && (
+                  <button onClick={handleViewPdf} className="btn-download">
+                    Ver Ficha Técnica
+                  </button>
+                )}
+
+                {/* Mostrar botón de cotización SOLO si NO tiene precio */}
+                {!tienePrec && (
+                  <button className="btn-quote">
+                    <Link
+                      to={`/cotizacion?sku=${product.sku}&nombre=${product.nombre}`}
+                      style={{ color: "inherit", textDecoration: "none" }}
+                    >
+                      Solicitar Cotización
+                    </Link>
+                  </button>
+                )}
+              </div>
+
+              {/* Botón Agregar al carrito - Solo si tiene precio */}
+              {tienePrec && (
+                <AddToCartButton
+                  product={{
+                    sku: product.sku,
+                    name: product.nombre,
+                    precio: product.precio,
+                    image: `/img/productos/${product.imagen}`,
+                    description: product.descripcionCorta,
+                    marca: product.marca,
+                    categoria: product.categoria,
+                    disponibleParaVenta: product.disponibleParaVenta
+                  }}
+                  className="w-full md:w-auto"
+                />
               )}
-              <button className="btn-quote">
-                <Link
-                  to={`/cotizacion?sku=${product.sku}&nombre=${product.nombre}`}
-                  style={{ color: "inherit", textDecoration: "none" }}
-                >
-                  Solicitar Cotización
-                </Link>
-              </button>
+
+              {/* Mensaje si no tiene precio */}
+              {!tienePrec && (
+                <div className="bg-orange-100 border border-orange-300 text-orange-700 px-4 py-3 rounded">
+                  <p className="font-semibold">Solo disponible por cotización</p>
+                  <p className="text-sm">Este producto requiere cotización personalizada.</p>
+                </div>
+              )}
             </div>
-            <br />
+
             <p className="text-gray-600 text-lg mb-4">Categoría: {product.categoria}</p>
             <p className="text-gray-600 text-lg mb-4">Marca: {product.marca}</p>
-            <p className="text-gray-600 text-lg mb-4">SKU: {product.pn}</p>
+            <p className="text-gray-600 text-lg mb-4">SKU: {product.sku}</p>
             <p className="text-lg mb-4">{product.descripcionCorta}</p>
-            <p className="text-lg mb-4">{product.descripcionLarga}</p>
-
-
+            {product.descripcionLarga && (
+              <p className="text-lg mb-4">{product.descripcionLarga}</p>
+            )}
           </div>
         </div>
       </div>
+
       {/* Componente para productos relacionados */}
       {/* <RelatedProducts currentSku={sku} /> */}
 

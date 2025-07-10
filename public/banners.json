@@ -1,4 +1,62 @@
 [
-    { "id": 1, "image": "/img/homeHero1.png", "alt": "Impresora Oficina" }
-  ]
-  
+  {
+    "idBannerProducts": 1,
+    "title": "Surecolor F2270",
+    "imgUrl": "/img/Swiper/01_CARRUSEL_EPSON F2270.png",
+    "sku": "SCF2270SE",
+    "create_at": "2025-05-26T00:10:48.000Z",
+    "fhInicio": "2025-05-25T00:00:00.000Z",
+    "fhFin": "2025-07-31T00:00:00.000Z",
+    "status": 1
+  },
+  {
+    "idBannerProducts": 2,
+    "title": "Surecolor G6070",
+    "imgUrl": "/img/Swiper/02_CARRUSEL_EPSON G6070.png",
+    "sku": "SCG6070SE",
+    "create_at": "2025-05-26T00:10:48.000Z",
+    "fhInicio": "2025-05-25T00:00:00.000Z",
+    "fhFin": "2025-07-31T00:00:00.000Z",
+    "status": 1
+  },
+  {
+    "idBannerProducts": 3,
+    "title": "PeriOne",
+    "imgUrl": "/img/Swiper/03_CARRUSEL_LSINC PERIONE.png",
+    "sku": "PeriOne",
+    "create_at": "2025-05-26T00:10:48.000Z",
+    "fhInicio": "2025-05-25T00:00:00.000Z",
+    "fhFin": "2025-07-31T00:00:00.000Z",
+    "status": 1
+  },
+  {
+    "idBannerProducts": 4,
+    "title": "Foton 30",
+    "imgUrl": "/img/Swiper/04_CARRUSEL_GBC FOTON 30.png",
+    "sku": "56-072",
+    "create_at": "2025-05-26T00:10:48.000Z",
+    "fhInicio": "2025-05-25T00:00:00.000Z",
+    "fhFin": "2025-07-31T00:00:00.000Z",
+    "status": 1
+  },
+  {
+    "idBannerProducts": 6,
+    "title": "Graphtec CE7000",
+    "imgUrl": "/img/Swiper/06_CARRUSEL_GRAPHTEC CE7000.png",
+    "sku": "69-035",
+    "create_at": "2025-05-26T00:10:48.000Z",
+    "fhInicio": "2025-05-25T00:00:00.000Z",
+    "fhFin": "2025-07-31T00:00:00.000Z",
+    "status": 0
+  },
+  {
+    "idBannerProducts": 9,
+    "title": "Falcon XL 3300",
+    "imgUrl": "https://siscoprint-front-vite.s3.mx-central-1.amazonaws.com/img/Swiper/ad7eb23b-da7f-4416-9aca-400c5cf2dee2.png",
+    "sku": "Falcon-XL-3300",
+    "create_at": "2025-06-14T16:28:44.000Z",
+    "fhInicio": "2025-06-14T00:00:00.000Z",
+    "fhFin": "2025-07-31T00:00:00.000Z",
+    "status": 1
+  }
+]

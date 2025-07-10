@@ -111,6 +111,8 @@
 }
 
 .catalog-button {
+  display: flex;
+  justify-content: center;
   margin-top: 50px; /* Agregar margen superior para separar del Swiper */
   padding: 15px 30px; /* Aumentar padding del botón */
   background-color: #1e3a8a; /* Fondo azul */
