@@ -219,7 +219,7 @@
     "endpointqr": "https://www.siscoprint.com/epson-F10070H/",
     "status": 1,
     "create_at": "2025-03-24 9:36:00",
-    "sku": "PREGUNTAR",
+    "sku": "PREGUNTAR1",
     "pn": "",
     "imagen": "F10070H.jpg",
     "sku-zoho": 0,
@@ -2344,5 +2344,28 @@
     "precioPromocion": "#N/A",
     "precio": 0,
     "disponibleParaVenta": "FALSE"
+  },
+  {
+    "idProducto": 103,
+    "nombre": "Prueba codigo",
+    "marca": "SISCO",
+    "familia": "CONSUMIBLES",
+    "categoria": "PRUEBAS",
+    "subcategoria": "PRUEBA WEB",
+    "descripcionCorta": "¡Recién lanzada! La PeriOne es nuestra versión básica de un solo husillo de la PeriQ360.\n\nEsta tecnología facilita el acceso al mercado de impresión directa sobre objeto, a la vez que ofrece un rendimiento rápido, eficiente y productivo para la impresión de producción ligera en cilindros y soportes cónicos.\nLa PeriOne imprime directamente sobre vidrio transparente sin barreras e incorpora limpieza y tapado automáticos de los cabezales de inyección de tinta. La PeriOne es pionera en funcionali",
+    "linkYoutube": "https://www.youtube.com/watch?v=GVrHvLLCEXo",
+    "datasheet": "/files/productos/LSINC/LSINC-PERIONE-WEB.pdf",
+    "endpointqr": "https://www.siscoprint.com/PeriOne/",
+    "status": 1,
+    "create_at": "2025-03-24 9:36:00",
+    "sku": "PRUEBA",
+    "pn": "",
+    "imagen": "PeriOne.jpg",
+    "sku-zoho": "PeriOne",
+    "rate": "#N/A",
+    "precioSugerido": "#N/A",
+    "precioPromocion": "#N/A",
+    "precio": 40,
+    "disponibleParaVenta": "TRUE"
   }
 ]
