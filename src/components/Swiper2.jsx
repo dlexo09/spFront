@@ -53,9 +53,9 @@ const BannerStreamingHome = () => {
     <section className="productHome-section">
       <div className="productHome-content">
         <h1 className="productHome-title">Productos destacados</h1>
-        <p className="productHome-text">
+        {/* <p className="productHome-text">
           Conoce todo el catálogo disponible, y descubre por qué Siscoprint es tu mejor aliado.
-        </p>
+        </p> */}
       </div>
 
       <div className="container swiper-container streamings-home">

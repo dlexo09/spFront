@@ -109,7 +109,8 @@ const ProductDetail = () => {
     return <div>Cargando producto...</div>; // Mostrar un mensaje de carga mientras se obtienen los datos
   }
 
-  const tienePrec = product.precio && product.precio > 0 && product.disponibleParaVenta === "TRUE";
+  // const tienePrec = product.precio && product.precio > 0 && product.disponibleParaVenta === "TRUE";
+  const tienePrec = false;
 
   return (
     <>

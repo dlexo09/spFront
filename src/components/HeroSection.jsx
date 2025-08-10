@@ -34,7 +34,16 @@ const HeroSection = () => (
             >
                 <div className="w-full max-w-3xl mx-auto flex flex-col items-center">
                     <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-6 md:mb-9 drop-shadow-lg text-blue-900">
-                        DONDE LA CREATIVIDAD SE ENCUENTRA CON LA TECNOLOGÍA
+                        DONDE LA CREATIVIDAD SE ENCUENTRA CON LA{" "}
+                        <span className="relative inline-block">
+                            <span className="bg-gradient-to-r from-pink-500 via-yellow-400 via-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+                                TECNOLOGÍA
+                            </span>
+                            <span
+                                className="absolute left-0 right-0 -bottom-1 h-2 rounded-full bg-gradient-to-r from-pink-500 via-yellow-400 via-green-400 via-blue-500 to-purple-600 opacity-80"
+                                aria-hidden="true"
+                            />
+                        </span>
                     </h1>
                     <p className="text-base sm:text-lg md:text-2xl font-medium drop-shadow mb-8 md:mb-10 max-w-2xl">
                         Soluciones de impresión para todo tipo de materiales: papel, textil, etiquetas y más.

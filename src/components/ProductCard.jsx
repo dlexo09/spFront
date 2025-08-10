@@ -7,7 +7,8 @@ const ProductCard = ({ product }) => {
   const productImage = product.imagen ? product.imagen : defaultImage;
 
   // Verificar si el producto tiene precio y está disponible para venta
-  const tienePrec = product.precio && product.precio > 0 && product.disponibleParaVenta === "TRUE";
+  // const tienePrec = product.precio && product.precio > 0 && product.disponibleParaVenta === "TRUE";
+  const tienePrec = false;
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4 flex flex-col items-center">
