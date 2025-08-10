@@ -28,7 +28,7 @@ const BannerStreamingHome = () => {
           });
 
         let finalBanners = [];
-        
+
         if (activos.length > 0) {
           // Si hay banners activos, repetirlos hasta llenar 6 espacios
           while (finalBanners.length < 6) {
@@ -112,8 +112,12 @@ const BannerStreamingHome = () => {
         <div className="swiper-button-next"></div>
       </div>
 
-      <a href="/productos" className="catalog-button">
-        Ver catálogo completo
+      
+      <a
+        href="/productos"
+        className="inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 md:px-8 md:py-3 rounded-full shadow transition-colors duration-200 text-base md:text-lg catalog-button"
+      >
+        Ver Catálogo completo &gt;&gt;
       </a>
     </section>
   );
