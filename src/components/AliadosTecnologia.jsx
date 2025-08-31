@@ -13,6 +13,7 @@ import logo4 from "../assets/img/logos/graphtec-logo.png";
 import logo5 from "../assets/img/logos/konica-minolta-logo.png";
 import logo6 from "../assets/img/logos/lsinc-logo.png";
 import logo7 from "../assets/img/logos/stratojet-logo.png";
+import sucursalesImg from "../assets/img/sucursales.png";
 
 const logos = [
   { src: logo1, alt: "Epson" },
@@ -30,7 +31,7 @@ const AliadosTecnologia = () => (
       Nuestros aliados de tecnología
     </h2>
     
-    <div className="container swiper-container streamings-home">
+  <div className="container swiper-container streamings-home rounded-lg xl:rounded-none overflow-hidden xl:overflow-visible p-4 xl:p-0">
       <Swiper
         grabCursor={true}
         centeredSlides={false}
@@ -71,6 +72,17 @@ const AliadosTecnologia = () => (
       <div className="swiper-button-prev-logos"></div>
       <div className="swiper-button-next-logos"></div>
     </div>
+
+  {/* Imagen de sucursales */}
+  <div className="w-full hidden xl:block xl:mt-[100px]">
+      <img
+        src={sucursalesImg}
+        alt="Sucursales Siscoprint"
+        className="w-full h-auto object-cover object-center block max-w-[1200px] mx-auto xl:max-w-none xl:mx-0"
+        style={{ maxHeight: 400 }}
+      />
+    </div>
+
   </section>
 );
 
