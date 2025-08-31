@@ -4,7 +4,7 @@ import imgSobreNosotros from "../assets/img/nosotros-img.png";
 
 const SobreNosotrosSection = () => (
   <section
-    className="relative w-full mt-[100px] mb-[100px] rounded-3xl overflow-hidden flex items-center"
+    className="relative w-full mt-[60px] md:mt-[150px] rounded-3xl overflow-hidden flex items-center"
     style={{
       minHeight: "400px",
       backgroundImage: `url(${bgSobreNosotros})`,
@@ -12,25 +12,39 @@ const SobreNosotrosSection = () => (
       backgroundPosition: "center",
     }}
   >
-    <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row h-full">
+    <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row pl-4 px-4 pt-[40px] pb-[40px] md:pt-8 md:pb-8">
       {/* Lado izquierdo: texto */}
-      <div className="flex-1 flex flex-col justify-center items-start p-8 md:p-12 z-10">
-        <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-4">Sobre Nosotros</h2>
-        <p className="text-blue-900 text-base md:text-lg mb-6 max-w-md">
+      <div className="flex-1 flex flex-col justify-center items-start md:items-start items-center z-10 text-center md:text-left">
+        <h2 className="text-2xl sm:text-3xl md:text-[32px] font-semibold mb-2 text-strong-blue leading-8 sm:leading-10 md:leading-[40px]">Sobre Nosotros</h2>
+
+        {/* Imagen solo en móvil */}
+        <div className="block md:hidden mb-5 mt-5">
+          <img
+            src={imgSobreNosotros}
+            alt="Sobre nosotros"
+            className="w-64 h-auto object-contain mx-auto"
+          />
+        </div>
+
+        <p className="text-blue-900 text-base mb-6 max-w-md">
           Desde hace más de 20 años impulsamos la creatividad y productividad de cientos de negocios en México a través de tecnología de impresión de alto nivel.
         </p>
-        <p className="text-blue-900 text-base md:text-lg mb-6 max-w-md">
+        <p className="text-blue-900 text-base mb-6 max-w-md">
           Estamos presentes en 6 ciudades y nos enfocamos en ofrecer no solo equipos, sino respaldo, capacitación y servicio técnico confiable.
         </p>
         <a
           href="/about"
-          className="inline-block bg-pink-500 hover:bg-pink-600 text-white font-semibold px-8 py-3 rounded-full shadow transition-colors duration-200 text-base md:text-lg"
+          className="inline-block text-sm bg-pink-sp hover:bg-strong-blue text-white font-semibold uppercase px-6 py-3 md:px-8 md:py-3 rounded-full transition-colors duration-500 text-base md:text-lg"
         >
-          VER MÁS SOBRE NOSOTROS
+          Ver más sobre nosotros
+          <span
+            className="inline-block align-middle mb-1 w-6 h-6 ml-2 bg-[url('/public/img/arrow-inpage.png')] bg-contain bg-no-repeat bg-center"
+            aria-hidden="true"
+          ></span>
         </a>
       </div>
-      {/* Lado derecho: imagen */}
-      <div className="flex-1 flex items-end justify-center p-4 md:p-8">
+      {/* Lado derecho: imagen (solo en desktop) */}
+      <div className="hidden md:flex flex-1 items-end justify-center p-4 md:p-8">
         <img
           src={imgSobreNosotros}
           alt="Sobre nosotros"

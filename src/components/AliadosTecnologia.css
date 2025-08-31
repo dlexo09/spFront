@@ -1,0 +1,107 @@
+/* Estilos para el carousel de logos de aliados tecnológicos */
+.logos-swiper {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+}
+
+.container.swiper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  padding: 0 60px;
+  height: 80px;
+}
+
+.swiper-button-prev-logos,
+.swiper-button-next-logos {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  color: #1E3A8A;
+  width: var(--swiper-navigation-size);
+  height: var(--swiper-navigation-size);
+  margin-top: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--swiper-navigation-size);
+}
+
+.swiper-button-prev-logos {
+  left: 0px; /* Posición simétrica */
+}
+
+.swiper-button-next-logos {
+  right: 0px; /* Posición simétrica */
+}
+
+.swiper-button-prev-logos:after,
+.swiper-button-next-logos:after {
+  font-family: swiper-icons;
+  font-size: var(--swiper-navigation-size);
+  text-transform: none !important;
+  letter-spacing: 0;
+  font-variant: initial;
+  line-height: 1;
+}
+
+.swiper-button-prev-logos:after {
+  content: 'prev';
+}
+
+.swiper-button-next-logos:after {
+  content: 'next';
+}
+
+.swiper-button-prev-logos:hover,
+.swiper-button-next-logos:hover {
+  color: #163a6a; /* Color más oscuro en hover */
+}
+
+/* Responsive adjustments - igual que Swiper2 */
+@media (max-width: 768px) {
+  .swiper-button-prev-logos,
+  .swiper-button-next-logos {
+    font-size: 20px;
+  }
+  .swiper-button-prev-logos{
+    left: 10px; 
+  }
+
+  .swiper-button-next-logos{
+    right: 10px;
+  }
+
+  .container.swiper-container {
+    padding: 0 40px; /* Menos padding en móvil */
+  }
+
+}
+
+
+@media (max-width: 640px) {
+  .container.swiper-container {
+    padding: 0 30px; /* Aún menos padding en pantallas pequeñas */
+  }
+}
+
+@media (min-width: 1024px)  and (max-width: 1430px){
+
+  .swiper-button-prev-logos{
+    left: 12px; 
+  }
+    .swiper-button-next-logos{
+    right: 12px;
+  }
+}

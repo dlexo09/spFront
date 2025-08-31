@@ -6,7 +6,6 @@
   padding: 10px 10px;
   background-color: #ffffff; /* Fondo blanco */
   max-width: 1440px; /* Limitar el ancho máximo */
-  margin: 0 auto; /* Centrar horizontalmente */
 }
 
 .productHome-content {
@@ -14,15 +13,9 @@
   margin-bottom: 0px; /* Agregar 50px de separación entre el texto y el Swiper */
 }
 
-.productHome-title {
-  font-size: 2.6rem; /* Aumentar tamaño de la tipografía */
-  color: #1e3a8a; /* Texto azul */
-  margin-bottom: 20px;
-}
-
 .productHome-text {
   font-size: 1.5rem; /* Aumentar tamaño de la tipografía */
-  color: #1e3a8a; /* Texto azul */
+  color: #1E3A8A; /* Texto azul */
 }
 
 .banner-streaming-home {
@@ -45,7 +38,7 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  color: #1e3a8a; /* Color azul */
+  color: #1E3A8A; /* Color azul */
 }
 
 .swiper-button-prev {
@@ -98,15 +91,15 @@
   margin-top: 20px; /* Agregar margen superior para separar del texto */
   padding: 10px 20px;
   background-color: #ffffff; /* Fondo blanco */
-  color: #1e3a8a; /* Texto azul */
-  border: 2px solid #1e3a8a; /* Borde azul */
+  color: #1E3A8A; /* Texto azul */
+  border: 2px solid #1E3A8A; /* Borde azul */
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
 }
 
 .swiper-content .swiper-button:hover {
-  background-color: #1e3a8a; /* Fondo azul al pasar el ratón */
+  background-color: #163a6a; /* Fondo azul al pasar el ratón */
   color: #ffffff; /* Texto blanco al pasar el ratón */
 }
 
@@ -116,7 +109,7 @@
 }
 
 .catalog-button:hover {
-  background-color: #163a6a; /* Fondo azul oscuro al pasar el ratón */
+  background-color: #1E3A8A; /* Fondo azul oscuro al pasar el ratón */
 }
 
 @media (max-width: 640px) {
