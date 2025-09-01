@@ -1,8 +1,11 @@
-.footer {
-    background-color: #1e3a8a; /* Fondo azul */
-    color: #ffffff; /* Texto blanco */
-    padding: 40px 20px;
-  }
+.footer-with-bg {
+  background-image: url('../assets/img/footer-bg.jpg');
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* Desktop default (keep previous desktop spacing) */
+  padding: 80px 0 30px 0;
+}
   
   .footer-container {
     display: flex;
@@ -16,12 +19,6 @@
     flex: 1;
     min-width: 250px;
     margin-bottom: 20px;
-  }
-  
-  .footer-title {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #ffffff;
   }
   
   .footer-links {
@@ -53,12 +50,14 @@
   .footer-socials a:hover {
     color: #ffcc00; /* Color amarillo al pasar el ratón */
   }
-  
-  .footer-bottom {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: #cccccc;
+
+  /* Línea separadora arriba del copyright */
+  .footer-separator {
+    width: 100%;
+    max-width: 1200px; /* igual que .footer-container */
+    height: 1px;
+    background-color: rgba(255,255,255,0.25);
+    margin: 28px auto 12px auto;
   }
 
   .footer-image {
@@ -67,3 +66,52 @@
     margin-top: 10px;
     border-radius: 8px; /* Opcional: bordes redondeados */
   }
+
+/* Responsive tweaks: center content on small screens */
+@media (max-width: 767px) {
+  .footer-container {
+    text-align: center;
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    width: 100%;
+    display: block;
+    align-items: center;
+  }
+
+  .footer-left img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer-socials {
+    justify-content: center;
+  }
+}
+
+/* Apply the adjusted (more spaced / centered) layout for all screens below XL */
+@media (max-width: 1279px) {
+  .footer-container {
+    gap: 20px;
+    padding: 0 18px; /* breathing room on medium/small screens */
+  }
+
+  .footer-section {
+    flex: 1 1 280px;
+    min-width: 220px;
+  }
+
+  .footer-with-bg {
+    /* slightly reduced top padding on smaller screens to bring wave closer visually */
+    padding: 72px 0 30px 0;
+  }
+
+  .footer-socials a {
+    margin-right: 12px;
+    font-size: 1.4rem;
+  }
+}

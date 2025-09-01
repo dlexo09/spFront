@@ -5,59 +5,50 @@ import "./Footer.css"; // Archivo CSS para estilos personalizados
 
 const Footer = () => {
     return (
-        <footer className="footer">
-            <div className="footer-container">
-                {/* Información de contacto */}
-                <div className="footer-section">
-                    <h3 className="footer-title">Contáctanos</h3>
-                    <p>Teléfono: (81) 8040-7221</p>
-                    <p>Correo: ventas@siscoprint.com</p>
-                    <p>Dirección: Mirto #2623, Col. Moderna, Monterrey, N.L.</p>
-                </div>
-
-                {/* Enlaces rápidos
-                <div className="footer-section">
-                    <h3 className="footer-title">Enlaces rápidos</h3>
-                    <ul className="footer-links">
-                        <li><a href="/productos">Productos</a></li>
-                        <li><a href="/contacto">Contacto</a></li>
-                        <li><a href="/nosotros">Nosotros</a></li>
-                        <li><a href="/faq">Preguntas frecuentes</a></li>
-                    </ul>
-                </div> */}
-
-                {/* Imagen pequeña */}
-                <div className="footer-section">
-                    <h3 className="footer-title">Nuestra Marca</h3>
+    <footer className="footer footer-with-bg">
+            <div className="footer-container text-white">
+                {/* Left: Logo + tagline */}
+                <div className="flex-1 min-w-[250px] mb-5 footer-left">
                     <img
-                        src="/img/logoSiscom.png" // Cambia esta ruta según la ubicación de tu imagen
+                        src="/img/logoSiscom.png"
                         alt="Logo Siscoprint"
-                        className="footer-image"
+                        className="w-[200px] mt-0 rounded-md"
                     />
+                    <p className="mt-3 text-base">Potenciamos la creatividad<br/>con soluciones de impresión innovadoras</p>
                 </div>
 
-                {/* Redes sociales */}
-                <div className="footer-section">
-                    <h3 className="footer-title">Síguenos</h3>
-                    <div className="footer-socials">
-                        <a href="https://www.facebook.com/siscoprint" target="_blank" rel="noopener noreferrer">
+                {/* Center: Contacto */}
+                                <div className="footer-section footer-center">
+                                        <h3 className="text-xl mb-4">CONTACTO</h3>
+                                        <ul className="footer-links text-base">
+                                            <li>Mirto #2623, Col. Moderna, Monterrey, N.L.</li>
+                                            <li>ventas@siscoprint.com</li>
+                                            <li>Teléfono: (81) 8040-7221</li>
+                                        </ul>
+                                </div>
+
+                {/* Right: Socials */}
+                <div className="footer-section footer-right">
+                    <h3 className="text-xl mb-4">SÍGUENOS</h3>
+                    <div className="flex items-center footer-socials">
+                        <a href="https://www.facebook.com/siscoprint" target="_blank" rel="noopener noreferrer" className="mr-4 text-2xl hover:text-[#ffcc00]">
                             <FontAwesomeIcon icon={faFacebook} />
                         </a>
-                        {/* <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faTwitter} />
-                        </a> */}
-                        <a href="https://www.instagram.com/siscoprint/" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.instagram.com/siscoprint/" target="_blank" rel="noopener noreferrer" className="mr-4 text-2xl hover:text-[#ffcc00]">
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
-                        <a href="https://www.youtube.com/@siscoprint9949" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.youtube.com/@siscoprint9949" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-[#ffcc00]">
                             <FontAwesomeIcon icon={faYoutube} />
                         </a>
                     </div>
                 </div>
             </div>
 
+            {/* Separator line matching image */}
+            <div className="footer-separator" aria-hidden="true" />
+
             {/* Copyright */}
-            <div className="footer-bottom">
+            <div className="mt-6 footer-bottom uppercase text-center text-white font-light text-xs">
                 <p>&copy; 2025 Siscoprint. Todos los derechos reservados.</p>
             </div>
         </footer>

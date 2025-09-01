@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import SectionHero from "../components/SectionHero";
+import pinBlue from "../assets/img/pin-blue.png";
+import pinBlack from "../assets/img/pin-black.png";
 
 const Contacto = () => {
   const [formData, setFormData] = useState({
@@ -106,125 +109,112 @@ const Contacto = () => {
   ];
 
   return (
-    <div className="container mx-auto p-4">
-      {/* Imagen del mapa */}
-      <div className="mb-8">
-        <img
-          src="/img/mapa.png"
-          alt="Mapa de sucursales"
-          className="w-full h-auto object-cover"
-        />
-      </div>
+    <div className="w-full">
+      <SectionHero title={"CONTACTO"} buttonText={"VER TODOS LOS PRODUCTOS"} buttonLink={"/productos"} backgroundImg={"../assets/img/bg-hero-general.png"} />
 
-      <h1 className="text-4xl font-bold mb-8 text-center">Contáctanos</h1>
+      <div className="container mx-auto px-4">
+        <h2 className="text-center text-2xl sm:text-3xl md:text-[32px] font-semibold mb-6 md:mb-7 text-strong-blue leading-8 sm:leading-10 md:leading-[40px]">Nuestras Sucursales</h2>
 
-      {/* Mapa de sucursales */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {sucursales.map((sucursal, index) => (
-          <div key={index} className="border p-4 rounded shadow">
-            <h2 className="text-xl font-bold mb-2">{sucursal.nombre}</h2>
-            <p className="text-gray-600">{sucursal.direccion}</p>
-            <p className="text-gray-600">Teléfono: {sucursal.telefono}</p>
-            <p className="text-gray-600">
-              Correo:{" "}
-              <a href={`mailto:${sucursal.correo}`} className="text-blue-500">
-                {sucursal.correo}
-              </a>
-            </p>
-          </div>
-        ))}
-      </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-12">
+          {sucursales.map((sucursal, index) => {
+            const isEven = index % 2 === 0;
+            const bgClass = isEven ? 'bg-[rgba(0,173,238,0.08)]' : 'bg-white';
+            const borderClass = 'border-none';
+            const radiusClass = 'rounded-none sm:rounded-none lg:rounded-none';
 
-      {/* Formulario de contacto */}
-      <div className="bg-gray-100 p-6 rounded shadow mx-auto max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-center">Formulario de Contacto</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-sm font-bold mb-2" htmlFor="name">
-              Nombre
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full p-2 border rounded"
-              required
-            />
+            const iconSrc = isEven ? pinBlack : pinBlue;
+
+            return (
+              <div key={index} className={`${bgClass} ${borderClass} p-5 ${radiusClass} flex items-start gap-4`}>
+                <img
+                  src={iconSrc}
+                  alt={`icon ${sucursal.nombre}`}
+                  className="w-10 h-10 object-contain"
+                  onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/img/logoSiscom.png'; }}
+                />
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold mb-1 text-strong-blue">{sucursal.nombre}</h3>
+                  <p className="text-xs text-strong-blue/70 mb-2">{sucursal.direccion}</p>
+                  <p className="text-sm text-strong-blue/80">Tel: {sucursal.telefono || 'N/A'}</p>
+                  <p className="text-sm text-strong-blue/80">Correo: <a href={`mailto:${sucursal.correo}`} className="text-light-blue underline">{sucursal.correo}</a></p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+
+        <div className="mb-12 lg:col-span- gap-6 items-start mt-[60px] md:mt-[150px]">
+          <img src="/img/mapa.png" alt="Mapa de sucursales" className="w-full h-auto object-cover" />
+        </div>
+
+
+        <div className=" bg-gradient-to-r from-light-blue/20 to-pink-sp/20 rounded-2xl px-4 py-16 mt-[60px] md:mt-[150px] mb-[60px]">
+          <div className="max-w-4xl mx-auto">
+
+            <h3 className="text-center text-2xl sm:text-3xl md:text-[32px] font-semibold mb-6 md:mb-7 text-strong-blue leading-8 sm:leading-10 md:leading-[40px]">¿Tienes Alguna Duda? Escríbenos</h3>
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-12">
+              <input
+                type="text"
+                placeholder="Escribe tu nombre"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="p-3 rounded-md border border-white bg-white shadow-sm"
+                required
+              />
+              <input
+                type="email"
+                placeholder="Escribe tu correo"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="p-3 rounded-md border border-white bg-white shadow-sm"
+                required
+              />
+              <input
+                type="tel"
+                placeholder="Escribe tu teléfono"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="p-3 rounded-md border border-white bg-white shadow-sm"
+                required
+              />
+              <select
+                value={formData.contactType}
+                onChange={(e) => setFormData({ ...formData, contactType: e.target.value })}
+                className="p-3 rounded-md border border-white bg-white shadow-sm"
+                required
+              >
+                <option value="soporte">Soporte</option>
+                <option value="ventas">Ventas</option>
+              </select>
+
+              <textarea
+                placeholder="Escribe tu mensaje"
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                className="p-3 rounded-md border border-white bg-white md:col-span-2 shadow-sm"
+                rows={5}
+                required
+              />
+
+              <div className="md:col-span-2 flex items-center justify-center flex-col gap-4">
+                <div>
+                  <ReCAPTCHA
+                    sitekey="6Le0OyErAAAAAOAVaYfWOqug_RQrtcXVj6TUm9Ue"
+                    onChange={handleCaptchaChange}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={!captchaToken}
+                  className="bg-light-blue text-white px-6 py-2 rounded-full hover:brightness-95 disabled:opacity-60"
+                >
+                  ENVIAR FORMULARIO
+                </button>
+              </div>
+            </form>
           </div>
-          <div className="mb-4">
-            <label className="block text-sm font-bold mb-2" htmlFor="email">
-              Correo Electrónico
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-bold mb-2" htmlFor="phone">
-              Teléfono
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-bold mb-2" htmlFor="contactType">
-              Tipo de Contacto
-            </label>
-            <select
-              id="contactType"
-              name="contactType"
-              value={formData.contactType}
-              onChange={(e) => setFormData({ ...formData, contactType: e.target.value })}
-              className="w-full p-2 border rounded"
-              required
-            >
-              <option value="soporte">Soporte</option>
-              <option value="ventas">Ventas</option>
-            </select>
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-bold mb-2" htmlFor="message">
-              Mensaje
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full p-2 border rounded"
-              rows="4"
-              required
-            ></textarea>
-          </div>
-          <div className="mb-4">
-            <ReCAPTCHA
-              sitekey="6Le0OyErAAAAAOAVaYfWOqug_RQrtcXVj6TUm9Ue"
-              onChange={handleCaptchaChange}
-            />
-          </div>
-          <button
-            type="submit"
-            className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 w-full"
-            disabled={!captchaToken}
-          >
-            Enviar
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );
