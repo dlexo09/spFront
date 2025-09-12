@@ -57,7 +57,7 @@ const About = () => {
 
       <div className="container px-4 mx-auto max-w-6xl grid md:grid-cols-2 gap-8 md:gap-6 xl:gap-16 items-center mt-[-100px]">
         <div className="mx-auto border-2 border-yellow-sp rounded-tl-[50px] rounded-br-[50px] p-6 bg-white h-auto md:h-[350px] xl:h-auto">
-          <h2 className="text-xl text-center lg:text-left sm:text-2xl md:text-[28px] font-semibold mb-6 md:mb-7 text-strong-blue leading-8 sm:leading-10 md:leading-[40px]">Nuestra Historia</h2>
+          <h2 className="text-xl text-center lg:text-left sm:text-2xl md:text-[28px] font-semibold mb-6 md:mb-7 text-strong-blue leading-8 sm:leading-10 md:leading-[40px]">Nuestra Misión</h2>
           <p className="text-base">Satisfacer plenamente las necesidades y expectativas de nuestros socios de negocio mediante soluciones integrales en impresión digital. Nos comprometemos a ofrecer equipos de alto rendimiento, asesoría especializada, capacitación constante y soporte técnico, creando una experiencia diferenciada basada en calidad, confianza y resultados sostenibles.</p>
         </div>
         <div className="mx-auto px-4 border-2 border-yellow-sp rounded-bl-[50px] rounded-tr-[50px] p-6 bg-white h-auto md:h-[350px] xl:h-auto">
