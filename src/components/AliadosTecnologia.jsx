@@ -74,7 +74,7 @@ const AliadosTecnologia = () => (
     </div>
 
   {/* Imagen de sucursales */}
-  <div className="w-full hidden xl:block xl:mt-[100px]">
+  <div className="w-full hidden md:block md:mt-[100px]">
       <img
         src={sucursalesImg}
         alt="Sucursales Siscoprint"

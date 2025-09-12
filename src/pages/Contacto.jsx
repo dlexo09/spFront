@@ -109,10 +109,10 @@ const Contacto = () => {
   ];
 
   return (
-    <div className="w-full">
+    <div className="w-full mb-[80px] md:mb-[130px]">
       <SectionHero title={"CONTACTO"} buttonText={"VER TODOS LOS PRODUCTOS"} buttonLink={"/productos"} backgroundImg={"../assets/img/bg-hero-general.png"} />
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto max-w-7xl px-4 container-mrg">
         <h2 className="text-center text-2xl sm:text-3xl md:text-[32px] font-semibold mb-6 md:mb-7 text-strong-blue leading-8 sm:leading-10 md:leading-[40px]">Nuestras Sucursales</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-12">

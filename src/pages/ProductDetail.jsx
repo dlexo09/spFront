@@ -114,7 +114,7 @@ const ProductDetail = () => {
 
   return (
     <>
-      <div className="container mx-auto p-4 product-detail">
+      <div className="container container-mrg mx-auto p-4 product-detail">
         <div className="product-detail-content grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Imagen principal del producto */}
           <div className="product-detail-image">

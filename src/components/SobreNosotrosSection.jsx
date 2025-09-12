@@ -12,7 +12,7 @@ const SobreNosotrosSection = () => (
       backgroundPosition: "center",
     }}
   >
-    <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row pl-4 px-4 pt-[40px] pb-[40px] md:pt-8 md:pb-8">
+    <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row pl-4 px-4 pt-[40px] pb-[40px] md:pt-8 md:pb-8">
       {/* Lado izquierdo: texto */}
       <div className="flex-1 flex flex-col justify-center items-start md:items-start items-center z-10 text-center md:text-left">
         <h2 className="text-2xl sm:text-3xl md:text-[32px] font-semibold mb-2 text-strong-blue leading-8 sm:leading-10 md:leading-[40px]">Sobre Nosotros</h2>
@@ -26,10 +26,10 @@ const SobreNosotrosSection = () => (
           />
         </div>
 
-        <p className="text-blue-900 text-base mb-6 max-w-md">
+        <p className="text-blue-900 text-base mb-6 max-w-lg">
           Desde hace más de 20 años impulsamos la creatividad y productividad de cientos de negocios en México a través de tecnología de impresión de alto nivel.
         </p>
-        <p className="text-blue-900 text-base mb-6 max-w-md">
+        <p className="text-blue-900 text-base mb-6 max-w-lg">
           Estamos presentes en 6 ciudades y nos enfocamos en ofrecer no solo equipos, sino respaldo, capacitación y servicio técnico confiable.
         </p>
         <a

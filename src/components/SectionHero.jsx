@@ -7,7 +7,7 @@ const SectionHero = ({ title, buttonText, buttonLink = '#', backgroundImg }) => 
   return (
     <section className="w-full overflow-hidden rounded-b-3xl mb-0" style={bgStyle}>
   <div className="w-full bg-gradient-to-r from-light-blue/30 to-pink-sp/30 px-4 py-10 md:py-20">
-        <div className="container mx-auto text-center">
+        <div className="container container-mrg mx-auto text-center">
           <h1 className="text-2xl sm:text-3xl md:text-[40px] font-semibold mb-6 text-strong-blue">{title}</h1>
           <a
             href={buttonLink}

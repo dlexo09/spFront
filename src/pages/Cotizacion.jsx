@@ -77,7 +77,7 @@ const Cotizacion = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-lg p-4">
+    <div className="container container-mrg mx-auto max-w-lg p-4">
       <h1 className="text-2xl font-bold mb-4">Solicitar Cotización</h1>
       
       {/* Mostrar producto individual */}
