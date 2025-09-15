@@ -38,7 +38,7 @@ const SobreNosotrosSection = () => (
         >
           Ver más sobre nosotros
           <span
-            className="inline-block align-middle mb-1 w-6 h-6 ml-2 bg-[url('/public/img/arrow-inpage.png')] bg-contain bg-no-repeat bg-center"
+            className="inline-block align-middle mb-1 w-6 h-6 ml-2 bg-[url('/img/arrow-inpage.png')] bg-contain bg-no-repeat bg-center"
             aria-hidden="true"
           ></span>
         </a>

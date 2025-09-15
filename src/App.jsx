@@ -10,40 +10,54 @@ import ZohoChat from "./components/ZohoChat";
 import Footer from "./components/Footer";
 import RecursosClientes from "./pages/RecursosClientes";
 import Cart from "./pages/Cart"; // Agregar esta línea
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Account from "./pages/Account";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 
 // ✅ Importar las páginas de resultado de pago
 import PagoExitoso from "./pages/PagoExitoso";
 import PagoFallido from "./pages/PagoFallido";
 import PagoPendiente from "./pages/PagoPendiente";
 
+import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 
 function App() {
   return (
-    <CartProvider>
-      <Router>
-        <Header />
-        <ZohoChat />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/productos" element={<Productos />} />
-          <Route path="/servicios" element={<h2 className="p-6">Servicios</h2>} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/product/:sku" element={<ProductDetail />} />
-          <Route path="/cotizacion" element={<Cotizacion />} />
-          <Route path="/recursos-clientes" element={<RecursosClientes />} />
-          <Route path="/cart" element={<Cart />} />
+    <AuthProvider>
+      <CartProvider>
+        <Router>
+          <Header />
+          <ZohoChat />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/productos" element={<Productos />} />
+            <Route path="/servicios" element={<h2 className="p-6">Servicios</h2>} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/product/:sku" element={<ProductDetail />} />
+            <Route path="/cotizacion" element={<Cotizacion />} />
+            <Route path="/recursos-clientes" element={<RecursosClientes />} />
+            <Route path="/cart" element={<Cart />} />
 
-          {/* ✅ Agregar rutas para páginas de resultado de pago */}
-          <Route path="/pago-exitoso" element={<PagoExitoso />} />
-          <Route path="/pago-fallido" element={<PagoFallido />} />
-          <Route path="/pago-pendiente" element={<PagoPendiente />} />
+            {/* ✅ Agregar rutas para páginas de resultado de pago */}
+            <Route path="/pago-exitoso" element={<PagoExitoso />} />
+            <Route path="/pago-fallido" element={<PagoFallido />} />
+            <Route path="/pago-pendiente" element={<PagoPendiente />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/registro" element={<Register />} />
+            <Route path="/cuenta" element={<Account />} />
+            <Route path="/recuperar-contrasena" element={<ForgotPassword />} />
+            <Route path="/restablecer-contrasena/:token" element={<ResetPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
 
-        </Routes>
-        <Footer />
-      </Router>
-    </CartProvider>
+          </Routes>
+          <Footer />
+        </Router>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

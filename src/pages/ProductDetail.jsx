@@ -109,8 +109,8 @@ const ProductDetail = () => {
     return <div>Cargando producto...</div>; // Mostrar un mensaje de carga mientras se obtienen los datos
   }
 
-  // const tienePrec = product.precio && product.precio > 0 && product.disponibleParaVenta === "TRUE";
-  const tienePrec = false;
+  const tienePrec = product.precio && product.precio > 0 && product.disponibleParaVenta === "TRUE";
+  // const tienePrec = false;
 
   return (
     <>
@@ -225,7 +225,7 @@ const ProductDetail = () => {
       </div>
 
       {/* Componente para productos relacionados */}
-      {/* <RelatedProducts currentSku={sku} /> */}
+      <RelatedProducts currentSku={product.sku} />
 
       {/* Mostrar el visor de PDF */}
       {showPdfViewer && (

@@ -139,13 +139,24 @@ const Cart = () => {
               </Link>
             </div>
           )}
+
+          {/* Botón para vaciar el carrito */}
+          <button 
+            onClick={() => clearCart()}
+            className="w-full mt-4 bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300 transition-colors"
+          >
+            Vaciar carrito
+          </button>
         </div>
       </div>
 
       {/* Mostrar checkout de MercadoPago */}
       {showCheckout && itemsWithPrice.length > 0 && (
         <div className="mt-8">
-          <MercadoPagoCheckout setShowCheckout={setShowCheckout} />
+          <MercadoPagoCheckout 
+            setShowCheckout={setShowCheckout} 
+            skipZohoValidation={true}  
+          />
         </div>
       )}
     </div>

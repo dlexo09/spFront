@@ -85,7 +85,7 @@ const Contacto = () => {
     {
       nombre: "Sucursal Monterrey",
       direccion: "Mirto #2623, Col. Moderna, Monterrey, N.L.",
-      telefono: "(81) 8040-7221 | (81) 8040-7322",
+      telefono: "(81) 8040-7321 | (81) 8040-7322",
       correo: "ventas@siscoprint.com",
     },
     {

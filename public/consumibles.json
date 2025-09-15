@@ -1,0 +1,26 @@
+[
+    {
+    "PRODUCTO": "Cyan",
+    "SKU": "T49M220",
+    "PROD RELACIONADO": "Surecolor F170",
+    "SKU-PADRE": "C11CJ80201",
+    "item name": "TINTA SUBLIMACION F570 DS CYAN 140ML",
+    "rate": "MXN 406.91",
+    "precio sugerido": "335.000000",
+    "precio promocion": "0.000000",
+    "Descripcion": "[H23] TINTAS SUBLIMACION F570 / F571 / F170",
+    "Imagen": "T49M220.png"
+  },
+  {
+    "PRODUCTO": "Magenta",
+    "SKU": "T49M320",
+    "PROD RELACIONADO": "Surecolor F170",
+    "SKU-PADRE": "C11CJ80201",
+    "item name": "TINTA SUBLIMACION F570 DS MAGENTA 140ML",
+    "rate": "MXN 406.91",
+    "precio sugerido": "335.000000",
+    "precio promocion": "0.000000",
+    "Descripcion": "[H23] TINTAS SUBLIMACION F570 / F170",
+    "Imagen": "T49M320.png"
+  }
+]
