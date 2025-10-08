@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 import MercadoPagoCheckout from '../components/MercadoPagoCheckout';
+import { useOrder } from '../context/OrderContext';
 
 const Cart = () => {
-  const { cartItems, removeFromCart, updateQuantity, getTotalItems, getTotalPrice, clearCart } = useCart();
+  const { cartItems, cart, removeFromCart, updateQuantity, getTotalItems, getTotalPrice, clearCart, calculateTotal } = useCart();
+  const { createOrder } = useOrder();
   const [showCheckout, setShowCheckout] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  if (cartItems.length === 0) {
+  if (!cartItems || cartItems.length === 0) {
     return (
       <div className="container mx-auto p-6 min-h-screen flex flex-col items-center justify-center">
         <h1 className="text-3xl font-bold mb-4">Tu carrito está vacío</h1>
@@ -25,6 +28,34 @@ const Cart = () => {
   // Separar productos con precio de los que no tienen
   const itemsWithPrice = cartItems.filter(item => item.price && item.price > 0);
   const itemsWithoutPrice = cartItems.filter(item => !item.price || item.price <= 0);
+
+  // Proceder al checkout (crear pedido)
+  const handleCheckout = async () => {
+    setIsProcessing(true);
+    try {
+      const totals = calculateTotal();
+      
+      const orderData = {
+        items: cartItems.filter(item => item.price && item.price > 0),
+        subtotal: totals.subtotal,
+        tax: totals.tax, 
+        total: totals.total,
+        notes: ""
+      };
+      
+      const order = await createOrder(orderData);
+      
+      if (order && order.id) {
+        // Redirigir a la página de métodos de pago
+        window.location.href = `/test-orders`;
+      }
+    } catch (error) {
+      console.error("Error al crear el pedido:", error);
+      alert("Hubo un problema al procesar tu pedido. Por favor, intenta nuevamente.");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   return (
     <div className="container mx-auto p-6 min-h-screen">
@@ -102,21 +133,13 @@ const Cart = () => {
                 </div>
               </div>
               
-              {!showCheckout ? (
-                <button 
-                  onClick={() => setShowCheckout(true)}
-                  className="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700 transition-colors mt-3"
-                >
-                  Proceder al pago
-                </button>
-              ) : (
-                <button 
-                  onClick={() => setShowCheckout(false)}
-                  className="w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700 transition-colors mt-3"
-                >
-                  Volver al carrito
-                </button>
-              )}
+              <button 
+                onClick={handleCheckout}
+                disabled={isProcessing}
+                className={`w-full ${isProcessing ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700'} text-white py-3 rounded transition-colors mt-3`}
+              >
+                {isProcessing ? 'Procesando...' : 'Proceder al pago'}
+              </button>
             </div>
           )}
 
@@ -149,16 +172,6 @@ const Cart = () => {
           </button>
         </div>
       </div>
-
-      {/* Mostrar checkout de MercadoPago */}
-      {showCheckout && itemsWithPrice.length > 0 && (
-        <div className="mt-8">
-          <MercadoPagoCheckout 
-            setShowCheckout={setShowCheckout} 
-            skipZohoValidation={true}  
-          />
-        </div>
-      )}
     </div>
   );
 };

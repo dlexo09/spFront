@@ -32,11 +32,11 @@ const ProductDetail = () => {
   };
 
   useEffect(() => {
-    // Cargar datos del producto
-    fetch("/products.json")
+    // ✅ Cargar datos del producto desde API Gateway
+    fetch("https://synr0sxjqg.execute-api.us-east-1.amazonaws.com/api/productos")
       .then((res) => {
         if (!res.ok) {
-          throw new Error("No se pudo cargar el archivo products.json");
+          throw new Error("No se pudo cargar los productos desde la API");
         }
         return res.json();
       })
@@ -51,7 +51,7 @@ const ProductDetail = () => {
       })
       .catch((error) => console.error("Error al cargar los datos del producto:", error));
 
-    // Cargar datos de la galería
+    // Cargar datos de la galería (mantener desde JSON si no tienes API para esto)
     fetch("/galeriaproductos.json")
       .then((res) => {
         if (!res.ok) {

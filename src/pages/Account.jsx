@@ -8,6 +8,8 @@ const Account = () => {
   const [activeTab, setActiveTab] = useState('pedidos');
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showOrderModal, setShowOrderModal] = useState(false);
   const [profileData, setProfileData] = useState({
     name: user?.name || '',
     email: user?.email || '',
@@ -44,12 +46,12 @@ const Account = () => {
         // Aquí iría una llamada a la API para cargar las órdenes del usuario
         // Por ahora simulamos cargando desde localStorage
         const localOrders = JSON.parse(localStorage.getItem('localOrders') || '[]');
-        
+
         // Filtrar solo las órdenes del usuario actual
-        const userOrders = localOrders.filter(order => 
+        const userOrders = localOrders.filter(order =>
           order.customerData.email === user.email
         );
-        
+
         setOrders(userOrders);
         setLoading(false);
       } catch (error) {
@@ -78,7 +80,7 @@ const Account = () => {
     e.preventDefault();
     // Aquí iría la llamada a la API para actualizar el perfil
     // Por ahora solo actualizamos el localStorage
-    
+
     const updatedUser = {
       ...user,
       name: profileData.name,
@@ -88,13 +90,13 @@ const Account = () => {
       state: profileData.state,
       zipCode: profileData.zipCode
     };
-    
+
     localStorage.setItem('user', JSON.stringify(updatedUser));
-    
+
     // Actualizar el contexto
     const { login } = useContext(AuthContext);
     login(updatedUser);
-    
+
     alert('Perfil actualizado correctamente');
   };
 
@@ -120,7 +122,7 @@ const Account = () => {
       'processing': 'En proceso',
       'cancelled': 'Cancelado'
     };
-    
+
     return statusMap[status] || status;
   };
 
@@ -133,6 +135,107 @@ const Account = () => {
     }).format(date);
   };
 
+  const handleViewOrderDetails = (order) => {
+    setSelectedOrder(order);
+    setShowOrderModal(true);
+  };
+
+  const closeOrderModal = () => {
+    setShowOrderModal(false);
+    setSelectedOrder(null);
+  };
+
+  // Función para continuar con el pago de un pedido
+  const handleContinuePayment = (orderId) => {
+    navigate(`/pagar-pedido/${orderId}`);
+  };
+
+  // Función para cancelar un pedido
+  const handleCancelOrder = async (orderId) => {
+    if (!window.confirm('¿Estás seguro de que deseas cancelar este pedido?')) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${orderId}/cancel`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al cancelar el pedido');
+      }
+
+      // Actualizar la lista de pedidos
+      const updatedOrders = orders.map(order =>
+        order.id === orderId ? { ...order, status: 'cancelled' } : order
+      );
+
+      setOrders(updatedOrders);
+
+      // Si el modal estaba abierto, actualizarlo también
+      if (selectedOrder && selectedOrder.id === orderId) {
+        setSelectedOrder({ ...selectedOrder, status: 'cancelled' });
+      }
+
+      alert('Pedido cancelado con éxito');
+    } catch (error) {
+      console.error('Error al cancelar el pedido:', error);
+      alert('Error al cancelar el pedido');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Modificar el OrderDetailsModal para incluir botones de acción
+  const OrderDetailsModal = () => {
+    if (!selectedOrder) return null;
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          {/* ... código existente ... */}
+
+          {/* Botones de acción según el estado */}
+          <div className="mt-6 flex justify-between">
+            <div>
+              {selectedOrder.status === 'pending_payment' && (
+                <>
+                  <button
+                    onClick={() => handleCancelOrder(selectedOrder.id)}
+                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 mr-2"
+                  >
+                    Cancelar pedido
+                  </button>
+                  <button
+                    onClick={() => {
+                      closeOrderModal();
+                      handleContinuePayment(selectedOrder.id);
+                    }}
+                    className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                  >
+                    Pagar ahora
+                  </button>
+                </>
+              )}
+            </div>
+            <button
+              onClick={closeOrderModal}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   if (!user) {
     return null; // Si no hay usuario, no renderizar nada (navegará a login)
   }
@@ -140,28 +243,26 @@ const Account = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl md:text-3xl font-bold text-blue-900 mb-6">Mi cuenta</h1>
-      
+
       <div className="bg-white shadow rounded-lg overflow-hidden">
         {/* Tabs de navegación */}
         <div className="border-b">
           <nav className="flex">
-            <button 
+            <button
               onClick={() => setActiveTab('pedidos')}
-              className={`px-4 py-4 text-sm font-medium ${
-                activeTab === 'pedidos'
+              className={`px-4 py-4 text-sm font-medium ${activeTab === 'pedidos'
                   ? 'border-b-2 border-blue-500 text-blue-600'
                   : 'text-gray-500 hover:text-gray-700'
-              }`}
+                }`}
             >
               Mis pedidos
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab('perfil')}
-              className={`px-4 py-4 text-sm font-medium ${
-                activeTab === 'perfil'
+              className={`px-4 py-4 text-sm font-medium ${activeTab === 'perfil'
                   ? 'border-b-2 border-blue-500 text-blue-600'
                   : 'text-gray-500 hover:text-gray-700'
-              }`}
+                }`}
             >
               Mi perfil
             </button>
@@ -174,7 +275,7 @@ const Account = () => {
           {activeTab === 'pedidos' && (
             <div>
               <h2 className="text-xl font-semibold mb-4">Mis pedidos</h2>
-              
+
               {loading ? (
                 <div className="flex justify-center py-8">
                   <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -219,9 +320,9 @@ const Account = () => {
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button 
+                            <button
                               className="text-blue-600 hover:text-blue-900"
-                              onClick={() => alert(`Ver detalles del pedido ${order.id}`)}
+                              onClick={() => handleViewOrderDetails(order)}
                             >
                               Ver detalles
                             </button>
@@ -249,7 +350,7 @@ const Account = () => {
           {activeTab === 'perfil' && (
             <div>
               <h2 className="text-xl font-semibold mb-4">Mi información personal</h2>
-              
+
               <form onSubmit={handleProfileSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -371,6 +472,9 @@ const Account = () => {
           )}
         </div>
       </div>
+
+      {/* Modal de detalles de pedido */}
+      {showOrderModal && <OrderDetailsModal />}
     </div>
   );
 };
