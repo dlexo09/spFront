@@ -45,12 +45,26 @@ const HeroSection = () => (
                             />
                         </span>
                     </h1>
-                    <p className="text-base text-lg font-light mb-8 md:mb-10 max-w-2xl text-black leading-[1.2]">
+                    <p className="text-base md:text-lg font-light mb-3 md:mb-4 max-w-2xl text-black leading-[1.2]">
                         Soluciones de impresión para todo tipo de materiales: papel, textil, etiquetas y más.
                     </p>
+                    
+                    {/* Familias de productos */}
+                    <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-3 md:mb-4">
+                        {["Sublimación", "DTF", "Ecosolvente", "UV"].map((categoria) => (
+                            <a
+                                key={categoria}
+                                href={`/productos?categoria=${encodeURIComponent(categoria)}`}
+                                className="px-4 py-2 md:px-5 md:py-2.5 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full text-sm md:text-base font-medium text-gray-700 hover:bg-strong-blue hover:text-white hover:border-strong-blue transition-all duration-300 shadow-sm"
+                            >
+                                {categoria}
+                            </a>
+                        ))}
+                    </div>
+
                     <a
                         href="/productos"
-                        className="inline-block text-sm bg-sky-500 hover:bg-strong-blue text-white font-semibold uppercase px-6 py-3 md:px-8 md:py-3 rounded-full transition-colors duration-500 text-base md:text-lg"
+                        className="inline-block bg-sky-500 hover:bg-strong-blue text-white font-semibold uppercase px-6 py-3 md:px-8 md:py-3 rounded-full transition-colors duration-500 text-base md:text-lg"
                     >
                         Ver Catálogo completo
                         <span
@@ -63,7 +77,7 @@ const HeroSection = () => (
         </section>
 
         {/* Divisor con 4 tarjetas flotando */}
-        <div className="relative z-30 flex justify-center mt-[-150px] md:mt-[-200px]">
+        <div className="relative z-30 flex justify-center mt-[-100px] md:mt-[-130px]">
             <div className="w-full max-w-6xl px-4 flex justify-center">
                 <div className="relative w-full h-full sm:w-[95%] md:w-[90%] bg-white rounded-[2.3rem] md:rounded-[1.8rem] shadow-lg p-6 md:p-8 flex justify-center overflow-hidden bg-[url('/img/bg-beneficios-sp-mov.png')] md:bg-[url('/img/bg-beneficios-sp.png')] bg-[length:100%_100%] bg-center">
                     <div className="relative z-30 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 w-full justify-items-center">

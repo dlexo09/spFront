@@ -23,7 +23,7 @@ const Footer = () => {
                                         <ul className="footer-links text-base">
                                             <li>Mirto #2623, Col. Moderna, Monterrey, N.L.</li>
                                             <li>ventas@siscoprint.com</li>
-                                            <li>Teléfono: (81) 8040-7221</li>
+                                            <li>Teléfono: (81) 8040-7321</li>
                                         </ul>
                                 </div>
 

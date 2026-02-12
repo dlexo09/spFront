@@ -6,7 +6,7 @@ import Cotizacion from './pages/Cotizacion';
 import About from './pages/About';
 import Productos from "./pages/Productos";
 import ProductDetail from "./pages/ProductDetail";
-import ZohoChat from "./components/ZohoChat";
+import ChatManager from "./components/ChatManager";
 import Footer from "./components/Footer";
 import RecursosClientes from "./pages/RecursosClientes";
 import Cart from "./pages/Cart";
@@ -36,7 +36,7 @@ function App() {
         <OrderProvider>
           <Router>
             <Header />
-            <ZohoChat />
+            <ChatManager provider="custom" />
             <Routes>
               {/* Rutas públicas */}
               <Route path="/" element={<Home />} />
