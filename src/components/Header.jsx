@@ -24,6 +24,7 @@ const Header = () => {
           <Link to="/contacto" className="nav-link">Contacto</Link>
         </nav>
         
+{/* Temporalmente oculto - Iniciar sesión
         {user ? (
           <div className="flex items-center">
             <Link to="/cuenta" className="nav-link flex items-center">
@@ -38,6 +39,7 @@ const Header = () => {
             Iniciar sesión
           </Link>
         )}
+        */}
 
         <CartIcon />
       </div>
