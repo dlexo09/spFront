@@ -44,7 +44,8 @@ function App() {
               <Route path="/productos" element={<Productos />} />
               <Route path="/servicios" element={<h2 className="p-6">Servicios</h2>} />
               <Route path="/contacto" element={<Contacto />} />
-              <Route path="/product/:sku" element={<ProductDetail />} />
+              <Route path="/producto/:id" element={<ProductDetail />} />
+              <Route path="/product/:id" element={<ProductDetail />} /> {/* Ruta legacy por compatibilidad */}
               <Route path="/cotizacion" element={<Cotizacion />} />
               <Route path="/recursos-clientes" element={<RecursosClientes />} />
               <Route path="/cart" element={<Cart />} />
@@ -76,7 +77,7 @@ function App() {
               <Route path="*" element={<h1 className="text-center p-20 text-4xl">Página no encontrada</h1>} />
             </Routes>
             <Footer />
-            <CartDebugger />
+            {/* <CartDebugger /> */}
           </Router>
         </OrderProvider>
       </CartProvider>

@@ -51,13 +51,13 @@ const HeroSection = () => (
                     
                     {/* Familias de productos */}
                     <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-3 md:mb-4">
-                        {["Sublimación", "DTF", "Ecosolvente", "UV"].map((categoria) => (
+                        {["Sublimación", "DTG", "Eco-solvente", "UV"].map((familia) => (
                             <a
-                                key={categoria}
-                                href={`/productos?categoria=${encodeURIComponent(categoria)}`}
+                                key={familia}
+                                href={`/productos?familia=${encodeURIComponent(familia)}`}
                                 className="px-4 py-2 md:px-5 md:py-2.5 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full text-sm md:text-base font-medium text-gray-700 hover:bg-strong-blue hover:text-white hover:border-strong-blue transition-all duration-300 shadow-sm"
                             >
-                                {categoria}
+                                {familia}
                             </a>
                         ))}
                     </div>

@@ -29,9 +29,9 @@ const AddToCartButton = ({ product, className = "" }) => {
   return (
     <button
       onClick={handleAddToCart}
-      className={`bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors ${className}`}
+      className={`bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold rounded-xl text-center transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/40 hover:from-emerald-600 hover:to-teal-600 active:scale-95 px-4 py-2 ${className}`}
     >
-      Agregar al carrito - ${product.precio.toLocaleString('es-MX')}
+      🛒 Agregar al carrito
     </button>
   );
 };
