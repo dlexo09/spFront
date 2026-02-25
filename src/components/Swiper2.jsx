@@ -96,7 +96,7 @@ const BannerStreamingHome = () => {
                 <div className="swiper-img-container">
                   <img src={banner.imgUrl} alt={banner.title} className="w-full object-cover" />
                   <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
-                    <a href={`/product/${banner.sku}`} className="swiper-button">Conocer más</a>
+                    <a href={`/producto/${banner.idProducto}`} className="swiper-button">Conocer más</a>
                   </div>
                 </div>
               ) : (

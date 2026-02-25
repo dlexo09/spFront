@@ -2,6 +2,13 @@ import { useEffect } from "react";
 
 const CustomChatWidget = () => {
   useEffect(() => {
+    // ── Configurar el widget para que apunte al API Gateway de AWS ──
+    // Cambia la URL cuando tengas tu API Gateway desplegado
+    window.chatConfig = {
+      apiUrl: import.meta.env.VITE_CHAT_API_URL || "/api",
+      tenantId: "siscoprint",
+    };
+
     // Cargar el script del widget personalizado
     const script = document.createElement("script");
     script.src = "/chat-widget.js";

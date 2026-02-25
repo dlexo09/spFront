@@ -1,0 +1,21 @@
+{
+  "name": "siscoprint-chat-lambda",
+  "version": "1.0.0",
+  "description": "AWS Lambda chatbot backend powered by OpenAI + Supabase for Siscoprint",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+    "install:deps": "npm install",
+    "setup:vectorstore": "node scripts/setup-vectorstore.mjs",
+    "zip": "powershell -Command \"if (Test-Path function.zip) { Remove-Item function.zip }; Compress-Archive -Path index.mjs,lib,node_modules,package.json,package-lock.json -DestinationPath function.zip\"",
+    "deploy": "npm run zip && echo 'Upload function.zip to your Lambda function'"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "openai": "^4.40.0"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.997.0",
+    "dotenv": "^17.3.1"
+  }
+}

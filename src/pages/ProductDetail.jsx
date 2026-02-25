@@ -473,7 +473,7 @@ const ProductDetail = () => {
                     En stock ({product.stock} disponibles)
                   </span>
                 ) : (
-                  <span className="text-red-600 font-medium">Agotado</span>
+                  <span className="text-yellow-600 font-medium">Requiere cotización</span>
                 )}
               </div>
             )}
