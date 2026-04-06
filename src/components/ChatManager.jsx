@@ -1,31 +1,34 @@
 import { useState } from "react";
 import ZohoChat from "./ZohoChat";
 import CustomChatWidget from "./CustomChatWidget";
+import SalesIQBridge from "./SalesIQBridge";
 
 /**
  * ChatManager - Componente para gestionar qué chat mostrar
  * 
- * Opciones:
- * 1. Usar variable de entorno VITE_CHAT_PROVIDER
- * 2. Usar props para elegir el proveedor
- * 3. Usar estado para alternar entre chats
+ * En modo "custom": Carga el chat AI de Sisco + SalesIQ oculto para handoff.
+ * En modo "zoho": Solo el widget de Zoho SalesIQ directo.
  */
 
 const ChatManager = ({ provider = "custom" }) => {
-  // Opción 1: Usar variable de entorno
   const chatProvider = import.meta.env.VITE_CHAT_PROVIDER || provider;
-
-  // Opción 2: Usar estado local para alternar (útil para testing)
   const [activeChat, setActiveChat] = useState(chatProvider);
 
-  // Función para alternar entre chats (útil para desarrollo/testing)
   const toggleChat = () => {
     setActiveChat(prev => prev === "zoho" ? "custom" : "zoho");
   };
 
   return (
     <>
-      {activeChat === "zoho" ? <ZohoChat /> : <CustomChatWidget />}
+      {activeChat === "zoho" ? (
+        <ZohoChat />
+      ) : (
+        <>
+          <CustomChatWidget />
+          {/* SalesIQ cargado oculto, listo para handoff desde el chat AI */}
+          <SalesIQBridge hidden={true} />
+        </>
+      )}
       
       {/* Botón de desarrollo - remover en producción */}
       {import.meta.env.DEV && (

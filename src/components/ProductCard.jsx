@@ -11,11 +11,11 @@ const ProductCard = ({ product, index = 0 }) => {
   const productImage = product.imagen ? getImagenUrl(product.imagen) : defaultImage;
 
   // Verificar si el producto tiene precio y está disponible para venta
-  const tienePrec = product.precio && product.precio > 0 && product.disponibleParaVenta === "TRUE";
+  const tienePrec = product.precio && product.precio > 0 && String(product.disponible).toUpperCase() === "TRUE";
 
   // Precio a mostrar (oferta o normal)
-  const precioMostrar = product.precioOferta && product.precioOferta > 0 ? product.precioOferta : product.precio;
-  const tieneOferta = product.precioOferta && product.precioOferta > 0 && product.precio > product.precioOferta;
+  const precioMostrar = product.precio_oferta && product.precio_oferta > 0 ? product.precio_oferta : product.precio;
+  const tieneOferta = product.precio_oferta && product.precio_oferta > 0 && product.precio > product.precio_oferta;
 
   return (
     <div 
@@ -54,7 +54,7 @@ const ProductCard = ({ product, index = 0 }) => {
         )}
         {tieneOferta && (
           <span className="px-3 py-1 text-xs font-bold bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-full shadow-lg">
-            -{Math.round(((product.precio - product.precioOferta) / product.precio) * 100)}%
+            -{Math.round(((product.precio - product.precio_oferta) / product.precio) * 100)}%
           </span>
         )}
       </div>
@@ -188,7 +188,7 @@ const ProductCard = ({ product, index = 0 }) => {
                 description: product.descripcionCorta,
                 marca: product.marca,
                 categoria: product.categoria,
-                disponibleParaVenta: product.disponibleParaVenta
+                disponible: product.disponible
               }}
               className="w-full py-2.5 px-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-semibold rounded-xl text-center transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/40 hover:from-emerald-600 hover:to-teal-600 active:scale-95"
             />

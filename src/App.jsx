@@ -18,6 +18,9 @@ import ResetPassword from "./components/ResetPassword";
 import ProtectedRoute from "./components/ProtectedRoute"; 
 import OrderTester from "./components/OrderTester"; 
 import CartDebugger from './components/CartDebugger';
+import Checkout from './pages/Checkout';
+import OrderConfirmation from './pages/OrderConfirmation';
+import UploadReceipt from './pages/UploadReceipt';
 
 
 // Importaciones existentes
@@ -49,6 +52,9 @@ function App() {
               <Route path="/cotizacion" element={<Cotizacion />} />
               <Route path="/recursos-clientes" element={<RecursosClientes />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/orden/:folio" element={<OrderConfirmation />} />
+              <Route path="/subir-comprobante/:orderId" element={<UploadReceipt />} />
 
               {/* Rutas de autenticación */}
               <Route path="/login" element={<Login />} />

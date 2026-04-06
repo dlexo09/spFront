@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { supabase } from '../lib/supabase';
 
 const ResetPassword = () => {
   const [passwords, setPasswords] = useState({
@@ -9,80 +11,42 @@ const ResetPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-  const [tokenValid, setTokenValid] = useState(true); // Asumimos que el token es válido inicialmente
-  const { token: routeToken } = useParams(); // Token de la ruta
-  const location = useLocation();
+  const [ready, setReady] = useState(false);
   const navigate = useNavigate();
-  
-  // Obtener el token, ya sea de la ruta o de los parámetros de consulta
-  const getToken = () => {
-    if (routeToken) return routeToken;
-    const queryParams = new URLSearchParams(location.search);
-    return queryParams.get('token');
-  };
-  
-  const token = getToken();
+  const { updatePassword } = useContext(AuthContext);
 
   useEffect(() => {
-    // Si no hay token, mostrar error
-    if (!token) {
-      setTokenValid(false);
-      setError('No se proporcionó un token de restablecimiento');
-      return;
-    }
-
-    // Verificar validez del token al cargar el componente
-    const verifyToken = async () => {
-      try {
-        console.log('Verificando token:', token);
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/verify-reset-token`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ token }),
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          setTokenValid(false);
-          setError(data.message || 'El enlace de recuperación no es válido o ha expirado');
-        }
-      } catch (err) {
-        console.error('Error al verificar token:', err);
-        setTokenValid(false);
-        setError('Error al verificar el token');
-        
-        // En desarrollo, continuamos como si el token fuera válido
-        if (import.meta.env.MODE === 'development') {
-          setTokenValid(true);
-          setError('');
+    // Supabase Auth detecta automáticamente el token de la URL
+    // y dispara el evento PASSWORD_RECOVERY
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event) => {
+        if (event === 'PASSWORD_RECOVERY') {
+          setReady(true);
         }
       }
-    };
+    );
 
-    verifyToken();
-  }, [token]);
+    // Si ya hay sesión (el token fue procesado antes de montar), marcar listo
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) setReady(true);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setPasswords({
-      ...passwords,
-      [name]: value
-    });
+    setPasswords({ ...passwords, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
-    // Validaciones
     if (passwords.password !== passwords.confirmPassword) {
       setError('Las contraseñas no coinciden');
       return;
     }
-
     if (passwords.password.length < 6) {
       setError('La contraseña debe tener al menos 6 caracteres');
       return;
@@ -91,47 +55,17 @@ const ResetPassword = () => {
     setIsLoading(true);
 
     try {
-      console.log('Enviando solicitud de restablecimiento con token:', token);
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/reset-password`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          token,
-          password: passwords.password
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Error al restablecer la contraseña');
-      }
-
+      await updatePassword(passwords.password);
       setSuccess(true);
-      
-      // Redirigir al login después de unos segundos
-      setTimeout(() => {
-        navigate('/login');
-      }, 3000);
+      setTimeout(() => navigate('/cuenta'), 3000);
     } catch (err) {
-      console.error('Error al restablecer contraseña:', err);
       setError(err.message || 'Ha ocurrido un error');
-      
-      // En desarrollo, simular éxito para pruebas
-      if (import.meta.env.MODE === 'development') {
-        setSuccess(true);
-        setTimeout(() => {
-          navigate('/login');
-        }, 3000);
-      }
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (!tokenValid) {
+  if (!ready) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
@@ -139,11 +73,9 @@ const ResetPassword = () => {
             <img src="/img/logoSiscom.png" alt="Logo" className="h-16 mx-auto" />
             <h2 className="text-2xl font-bold mt-4 text-red-600">Enlace no válido</h2>
           </div>
-          
           <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg mb-6">
-            <p>{error}</p>
+            <p>El enlace de recuperación no es válido o ha expirado.</p>
           </div>
-          
           <div className="text-center">
             <Link to="/recuperar-contrasena" className="text-blue-600 hover:text-blue-500">
               Solicitar un nuevo enlace

@@ -6,7 +6,7 @@ import './Header.css';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logout } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -24,14 +24,13 @@ const Header = () => {
           <Link to="/contacto" className="nav-link">Contacto</Link>
         </nav>
         
-{/* Temporalmente oculto - Iniciar sesión
         {user ? (
-          <div className="flex items-center">
-            <Link to="/cuenta" className="nav-link flex items-center">
+          <div className="flex items-center gap-2">
+            <Link to="/cuenta" className="nav-link flex items-center" title="Mi cuenta">
               <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
               </svg>
-              <span className="hidden md:inline">{user.name.split(' ')[0]}</span>
+              <span className="hidden md:inline">{user.name ? user.name.split(' ')[0] : 'Cuenta'}</span>
             </Link>
           </div>
         ) : (
@@ -39,7 +38,6 @@ const Header = () => {
             Iniciar sesión
           </Link>
         )}
-        */}
 
         <CartIcon />
       </div>

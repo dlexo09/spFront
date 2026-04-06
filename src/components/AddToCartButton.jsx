@@ -5,7 +5,7 @@ const AddToCartButton = ({ product, className = "" }) => {
   const { addToCart } = useCart();
   
   // Verificar si el producto tiene precio y está disponible para venta
-  const tienePrec = product.precio && product.precio > 0 && product.disponibleParaVenta === "TRUE";
+  const tienePrec = product.precio && product.precio > 0 && String(product.disponible).toUpperCase() === "TRUE";
 
   const handleAddToCart = () => {
     if (tienePrec) {

@@ -88,8 +88,17 @@ Score 5 – Listo para comprar, pide demostración o reunión ← CREAR LEAD PRI
 - Máximo 3 párrafos por respuesta. Sé concreto.
 - NUNCA inventes productos ni precios. Solo muestra lo que devuelva search_products.
 - Si no encuentras el producto: "No tenemos ese modelo específico, pero déjame buscar alternativas similares."
-- Si el cliente quiere hablar con humano: pide nombre y correo, crea el lead con score 4+.
-- No presiones. Asesora genuinamente.`;
+- Si el cliente quiere hablar con humano: pide nombre y correo, crea el lead con score 4+, y usa transfer_to_agent para conectarlo con un asesor real.
+- No presiones. Asesora genuinamente.
+
+== TRANSFERENCIA A ASESOR HUMANO ==
+Usa transfer_to_agent cuando:
+1. El cliente pide EXPLÍCITAMENTE hablar con un asesor humano.
+2. Ya capturaste nombre + email y el score es ≥ 4.
+3. El cliente está frustrado o insiste en hablar con alguien.
+Primero crea el lead con create_crm_lead, luego usa transfer_to_agent.
+Antes de transferir, envía un mensaje corto: "Te conecto con uno de nuestros asesores. Un momento por favor…"
+NUNCA transfieras sin antes haber intentado ayudar con búsqueda de productos.`;
 
 /* ─── Tools para OpenAI Function Calling ──────────────────────────────────── */
 const TOOLS = [
@@ -161,6 +170,25 @@ const TOOLS = [
       },
     },
   },
+  {
+    type: 'function',
+    function: {
+      name: 'transfer_to_agent',
+      description: 'Transfiere la conversación a un asesor humano de Siscoprint. Usa DESPUÉS de crear el lead con create_crm_lead. Solo cuando el cliente pide explícitamente hablar con alguien o el score es ≥ 4.',
+      parameters: {
+        type: 'object',
+        properties: {
+          name: { type: 'string', description: 'Nombre del cliente' },
+          email: { type: 'string', description: 'Correo electrónico del cliente' },
+          phone: { type: 'string', description: 'Teléfono (opcional)' },
+          company: { type: 'string', description: 'Empresa (opcional)' },
+          product: { type: 'string', description: 'Producto o servicio de interés principal' },
+          summary: { type: 'string', description: 'Resumen breve de la conversación y lo que necesita el cliente' },
+        },
+        required: ['name', 'email', 'summary'],
+      },
+    },
+  },
 ];
 
 const MAX_HISTORY = 16;
@@ -195,6 +223,7 @@ export async function handleChat({ sessionId, message }) {
   let reply = 'Lo siento, no pude procesar tu mensaje. Intenta de nuevo.';
   let products = [];
   let crmResult = null;
+  let handoff = null; // datos de handoff para SalesIQ
 
   try {
     // 4. Agentic loop — OpenAI puede llamar tools múltiples veces
@@ -248,6 +277,19 @@ export async function handleChat({ sessionId, message }) {
             : `Error al crear lead: ${crmResult.error}`;
         }
 
+        if (toolCall.function.name === 'transfer_to_agent') {
+          console.log('[TOOL_CALL] transfer_to_agent → handoff triggered');
+          handoff = {
+            name: args.name || '',
+            email: args.email || '',
+            phone: args.phone || '',
+            company: args.company || '',
+            product: args.product || '',
+            summary: args.summary || '',
+          };
+          toolResult = 'Transferencia iniciada. El cliente será conectado con un asesor humano vía SalesIQ.';
+        }
+
         messages.push({
           role: 'tool',
           tool_call_id: toolCall.id,
@@ -259,7 +301,7 @@ export async function handleChat({ sessionId, message }) {
     console.error('Chat error:', err.message, err.stack);
   }
 
-  console.log(`[CHAT_DONE] session=${sessionId} products=${products.length} reply_len=${reply.length}`);
+  console.log(`[CHAT_DONE] session=${sessionId} products=${products.length} handoff=${!!handoff} reply_len=${reply.length}`);
 
   // 5. Guardar respuesta del asistente
   await supabase.from('chat_messages').insert({ session_id: sessionId, role: 'assistant', content: reply });
@@ -267,7 +309,9 @@ export async function handleChat({ sessionId, message }) {
   // 6. Quick replies contextuales
   const quickReplies = buildQuickReplies(reply, products, crmResult);
 
-  return { reply, products, quickReplies };
+  const response = { reply, products, quickReplies };
+  if (handoff) response.handoff = handoff;
+  return response;
 }
 
 /* ─── Quick replies dinámicos ──────────────────────────────────────────────── */

@@ -38,7 +38,7 @@ const RelatedProducts = ({ currentSku }) => {
           const tienePrec = 
             product["precio sugerido"] && 
             parseFloat(product["precio sugerido"]) > 0 && 
-            product["disponibleParaVenta"] !== "FALSE";
+            product["disponible"] !== "FALSE";
           
           return (
             <div key={index} className="bg-white rounded-lg shadow p-4 flex flex-col items-center hover:shadow-lg transition-shadow">
@@ -77,7 +77,7 @@ const RelatedProducts = ({ currentSku }) => {
                       description: product.Descripcion,
                       marca: product.PRODUCTO,
                       categoria: "Consumible",
-                      disponibleParaVenta: "TRUE"
+                      disponible: "TRUE"
                     }}
                     className="w-full text-sm py-1"
                   />

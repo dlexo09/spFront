@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useCart } from '../context/CartContext';
-import { Link } from 'react-router-dom';
-import MercadoPagoCheckout from '../components/MercadoPagoCheckout';
-import { useOrder } from '../context/OrderContext';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const { cartItems, cart, removeFromCart, updateQuantity, getTotalItems, getTotalPrice, clearCart, calculateTotal } = useCart();
-  const { createOrder } = useOrder();
-  const [showCheckout, setShowCheckout] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const navigate = useNavigate();
 
   if (!cartItems || cartItems.length === 0) {
     return (
@@ -29,32 +25,8 @@ const Cart = () => {
   const itemsWithPrice = cartItems.filter(item => item.price && item.price > 0);
   const itemsWithoutPrice = cartItems.filter(item => !item.price || item.price <= 0);
 
-  // Proceder al checkout (crear pedido)
-  const handleCheckout = async () => {
-    setIsProcessing(true);
-    try {
-      const totals = calculateTotal();
-      
-      const orderData = {
-        items: cartItems.filter(item => item.price && item.price > 0),
-        subtotal: totals.subtotal,
-        tax: totals.tax, 
-        total: totals.total,
-        notes: ""
-      };
-      
-      const order = await createOrder(orderData);
-      
-      if (order && order.id) {
-        // Redirigir a la página de métodos de pago
-        window.location.href = `/test-orders`;
-      }
-    } catch (error) {
-      console.error("Error al crear el pedido:", error);
-      alert("Hubo un problema al procesar tu pedido. Por favor, intenta nuevamente.");
-    } finally {
-      setIsProcessing(false);
-    }
+  const handleCheckout = () => {
+    navigate('/checkout');
   };
 
   return (
@@ -135,10 +107,9 @@ const Cart = () => {
               
               <button 
                 onClick={handleCheckout}
-                disabled={isProcessing}
-                className={`w-full ${isProcessing ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700'} text-white py-3 rounded transition-colors mt-3`}
+                className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded transition-colors mt-3"
               >
-                {isProcessing ? 'Procesando...' : 'Proceder al pago'}
+                Proceder al pago
               </button>
             </div>
           )}

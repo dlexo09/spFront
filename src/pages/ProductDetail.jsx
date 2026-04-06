@@ -139,7 +139,7 @@ const ProductDetail = () => {
     );
   }
 
-  const tienePrec = product.precio && product.precio > 0 && product.disponibleParaVenta === "TRUE";
+  const tienePrec = product.precio && product.precio > 0 && String(product.disponible).toUpperCase() === "TRUE";
 
   // Parsear videos: linkYoutube (string, puede estar vacío) + videos (jsonb array)
   let videosList = [];
@@ -334,7 +334,7 @@ const ProductDetail = () => {
                   Destacado
                 </span>
               )}
-              {product.precioOferta && product.precioOferta > 0 && (
+              {product.precio_oferta && product.precio_oferta > 0 && (
                 <span className="px-3 py-1 text-xs font-bold bg-red-500 text-white rounded-full">
                   Oferta
                 </span>
@@ -344,16 +344,16 @@ const ProductDetail = () => {
             {/* Precio */}
             {tienePrec && (
               <div className="mb-6">
-                {product.precioOferta && product.precioOferta > 0 ? (
+                {product.precio_oferta && product.precio_oferta > 0 ? (
                   <div className="flex items-baseline gap-3">
                     <span className="text-3xl font-bold text-green-600">
-                      ${product.precioOferta.toLocaleString('es-MX')}
+                      ${product.precio_oferta.toLocaleString('es-MX')}
                     </span>
                     <span className="text-xl text-gray-400 line-through">
                       ${product.precio.toLocaleString('es-MX')}
                     </span>
                     <span className="text-sm font-semibold text-red-500 bg-red-50 px-2 py-1 rounded">
-                      -{Math.round(((product.precio - product.precioOferta) / product.precio) * 100)}%
+                      -{Math.round(((product.precio - product.precio_oferta) / product.precio) * 100)}%
                     </span>
                   </div>
                 ) : (
@@ -419,12 +419,12 @@ const ProductDetail = () => {
                   product={{
                     sku: product.sku,
                     name: product.nombre,
-                    precio: product.precioOferta && product.precioOferta > 0 ? product.precioOferta : product.precio,
+                    precio: product.precio_oferta && product.precio_oferta > 0 ? product.precio_oferta : product.precio,
                     image: imagenPrincipalUrl,
                     description: product.descripcionCorta,
                     marca: product.marca,
                     categoria: product.categoria,
-                    disponibleParaVenta: product.disponibleParaVenta
+                    disponible: product.disponible
                   }}
                   className="w-full md:w-auto"
                 />

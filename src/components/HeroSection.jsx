@@ -34,7 +34,7 @@ const HeroSection = () => (
             >
                 <div className="w-full max-w-3xl mx-auto flex flex-col items-center">
                     <h1 className="text-2xl sm:text-3xl md:text-[40px] font-semibold mb-6 md:mb-9 text-strong-blue leading-8 sm:leading-10 md:leading-[50px]">
-                        DONDE LA CREATIVIDAD SE ENCUENTRA CON LA{" "}
+                        SOLUCIONES DE IMPRESIÓN PARA TU NEGOCIO: VENTA, SERVICIO Y{" "}
                         <span className="relative inline-block">
                             <span className="bg-gradient-to-r from-yellow-sp via-pink-sp to-light-blue bg-clip-text text-transparent">
                                 TECNOLOGÍA
@@ -79,7 +79,7 @@ const HeroSection = () => (
         {/* Divisor con 4 tarjetas flotando */}
         <div className="relative z-30 flex justify-center mt-[-100px] md:mt-[-130px]">
             <div className="w-full max-w-6xl px-4 flex justify-center">
-                <div className="relative w-full h-full sm:w-[95%] md:w-[90%] bg-white rounded-[2.3rem] md:rounded-[1.8rem] shadow-lg p-6 md:p-8 flex justify-center overflow-hidden bg-[url('/img/bg-beneficios-sp-mov.png')] md:bg-[url('/img/bg-beneficios-sp.png')] bg-[length:100%_100%] bg-center">
+                <div className="relative w-full h-full sm:w-[95%] md:w-[90%] bg-white rounded-[2.3rem] md:rounded-[1.8rem] shadow-[0_30px_80px_-10px_rgba(0,0,0,0.10)] p-6 md:p-8 flex justify-center overflow-hidden bg-[url('/img/bg-beneficios-sp-mov.png')] md:bg-[url('/img/bg-beneficios-sp.png')] bg-[length:100%_100%] bg-center">
                     <div className="relative z-30 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 w-full justify-items-center">
                         {cards.map((card, idx) => (
                             <div
