@@ -1,78 +1,146 @@
 .header {
-    background-color: #ffffff; /* Fondo blanco */
-    color: #1e3a8a; /* Texto azul */
-    padding-left: 100px; /* Padding izquierdo */
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1340px, calc(100% - 24px));
+    height: 82px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px; /* Ajustar la altura si es necesario */
-    position: fixed; /* Hacer que el header sea fijo */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 50; /* Asegurar que el header esté por encima de otros elementos */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir una sombra para destacar el header */
+    padding: 0 clamp(18px, 4vw, 34px);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(14, 116, 144, 0.08);
+    color: #1e3a8a;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(10px);
+    z-index: 60;
+    transition: height 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-.nav-link {
-    padding: 0.5rem 1rem; /* Ajustar el padding */
-    font-size: 1.2rem; /* Ajustar el tamaño del texto */
-    color: #1e3a8a; /* Texto azul */
+.header.is-scrolled {
+    height: 74px;
+}
+
+.header a {
     text-decoration: none;
 }
 
-.nav-link:hover {
-    color: #93c5fd; /* Hover color */
+.nav-link {
+    position: relative;
+    padding: 0.5rem 0.95rem;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: #1e3a8a;
+    text-decoration: none;
+    transition: color 0.25s ease;
 }
 
-/* Contenedor para navegación y carrito */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0.95rem;
+    right: 0.95rem;
+    bottom: 0.2rem;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #0ea5e9, #ec4899);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
+}
+
+.nav-link:hover {
+    color: #0f172a;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
 .header-right {
     display: flex;
     align-items: center;
-    gap: 1rem; /* Espacio entre navegación y carrito */
-    padding-right: 10%;
+    gap: 0.75rem;
 }
 
 .nav {
     display: flex;
     align-items: center;
+    gap: 0.15rem;
 }
 
 .menu-button {
-    display: none; /* Ocultar el botón del menú en pantallas grandes */
+    display: none;
+    border: 0;
+    background: transparent;
+    color: #1e3a8a;
 }
 
 .logo {
-    padding: 10px; /* Agregar padding al logo */
+    height: 56px;
+    width: auto;
+    display: block;
 }
 
 @media (max-width: 768px) {
     .header {
-        padding-left: 20px; /* Ajustar el padding izquierdo en pantallas pequeñas */
+        height: 74px;
+        padding: 0 18px;
     }
-    
+
     .header-right {
-        padding-right: 20px; /* Ajustar el padding derecho en móvil */
+        gap: 0.5rem;
     }
-    
+
     .nav {
-        display: none; /* Ocultar el menú en pantallas pequeñas */
+        display: none;
     }
 
     .menu-button {
-        display: block; /* Mostrar el botón del menú en pantallas pequeñas */
-        padding-right: 20px; /* Ajustar el padding derecho */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        background: rgba(30, 58, 138, 0.08);
     }
 
     .nav.open {
         display: flex;
         flex-direction: column;
+        align-items: stretch;
         position: absolute;
-        top: 80px;
+        top: calc(100% + 12px);
         left: 0;
+        right: 0;
         width: 100%;
-        background-color: #ffffff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        z-index: 20; /* Asegurar que el nav esté por encima de otros elementos */
+        padding: 0.8rem;
+        background: rgba(255, 255, 255, 0.98);
+        border: 1px solid rgba(14, 116, 144, 0.08);
+        border-radius: 28px;
+        box-shadow: 0 18px 35px rgba(15, 23, 42, 0.12);
+        z-index: 20;
+    }
+
+    .nav.open .nav-link {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        border-radius: 18px;
+    }
+
+    .nav.open .nav-link:hover {
+        background: rgba(14, 165, 233, 0.08);
+    }
+
+    .nav.open .nav-link::after {
+        display: none;
+    }
+
+    .logo {
+        height: 48px;
     }
 }

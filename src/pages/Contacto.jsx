@@ -113,19 +113,21 @@ const Contacto = () => {
       <SectionHero title={"CONTACTO"} buttonText={"VER TODOS LOS PRODUCTOS"} buttonLink={"/productos"} backgroundImg={"../assets/img/bg-hero-general.png"} />
 
       <div className="container mx-auto max-w-7xl px-4 container-mrg">
-        <h2 className="text-center text-2xl sm:text-3xl md:text-[32px] font-semibold mb-6 md:mb-7 text-strong-blue leading-8 sm:leading-10 md:leading-[40px]">Nuestras Sucursales</h2>
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+          <span className="inline-flex items-center rounded-full bg-sky-50 border border-sky-100 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Cobertura nacional</span>
+          <h2 className="mt-4 text-center text-2xl sm:text-3xl md:text-[32px] font-semibold mb-4 text-strong-blue leading-8 sm:leading-10 md:leading-[40px]">Nuestras sucursales</h2>
+          <p className="text-slate-600 text-base md:text-lg leading-7">Estamos cerca para acompañarte en ventas, soporte y asesoría técnica especializada en cada etapa de tu operación.</p>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-14 md:mb-20">
           {sucursales.map((sucursal, index) => {
             const isEven = index % 2 === 0;
-            const bgClass = isEven ? 'bg-[rgba(0,173,238,0.08)]' : 'bg-white';
-            const borderClass = 'border-none';
-            const radiusClass = 'rounded-none sm:rounded-none lg:rounded-none';
+            const bgClass = isEven ? 'bg-[linear-gradient(180deg,rgba(0,173,238,0.10),rgba(255,255,255,0.96))]' : 'bg-white';
 
             const iconSrc = isEven ? pinBlack : pinBlue;
 
             return (
-              <div key={index} className={`${bgClass} ${borderClass} p-5 ${radiusClass} flex items-start gap-4`}>
+              <div key={index} className={`${bgClass} p-6 rounded-[28px] border border-slate-100 shadow-[0_18px_36px_rgba(15,23,42,0.08)] flex items-start gap-4 transition-transform duration-300 hover:-translate-y-1`}>
                 <img
                   src={iconSrc}
                   alt={`icon ${sucursal.nombre}`}
@@ -133,10 +135,10 @@ const Contacto = () => {
                   onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/img/logoSiscom.png'; }}
                 />
                 <div className="flex-1">
-                  <h3 className="text-base font-semibold mb-1 text-strong-blue">{sucursal.nombre}</h3>
-                  <p className="text-xs text-strong-blue/70 mb-2">{sucursal.direccion}</p>
-                  <p className="text-sm text-strong-blue/80">Tel: {sucursal.telefono || 'N/A'}</p>
-                  <p className="text-sm text-strong-blue/80">Correo: <a href={`mailto:${sucursal.correo}`} className="text-light-blue underline">{sucursal.correo}</a></p>
+                  <h3 className="text-base font-semibold mb-2 text-strong-blue">{sucursal.nombre}</h3>
+                  <p className="text-sm text-slate-500 mb-3 leading-6">{sucursal.direccion}</p>
+                  <p className="text-sm text-slate-700">Tel: {sucursal.telefono || 'N/A'}</p>
+                  <p className="text-sm text-slate-700 mt-1">Correo: <a href={`mailto:${sucursal.correo}`} className="text-light-blue underline">{sucursal.correo}</a></p>
                 </div>
               </div>
             );
@@ -144,22 +146,27 @@ const Contacto = () => {
         </div>
 
 
-        <div className="mb-12 lg:col-span- gap-6 items-start mt-[60px] md:mt-[150px]">
+        <div className="mb-12 gap-6 items-start mt-[60px] md:mt-[150px] rounded-[36px] overflow-hidden border border-white shadow-[0_24px_60px_rgba(15,23,42,0.10)] bg-white">
           <img src="/img/mapa.png" alt="Mapa de sucursales" className="w-full h-auto object-cover" />
         </div>
 
 
-        <div className=" bg-gradient-to-r from-light-blue/20 to-pink-sp/20 rounded-2xl px-4 py-16 mt-[60px] md:mt-[150px] mb-[60px]">
+        <div className="relative overflow-hidden bg-[linear-gradient(135deg,rgba(14,165,233,0.12),rgba(244,114,182,0.10),rgba(250,204,21,0.12))] rounded-[36px] px-4 py-16 md:px-8 mt-[60px] md:mt-[150px] mb-[60px] shadow-[0_28px_70px_rgba(15,23,42,0.08)] border border-white/70">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.8),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.7),transparent_24%)]" aria-hidden="true" />
           <div className="max-w-4xl mx-auto">
 
-            <h3 className="text-center text-2xl sm:text-3xl md:text-[32px] font-semibold mb-6 md:mb-7 text-strong-blue leading-8 sm:leading-10 md:leading-[40px]">¿Tienes Alguna Duda? Escríbenos</h3>
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-12">
+            <div className="relative text-center max-w-2xl mx-auto">
+              <span className="inline-flex items-center rounded-full bg-white/80 border border-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Contacto directo</span>
+              <h3 className="mt-4 text-center text-2xl sm:text-3xl md:text-[32px] font-semibold mb-4 text-strong-blue leading-8 sm:leading-10 md:leading-[40px]">¿Tienes alguna duda? Escríbenos</h3>
+              <p className="text-slate-600 leading-7">Cuéntanos qué necesitas y te respondemos con asesoría comercial o soporte especializado según tu caso.</p>
+            </div>
+            <form onSubmit={handleSubmit} className="relative grid grid-cols-1 md:grid-cols-2 gap-4 mt-12">
               <input
                 type="text"
                 placeholder="Escribe tu nombre"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="p-3 rounded-md border border-white bg-white shadow-sm"
+                className="p-4 rounded-2xl border border-white bg-white/95 shadow-sm outline-none focus:ring-2 focus:ring-sky-200"
                 required
               />
               <input
@@ -167,7 +174,7 @@ const Contacto = () => {
                 placeholder="Escribe tu correo"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="p-3 rounded-md border border-white bg-white shadow-sm"
+                className="p-4 rounded-2xl border border-white bg-white/95 shadow-sm outline-none focus:ring-2 focus:ring-sky-200"
                 required
               />
               <input
@@ -175,13 +182,13 @@ const Contacto = () => {
                 placeholder="Escribe tu teléfono"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="p-3 rounded-md border border-white bg-white shadow-sm"
+                className="p-4 rounded-2xl border border-white bg-white/95 shadow-sm outline-none focus:ring-2 focus:ring-sky-200"
                 required
               />
               <select
                 value={formData.contactType}
                 onChange={(e) => setFormData({ ...formData, contactType: e.target.value })}
-                className="p-3 rounded-md border border-white bg-white shadow-sm"
+                className="p-4 rounded-2xl border border-white bg-white/95 shadow-sm outline-none focus:ring-2 focus:ring-sky-200"
                 required
               >
                 <option value="soporte">Soporte</option>
@@ -192,7 +199,7 @@ const Contacto = () => {
                 placeholder="Escribe tu mensaje"
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="p-3 rounded-md border border-white bg-white md:col-span-2 shadow-sm"
+                className="p-4 rounded-[24px] border border-white bg-white/95 md:col-span-2 shadow-sm outline-none focus:ring-2 focus:ring-sky-200"
                 rows={5}
                 required
               />
@@ -207,7 +214,7 @@ const Contacto = () => {
                 <button
                   type="submit"
                   disabled={!captchaToken}
-                  className="bg-light-blue text-white px-6 py-2 rounded-full hover:brightness-95 disabled:opacity-60"
+                  className="bg-light-blue text-white px-8 py-3 rounded-full hover:brightness-95 disabled:opacity-60 font-semibold shadow-[0_16px_30px_rgba(14,165,233,0.22)]"
                 >
                   ENVIAR FORMULARIO
                 </button>
