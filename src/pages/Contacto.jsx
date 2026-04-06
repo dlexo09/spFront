@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import SectionHero from "../components/SectionHero";
 import pinBlue from "../assets/img/pin-blue.png";
 import pinBlack from "../assets/img/pin-black.png";
+import { gsap, allowsMotion } from "../lib/gsap";
+
+const contactRoutes = [
+  {
+    title: "Ventas",
+    description: "Si buscas una solución, equipo o cotización, te orientamos para elegir mejor.",
+    accent: "border-sky-100 bg-[linear-gradient(180deg,#ffffff,#eef8ff)]",
+  },
+  {
+    title: "Soporte",
+    description: "Si ya eres cliente y necesitas seguimiento técnico o ayuda operativa, estamos para apoyarte.",
+    accent: "border-pink-100 bg-[linear-gradient(180deg,#ffffff,#fff0f7)]",
+  },
+];
 
 const Contacto = () => {
+  const pageRef = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,6 +28,30 @@ const Contacto = () => {
     contactType: "soporte",
   });
   const [captchaToken, setCaptchaToken] = useState(null);
+
+  useEffect(() => {
+    if (!allowsMotion() || !pageRef.current) {
+      return undefined;
+    }
+
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray("[data-contact-block]").forEach((block, index) => {
+        gsap.from(block, {
+          y: 32,
+          opacity: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          delay: index === 0 ? 0.08 : 0,
+          scrollTrigger: {
+            trigger: block,
+            start: "top 80%",
+          },
+        });
+      });
+    }, pageRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const handleCaptchaChange = (token) => {
     setCaptchaToken(token);
@@ -109,17 +148,34 @@ const Contacto = () => {
   ];
 
   return (
-    <div className="w-full mb-[80px] md:mb-[130px]">
-      <SectionHero title={"CONTACTO"} buttonText={"VER TODOS LOS PRODUCTOS"} buttonLink={"/productos"} backgroundImg={"../assets/img/bg-hero-general.png"} />
+    <div ref={pageRef} className="w-full mb-[80px] md:mb-[130px]">
+      <SectionHero
+        title={"CONTACTO"}
+        eyebrow={"Ventas y soporte"}
+        description={"Habla con nuestro equipo comercial o técnico y recibe acompañamiento claro para resolver dudas, cotizar o dar seguimiento a tu operación."}
+        buttonText={"EXPLORAR SOLUCIONES"}
+        buttonLink={"/productos"}
+        backgroundImg={"../assets/img/bg-hero-general.png"}
+      />
 
       <div className="container mx-auto max-w-7xl px-4 container-mrg">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+        <div data-contact-block className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
           <span className="inline-flex items-center rounded-full bg-sky-50 border border-sky-100 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">Cobertura nacional</span>
           <h2 className="mt-4 text-center text-2xl sm:text-3xl md:text-[32px] font-semibold mb-4 text-strong-blue leading-8 sm:leading-10 md:leading-[40px]">Nuestras sucursales</h2>
           <p className="text-slate-600 text-base md:text-lg leading-7">Estamos cerca para acompañarte en ventas, soporte y asesoría técnica especializada en cada etapa de tu operación.</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-14 md:mb-20">
+        <div data-contact-block className="grid md:grid-cols-2 gap-4 mb-10 md:mb-14 max-w-5xl mx-auto">
+          {contactRoutes.map((route) => (
+            <div key={route.title} className={`rounded-[28px] border p-6 shadow-[0_18px_36px_rgba(15,23,42,0.06)] ${route.accent}`}>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-strong-blue/70">Ruta recomendada</p>
+              <h3 className="mt-2 text-xl font-semibold text-strong-blue">{route.title}</h3>
+              <p className="mt-3 text-slate-600 leading-7 text-sm md:text-base">{route.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div data-contact-block className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-14 md:mb-20">
           {sucursales.map((sucursal, index) => {
             const isEven = index % 2 === 0;
             const bgClass = isEven ? 'bg-[linear-gradient(180deg,rgba(0,173,238,0.10),rgba(255,255,255,0.96))]' : 'bg-white';
@@ -146,12 +202,12 @@ const Contacto = () => {
         </div>
 
 
-        <div className="mb-12 gap-6 items-start mt-[60px] md:mt-[150px] rounded-[36px] overflow-hidden border border-white shadow-[0_24px_60px_rgba(15,23,42,0.10)] bg-white">
+        <div data-contact-block className="mb-12 gap-6 items-start mt-[60px] md:mt-[150px] rounded-[36px] overflow-hidden border border-white shadow-[0_24px_60px_rgba(15,23,42,0.10)] bg-white">
           <img src="/img/mapa.png" alt="Mapa de sucursales" className="w-full h-auto object-cover" />
         </div>
 
 
-        <div className="relative overflow-hidden bg-[linear-gradient(135deg,rgba(14,165,233,0.12),rgba(244,114,182,0.10),rgba(250,204,21,0.12))] rounded-[36px] px-4 py-16 md:px-8 mt-[60px] md:mt-[150px] mb-[60px] shadow-[0_28px_70px_rgba(15,23,42,0.08)] border border-white/70">
+        <div data-contact-block className="relative overflow-hidden bg-[linear-gradient(135deg,rgba(14,165,233,0.12),rgba(244,114,182,0.10),rgba(250,204,21,0.12))] rounded-[36px] px-4 py-16 md:px-8 mt-[60px] md:mt-[150px] mb-[60px] shadow-[0_28px_70px_rgba(15,23,42,0.08)] border border-white/70">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.8),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.7),transparent_24%)]" aria-hidden="true" />
           <div className="max-w-4xl mx-auto">
 

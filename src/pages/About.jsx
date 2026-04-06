@@ -65,6 +65,8 @@ const About = () => {
     <div ref={pageRef}>
       <SectionHero
         title={"SOBRE NOSOTROS"}
+        eyebrow={"Nuestra historia"}
+        description={"Conoce la trayectoria, visión y estructura con la que acompañamos a negocios de todo México en sus decisiones de impresión."}
         buttonText={"EXPLORAR SOLUCIONES"}
         buttonLink={"/productos"}
         backgroundImg={"../assets/img/bg-hero-general.png"}
