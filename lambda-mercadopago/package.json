@@ -1,0 +1,12 @@
+{
+  "name": "siscoprint-mercadopago-lambda",
+  "version": "1.0.0",
+  "description": "AWS Lambda for Mercado Pago preference creation",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+    "zip": "powershell -Command \"if (Test-Path function.zip) { Remove-Item function.zip }; Compress-Archive -Path index.mjs,package.json -DestinationPath function.zip\"",
+    "deploy": "npm run zip && echo 'Upload function.zip to your Lambda function'"
+  },
+  "dependencies": {}
+}

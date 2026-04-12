@@ -163,10 +163,28 @@ const OrderConfirmation = () => {
         </div>
 
         <div className="border-t mt-4 pt-4 space-y-2 text-sm">
+          {(() => {
+            const subtotal = Number(order.subtotal || 0);
+            const tax = Number(order.tax || 0);
+            const shipping = Number(order.shipping_cost || 0);
+            const total = Number(order.total || 0);
+            const paymentAdjustment = Number((total - (subtotal + tax + shipping)).toFixed(2));
+
+            return (
+              <>
           <div className="flex justify-between"><span className="text-gray-600">Subtotal</span><span>${order.subtotal?.toLocaleString('es-MX')}</span></div>
           <div className="flex justify-between"><span className="text-gray-600">IVA (16%)</span><span>${order.tax?.toLocaleString('es-MX')}</span></div>
           <div className="flex justify-between"><span className="text-gray-600">Envío</span><span>{order.shipping_cost === 0 ? 'Gratis' : `$${order.shipping_cost?.toLocaleString('es-MX')}`}</span></div>
+          {paymentAdjustment > 0 && (
+            <div className="flex justify-between"><span className="text-gray-600">Cargo por pago digital</span><span>+${paymentAdjustment.toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span></div>
+          )}
+          {paymentAdjustment < 0 && (
+            <div className="flex justify-between text-green-700"><span>Bonificación por transferencia</span><span>${paymentAdjustment.toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span></div>
+          )}
           <div className="flex justify-between font-bold text-base border-t pt-2"><span>Total</span><span>${order.total?.toLocaleString('es-MX')}</span></div>
+              </>
+            );
+          })()}
         </div>
       </div>
 

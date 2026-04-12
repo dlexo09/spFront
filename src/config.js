@@ -4,7 +4,8 @@ const API_CONFIG = {
   ENDPOINTS: {
     CREATE_PREFERENCE: '/api/create-preference',
     WEBHOOK: '/webhook/mercadopago',
-    HEALTH: '/api/health'
+    HEALTH: '/api/health',
+    PAYMENT_STATUS: '/api/payment-status'
   },
   TIMEOUT: 30000, // 30 segundos
   RETRIES: 3

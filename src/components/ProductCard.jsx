@@ -5,65 +5,55 @@ import { getImagenUrl } from "../utils/productUrls";
 
 const ProductCard = ({ product, index = 0 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const defaultImage = "/img/noDisponible.jpg";
-  // Construir URL completa desde el nombre de archivo
   const productImage = product.imagen ? getImagenUrl(product.imagen) : defaultImage;
-
-  // Verificar si el producto tiene precio y está disponible para venta
   const tienePrec = product.precio && product.precio > 0 && String(product.disponible).toUpperCase() === "TRUE";
-
-  // Precio a mostrar (oferta o normal)
   const precioMostrar = product.precio_oferta && product.precio_oferta > 0 ? product.precio_oferta : product.precio;
   const tieneOferta = product.precio_oferta && product.precio_oferta > 0 && product.precio > product.precio_oferta;
+  const categoryLabel = product.categoria || "Sin categoria";
+  const shortDescription = product.descripcionCorta || "Equipo disponible con acompanamiento comercial y soporte especializado.";
 
   return (
     <div 
-      className="group relative bg-white rounded-2xl overflow-hidden transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-2"
-      style={{ 
+      className="group relative overflow-hidden rounded-[28px] border border-slate-200/80 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(30,58,138,0.12)]"
+      style={{
         animationDelay: `${index * 50}ms`,
         animation: 'fadeInUp 0.6s ease-out forwards'
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Efecto de borde gradiente animado */}
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
-      <div className="absolute inset-[1px] rounded-2xl bg-white" />
-      
-      {/* Badges superiores */}
-      <div className="absolute top-3 left-3 z-10 flex gap-2 flex-wrap">
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sky-400 via-blue-500 to-amber-400" />
+
+      <div className="absolute top-4 left-4 z-10 flex max-w-[75%] flex-wrap gap-2">
         {tienePrec ? (
-          <span className="px-3 py-1 text-xs font-bold bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full shadow-lg shadow-emerald-500/30">
+          <span className="rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-emerald-700 border border-emerald-100">
             Disponible
           </span>
         ) : (
-          <span className="px-3 py-1 text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full shadow-lg shadow-amber-500/30 animate-pulse">
+          <span className="rounded-full bg-amber-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-amber-700 border border-amber-100">
             Cotización
           </span>
         )}
         {product.nuevo && (
-          <span className="px-3 py-1 text-xs font-bold bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full shadow-lg">
+          <span className="rounded-full bg-sky-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-sky-700 border border-sky-100">
             Nuevo
           </span>
         )}
         {product.destacado && (
-          <span className="px-3 py-1 text-xs font-bold bg-gradient-to-r from-yellow-400 to-amber-500 text-white rounded-full shadow-lg">
+          <span className="rounded-full bg-rose-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-rose-700 border border-rose-100">
             Destacado
           </span>
         )}
         {tieneOferta && (
-          <span className="px-3 py-1 text-xs font-bold bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-full shadow-lg">
+          <span className="rounded-full bg-slate-900 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white shadow-[0_10px_22px_rgba(15,23,42,0.18)]">
             -{Math.round(((product.precio - product.precio_oferta) / product.precio) * 100)}%
           </span>
         )}
       </div>
 
-      {/* Botón de vista rápida */}
-      <div className={`absolute top-3 right-3 z-10 transition-all duration-300 ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}`}>
+      <div className="absolute top-4 right-4 z-10 opacity-100 transition-all duration-300 md:opacity-0 md:translate-x-2 md:group-hover:opacity-100 md:group-hover:translate-x-0">
         <Link
           to={`/producto/${product.idProducto}`}
-          className="w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-blue-500 hover:text-white transition-colors"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/80 bg-white/92 text-slate-600 shadow-[0_12px_24px_rgba(15,23,42,0.10)] backdrop-blur-sm transition-colors hover:bg-blue-600 hover:text-white"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -72,8 +62,7 @@ const ProductCard = ({ product, index = 0 }) => {
         </Link>
       </div>
 
-      {/* Contenedor de imagen */}
-      <div className="relative h-52 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+      <div className="relative h-56 overflow-hidden border-b border-slate-100 bg-[linear-gradient(180deg,#f8fbff_0%,#eef3f8_100%)] px-5 pb-4 pt-7">
         {!imageLoaded && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-500 rounded-full animate-spin" />
@@ -84,99 +73,91 @@ const ProductCard = ({ product, index = 0 }) => {
           alt={product.nombre}
           onError={(e) => (e.target.src = defaultImage)}
           onLoad={() => setImageLoaded(true)}
-          className={`w-full h-full object-contain transition-all duration-700 group-hover:scale-110 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`h-full w-full object-contain transition-all duration-500 group-hover:scale-[1.04] ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
         />
-        
-        {/* Overlay con efecto */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white/90 via-white/18 to-transparent" />
       </div>
 
-      {/* Contenido */}
-      <div className="relative p-5 space-y-3">
-        {/* Categoría con diseño pill */}
-        <div className="flex items-center gap-2">
-          <span className="px-2 py-0.5 text-xs font-medium bg-blue-50 text-blue-600 rounded-md">
-            {product.categoria}
+      <div className="relative p-5 md:p-6">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full bg-sky-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-sky-700">
+            {categoryLabel}
           </span>
           {product.marca && (
-            <span className="px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-600 rounded-md">
+            <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-600">
               {product.marca}
             </span>
           )}
         </div>
 
-        {/* Nombre del producto */}
-        <h3 className="text-lg font-bold text-gray-800 line-clamp-2 group-hover:text-blue-600 transition-colors min-h-[3.5rem]">
+        <h3 className="mt-4 min-h-[3.5rem] text-lg font-bold leading-7 text-slate-800 transition-colors group-hover:text-blue-700">
           {product.nombre}
         </h3>
 
-        {/* SKU */}
-        <p className="text-xs font-mono text-gray-400 tracking-wide">
-          SKU: {product.sku}
+        <p className="mt-3 min-h-[3rem] text-sm leading-6 text-slate-500 line-clamp-2">
+          {shortDescription}
         </p>
 
-        {/* Precio con diseño destacado */}
-        <div className="pt-2 border-t border-gray-100">
+        <p className="mt-3 text-[11px] font-mono uppercase tracking-[0.18em] text-slate-400">
+          SKU: {product.sku || 'N/D'}
+        </p>
+
+        <div className="mt-4 border-t border-slate-100 pt-4">
           {tienePrec ? (
-            <div>
+            <div className="space-y-1">
               {tieneOferta ? (
                 <div className="flex flex-col">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-extrabold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="text-[1.9rem] font-extrabold text-emerald-600">
                       ${precioMostrar.toLocaleString('es-MX')}
                     </span>
-                    <span className="text-xs text-gray-400">MXN</span>
+                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">MXN</span>
                   </div>
-                  <span className="text-sm text-gray-400 line-through">
+                  <span className="text-sm text-slate-400 line-through">
                     ${product.precio.toLocaleString('es-MX')}
                   </span>
                 </div>
               ) : (
                 <div className="flex items-baseline gap-1">
-                  <span className="text-2xl font-extrabold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                  <span className="text-[1.9rem] font-extrabold text-emerald-600">
                     ${product.precio.toLocaleString('es-MX')}
                   </span>
-                  <span className="text-xs text-gray-400">MXN</span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">MXN</span>
                 </div>
               )}
             </div>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 rounded-2xl bg-amber-50 px-3 py-3 text-amber-700 border border-amber-100">
               <svg className="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
               </svg>
-              <span className="text-base font-semibold text-amber-600">
+              <span className="text-sm font-semibold">
                 Solicitar precio
               </span>
             </div>
           )}
         </div>
 
-        {/* Botones de acción */}
-        <div className="pt-3 flex flex-col gap-2">
+        <div className="mt-5 flex flex-col gap-2.5">
           <Link
             to={`/producto/${product.idProducto}`}
-            className="relative overflow-hidden w-full py-2.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-xl text-center transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/40 hover:from-blue-700 hover:to-indigo-700 active:scale-95"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-900 px-4 py-3 text-center text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-[0_18px_32px_rgba(29,78,216,0.24)] active:scale-[0.99]"
           >
-            <span className="relative z-10 flex items-center justify-center gap-2">
-              Ver detalles
-              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
+            Ver detalles
+            <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+            </svg>
           </Link>
 
           {!tienePrec ? (
             <Link
               to={`/cotizacion?sku=${product.sku}&nombre=${encodeURIComponent(product.nombre)}`}
-              className="w-full py-2.5 px-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold rounded-xl text-center transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/40 hover:from-amber-600 hover:to-orange-600 active:scale-95"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-center text-sm font-semibold text-amber-700 transition-all duration-300 hover:bg-amber-100 hover:shadow-[0_14px_26px_rgba(245,158,11,0.16)] active:scale-[0.99]"
             >
-              <span className="flex items-center justify-center gap-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
-                Solicitar cotización
-              </span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2z" />
+              </svg>
+              Solicitar cotizacion
             </Link>
           ) : (
             <AddToCartButton
@@ -190,13 +171,12 @@ const ProductCard = ({ product, index = 0 }) => {
                 categoria: product.categoria,
                 disponible: product.disponible
               }}
-              className="w-full py-2.5 px-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-semibold rounded-xl text-center transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/40 hover:from-emerald-600 hover:to-teal-600 active:scale-95"
+              className="w-full rounded-2xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-emerald-700 hover:shadow-[0_16px_28px_rgba(5,150,105,0.24)] active:scale-[0.99]"
             />
           )}
         </div>
       </div>
 
-      {/* Estilos para animación */}
       <style>{`
         @keyframes fadeInUp {
           from {

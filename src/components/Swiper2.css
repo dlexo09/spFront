@@ -19,7 +19,7 @@
 }
 
 .banner-streaming-home {
-  margin-bottom: 50px; /* Agregar margen inferior para evitar que se encimen */
+  margin-bottom: 50px; /* Agregar margen inferior para evitar que se encimen */ 
 }
 
 .swiper-container {
@@ -74,7 +74,7 @@
   color: white;
   padding: 10px;
   text-align: center;
-  margin-top: 20px; /* Agregar margen superior para separar del texto */
+  margin-top: 20px; /* Agregar margen superior para separar del texto */        
   margin-bottom: 8px;
 }
 
@@ -84,11 +84,11 @@
 
 .swiper-content p {
   color: #ffffff; /* Texto blanco */
-  margin-bottom: 20px; /* Agregar margen inferior para separar del botón */
+  margin-bottom: 20px; /* Agregar margen inferior para separar del botón */     
 }
 
 .swiper-content .swiper-button {
-  margin-top: 20px; /* Agregar margen superior para separar del texto */
+  margin-top: 20px; /* Agregar margen superior para separar del texto */        
   padding: 10px 20px;
   background-color: #ffffff; /* Fondo blanco */
   color: #1E3A8A; /* Texto azul */
@@ -104,7 +104,7 @@
 }
 
 .catalog-button {
-  margin-top: 50px; /* Agregar margen superior para separar del Swiper */
+  margin-top: 50px; /* Agregar margen superior para separar del Swiper */       
 
 }
 

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
 const Register = () => {
@@ -15,7 +15,9 @@ const Register = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { signUp } = useContext(AuthContext);
+  const redirect = searchParams.get('redirect') || '/cuenta';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,7 +61,7 @@ const Register = () => {
 
       if (session) {
         // Auto-confirmado: redirigir a cuenta
-        navigate('/cuenta');
+        navigate(redirect);
       } else {
         // Necesita confirmar email
         setSuccess(true);
@@ -98,7 +100,7 @@ const Register = () => {
             </div>
           </div>
           <div className="text-center">
-            <Link to="/login" className="text-blue-600 hover:text-blue-500 font-medium">
+            <Link to={`/login?redirect=${encodeURIComponent(redirect)}`} className="text-blue-600 hover:text-blue-500 font-medium">
               Ir a inicio de sesión
             </Link>
           </div>
@@ -228,7 +230,7 @@ const Register = () => {
         </form>
 
         <div className="text-center mt-4 text-sm text-gray-600">
-          <p>¿Ya tienes una cuenta? <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">Inicia sesión</Link></p>
+          <p>¿Ya tienes una cuenta? <Link to={`/login?redirect=${encodeURIComponent(redirect)}`} className="font-medium text-blue-600 hover:text-blue-500">Inicia sesión</Link></p>
         </div>
       </div>
     </div>

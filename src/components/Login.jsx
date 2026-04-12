@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
@@ -8,7 +8,9 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { signIn } = useContext(AuthContext);
+  const redirect = searchParams.get('redirect') || '/cuenta';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +19,7 @@ const Login = () => {
 
     try {
       await signIn(email, password);
-      navigate('/cuenta');
+      navigate(redirect);
     } catch (err) {
       const msg = err?.message || 'Error al iniciar sesión';
       if (msg.includes('Invalid login credentials')) {
@@ -118,7 +120,7 @@ const Login = () => {
         </form>
 
         <div className="text-center mt-4 text-sm text-gray-600">
-          <p>¿No tienes una cuenta? <Link to="/registro" className="font-medium text-blue-600 hover:text-blue-500">Regístrate</Link></p>
+          <p>¿No tienes una cuenta? <Link to={`/registro?redirect=${encodeURIComponent(redirect)}`} className="font-medium text-blue-600 hover:text-blue-500">Regístrate</Link></p>
         </div>
       </div>
     </div>

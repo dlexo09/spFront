@@ -183,6 +183,15 @@ const Account = () => {
 
             {/* Totales */}
             <div className="border-t mt-4 pt-4 space-y-1 text-sm">
+              {(() => {
+                const subtotal = Number(selectedOrder.subtotal || 0);
+                const tax = Number(selectedOrder.tax || 0);
+                const shipping = Number(selectedOrder.shipping_cost || 0);
+                const total = Number(selectedOrder.total || 0);
+                const paymentAdjustment = Number((total - (subtotal + tax + shipping)).toFixed(2));
+
+                return (
+                  <>
               <div className="flex justify-between">
                 <span>Subtotal</span>
                 <span>${Number(selectedOrder.subtotal).toLocaleString('es-MX')}</span>
@@ -197,10 +206,25 @@ const Account = () => {
                   <span>${Number(selectedOrder.shipping_cost).toLocaleString('es-MX')}</span>
                 </div>
               )}
+              {paymentAdjustment > 0 && (
+                <div className="flex justify-between">
+                  <span>Cargo por pago digital</span>
+                  <span>+${paymentAdjustment.toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>
+                </div>
+              )}
+              {paymentAdjustment < 0 && (
+                <div className="flex justify-between text-green-700">
+                  <span>Bonificación por transferencia</span>
+                  <span>${paymentAdjustment.toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>
+                </div>
+              )}
               <div className="flex justify-between font-bold text-base pt-2 border-t">
                 <span>Total</span>
                 <span>${Number(selectedOrder.total).toLocaleString('es-MX')}</span>
               </div>
+                  </>
+                );
+              })()}
             </div>
 
             {/* Acciones */}
@@ -239,7 +263,8 @@ const Account = () => {
   if (!user) return null;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-[linear-gradient(180deg,#f8f6ef_0%,#ffffff_30%,#ffffff_100%)] pt-[128px] pb-16">
+      <div className="container mx-auto max-w-7xl px-4">
       <h1 className="text-2xl md:text-3xl font-bold text-blue-900 mb-6">Mi cuenta</h1>
 
       <div className="bg-white shadow rounded-lg overflow-hidden">
@@ -468,6 +493,7 @@ const Account = () => {
       </div>
 
       {showOrderModal && <OrderDetailsModal />}
+      </div>
     </div>
   );
 };
