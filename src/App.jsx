@@ -5,6 +5,7 @@ import Contacto from "./pages/Contacto";
 import Cotizacion from './pages/Cotizacion';
 import About from './pages/About';
 import Productos from "./pages/Productos";
+import Consumibles from "./pages/Consumibles";
 import ProductDetail from "./pages/ProductDetail";
 import ChatManager from "./components/ChatManager";
 import Footer from "./components/Footer";
@@ -45,6 +46,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/productos" element={<Productos />} />
+              <Route path="/consumibles" element={<Consumibles />} />
               <Route path="/servicios" element={<h2 className="p-6">Servicios</h2>} />
               <Route path="/contacto" element={<Contacto />} />
               <Route path="/producto/:id" element={<ProductDetail />} />

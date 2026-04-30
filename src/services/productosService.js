@@ -161,3 +161,88 @@ export async function buscarProductos(termino, limite = 10) {
 
   return data || [];
 }
+
+/**
+ * Obtener consumibles compatibles con un producto (por SKU del producto)
+ */
+export async function getConsumiblesDeProducto(productoSku) {
+  if (!productoSku) return [];
+
+  // Obtener los SKUs de consumibles que tienen ese producto en su compatibilidad
+  const { data: compat, error: errorCompat } = await supabase
+    .from('consumibles_compatibilidad')
+    .select('consumible_sku')
+    .eq('producto_sku', productoSku);
+
+  if (errorCompat || !compat || compat.length === 0) return [];
+
+  const skus = compat.map(c => c.consumible_sku);
+
+  // Obtener los datos completos de esos consumibles
+  const { data, error } = await supabase
+    .from('consumibles')
+    .select('*')
+    .in('sku', skus)
+    .eq('status', 1)
+    .order('tipo', { ascending: true });
+
+  if (error) {
+    console.error("Error al obtener consumibles:", error);
+    return [];
+  }
+
+  return data || [];
+}
+
+/**
+ * Obtener consumibles con filtros (para página /consumibles)
+ */
+export async function getConsumibles({
+  page = 1,
+  limit = 12,
+  tipo = "",
+  search = "",
+  productoSku = ""
+} = {}) {
+  let skusFiltrados = null;
+
+  // Si se filtra por producto, obtener SKUs compatibles primero
+  if (productoSku) {
+    const { data: compat } = await supabase
+      .from('consumibles_compatibilidad')
+      .select('consumible_sku')
+      .eq('producto_sku', productoSku);
+
+    skusFiltrados = compat ? compat.map(c => c.consumible_sku) : [];
+    if (skusFiltrados.length === 0) return { consumibles: [], pagination: { currentPage: 1, totalPages: 0, total: 0 } };
+  }
+
+  let query = supabase
+    .from('consumibles')
+    .select('*', { count: 'exact' })
+    .eq('status', 1);
+
+  if (tipo) query = query.eq('tipo', tipo);
+  if (search) query = query.or(`nombre.ilike.%${search}%,sku.ilike.%${search}%,descripcion.ilike.%${search}%`);
+  if (skusFiltrados) query = query.in('sku', skusFiltrados);
+
+  const from = (page - 1) * limit;
+  query = query.order('tipo').order('nombre').range(from, from + limit - 1);
+
+  const { data, error, count } = await query;
+
+  if (error) {
+    console.error("Error al obtener consumibles:", error);
+    throw new Error("Error al cargar consumibles");
+  }
+
+  return {
+    consumibles: data || [],
+    pagination: {
+      currentPage: page,
+      totalPages: Math.ceil((count || 0) / limit),
+      total: count || 0,
+      limit
+    }
+  };
+}

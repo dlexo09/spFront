@@ -69,6 +69,7 @@ const Header = () => {
           <Link to="/" className="nav-link" data-header-item>Inicio</Link>
           <Link to="/about" className="nav-link" data-header-item>Nosotros</Link>
           <Link to="/productos" className="nav-link" data-header-item>Productos</Link>
+          <Link to="/consumibles" className="nav-link" data-header-item>Consumibles</Link>
           <Link to="/contacto" className="nav-link" data-header-item>Contacto</Link>
         </nav>
         

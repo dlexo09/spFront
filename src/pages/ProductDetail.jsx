@@ -4,7 +4,7 @@ import RelatedProducts from "../components/RelatedProducts";
 import QuotationForm from "../components/QuotationForm";
 import AddToCartButton from "../components/AddToCartButton";
 import { Link } from "react-router-dom";
-import { getProductoById, getProductoBySku } from "../services/productosService";
+import { getProductoById, getProductoBySku, getConsumiblesDeProducto } from "../services/productosService";
 import { getImagenUrl, getGalleryImageUrl, getDatasheetUrl } from "../utils/productUrls";
 
 import './ProductDetail.css';
@@ -20,6 +20,8 @@ const ProductDetail = () => {
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [consumibles, setConsumibles] = useState([]);
+  const [consumiblesFiltro, setConsumiblesFiltro] = useState('Todos');
 
   const handleQuotationClick = () => {
     setShowQuotationForm(true);
@@ -69,6 +71,10 @@ const ProductDetail = () => {
           setProduct(foundProduct);
           // Construir URL completa de imagen principal
           setSelectedImage(getImagenUrl(foundProduct.imagen));
+
+          // Cargar consumibles compatibles
+          const cons = await getConsumiblesDeProducto(foundProduct.sku);
+          setConsumibles(cons);
 
           // Cargar galería desde imagenesAdicionales (JSON array de nombres de archivo)
           if (foundProduct.imagenesAdicionales) {
@@ -320,16 +326,16 @@ const ProductDetail = () => {
               </div>
             )}
 
-            <h1 className="text-4xl font-bold mb-4">{product.nombre}</h1>
+            <h1 className="text-4xl font-bold mb-4 mt-6">{product.nombre}</h1>
 
             {/* Badges */}
             <div className="flex gap-2 mb-4 flex-wrap">
-              {product.nuevo && (
+              {!!product.nuevo && (
                 <span className="px-3 py-1 text-xs font-bold bg-green-500 text-white rounded-full">
                   Nuevo
                 </span>
               )}
-              {product.destacado && (
+              {!!product.destacado && (
                 <span className="px-3 py-1 text-xs font-bold bg-yellow-500 text-white rounded-full">
                   Destacado
                 </span>
@@ -481,6 +487,15 @@ const ProductDetail = () => {
         </div>
       </div>
 
+      {/* Sección de consumibles compatibles */}
+      {consumibles.length > 0 && (
+        <ConsumiblesSection
+          consumibles={consumibles}
+          filtro={consumiblesFiltro}
+          setFiltro={setConsumiblesFiltro}
+        />
+      )}
+
       {/* Componente para productos relacionados */}
       <RelatedProducts currentSku={product.sku} />
 
@@ -557,5 +572,98 @@ const ProductDetail = () => {
     </>
   );
 };
+
+// ─── Sección de consumibles ──────────────────────────────────────────────────
+function ConsumiblesSection({ consumibles, filtro, setFiltro }) {
+  const BASE_IMG = "https://www.siscoprint.com/img/consumibles/";
+
+  const tipos = ['Todos', ...new Set(consumibles.map(c => c.tipo))];
+
+  const visibles = filtro === 'Todos'
+    ? consumibles
+    : consumibles.filter(c => c.tipo === filtro);
+
+  return (
+    <section className="container container-mrg mx-auto px-4 pt-4 pb-10">
+      <div className="border-t border-gray-100 pt-8 mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <h2 className="text-2xl font-bold text-gray-800">
+          Consumibles compatibles
+        </h2>
+        {tipos.length > 2 && (
+          <div className="flex flex-wrap gap-2">
+            {tipos.map(tipo => (
+              <button
+                key={tipo}
+                onClick={() => setFiltro(tipo)}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+                  filtro === tipo
+                    ? 'bg-blue-600 text-white shadow'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                {tipo}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {visibles.map(c => (
+          <div
+            key={c.sku}
+            className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-4 flex flex-col items-center text-center gap-3"
+          >
+            {c.imagen ? (
+              <img
+                src={`${BASE_IMG}${c.imagen}`}
+                alt={c.nombre}
+                className="w-20 h-20 object-contain"
+                onError={e => { e.target.onerror = null; e.target.src = "/img/noDisponible.jpg"; }}
+              />
+            ) : (
+              <div className="w-20 h-20 rounded-lg bg-gray-100 flex items-center justify-center text-gray-300" aria-hidden="true">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+            )}
+            <div className="flex-1">
+              <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 mb-1">
+                {c.tipo}
+              </span>
+              <p className="text-sm font-medium text-gray-800 leading-tight">{c.nombre}</p>
+              <p className="text-xs text-gray-400 mt-0.5">SKU: {c.sku}</p>
+            </div>
+            {c.precio && Number(c.precio) > 0 ? (
+              <div className="border-t border-gray-100 pt-2 w-full">
+                <p className="text-base font-bold text-green-600 mb-2">
+                  ${Number(c.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                </p>
+                {c.disponible && (
+                  <AddToCartButton
+                    product={{
+                      sku: c.sku,
+                      name: c.nombre,
+                      precio: Number(c.precio),
+                      image: c.imagen ? `${BASE_IMG}${c.imagen}` : "/img/noDisponible.jpg",
+                      description: c.descripcion || c.nombre,
+                      marca: 'Consumible',
+                      categoria: c.tipo,
+                      disponible: 'TRUE'
+                    }}
+                    className="w-full text-xs py-1"
+                  />
+                )}
+              </div>
+            ) : (
+              <p className="text-xs text-gray-400 border-t border-gray-100 pt-2 w-full">Precio a consultar</p>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 export default ProductDetail;

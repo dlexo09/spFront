@@ -11,7 +11,9 @@ const ProductCard = ({ product, index = 0 }) => {
   const precioMostrar = product.precio_oferta && product.precio_oferta > 0 ? product.precio_oferta : product.precio;
   const tieneOferta = product.precio_oferta && product.precio_oferta > 0 && product.precio > product.precio_oferta;
   const categoryLabel = product.categoria || "Sin categoria";
-  const shortDescription = product.descripcionCorta || "Equipo disponible con acompanamiento comercial y soporte especializado.";
+  const rawDescription = product.descripcionCorta || "Equipo disponible con acompanamiento comercial y soporte especializado.";
+  // Quitar etiquetas HTML para mostrar solo texto plano en la tarjeta
+  const shortDescription = rawDescription.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 
   return (
     <div 
