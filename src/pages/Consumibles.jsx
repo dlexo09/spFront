@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getConsumibles } from '../services/productosService';
 import AddToCartButton from '../components/AddToCartButton';
+import { withMarkup } from '../utils/priceUtils';
 import './Consumibles.css';
 
 const Consumibles = () => {
@@ -78,11 +79,6 @@ const Consumibles = () => {
           <span className="consumables-hero__eyebrow">Linea comercial</span>
           <h1 className="consumables-hero__title">Consumibles y accesorios</h1>
           <p className="consumables-hero__copy">Tintas, papeles, kits y repuestos para tu equipo de impresión.</p>
-          <div className="consumables-hero__points">
-            <span className="consumables-hero__point">Compatibilidad por equipo</span>
-            <span className="consumables-hero__point">Compra directa o cotización</span>
-            <span className="consumables-hero__point">Catálogo especializado</span>
-          </div>
         </div>
       </section>
 
@@ -163,7 +159,7 @@ const Consumibles = () => {
                   {consumible.precio && Number(consumible.precio) > 0 ? (
                     <div className="consumables-card__price-wrap">
                       <p className="consumables-card__price">
-                        ${Number(consumible.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                        ${withMarkup(Number(consumible.precio)).toLocaleString('es-MX', { minimumFractionDigits: 2 })}
                       </p>
                     </div>
                   ) : (

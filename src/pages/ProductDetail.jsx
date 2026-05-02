@@ -6,6 +6,7 @@ import AddToCartButton from "../components/AddToCartButton";
 import { Link } from "react-router-dom";
 import { getProductoById, getProductoBySku, getConsumiblesDeProducto } from "../services/productosService";
 import { getImagenUrl, getGalleryImageUrl, getDatasheetUrl } from "../utils/productUrls";
+import { withMarkup } from "../utils/priceUtils";
 
 import './ProductDetail.css';
 
@@ -353,10 +354,10 @@ const ProductDetail = () => {
                 {product.precio_oferta && product.precio_oferta > 0 ? (
                   <div className="flex items-baseline gap-3">
                     <span className="text-3xl font-bold text-green-600">
-                      ${product.precio_oferta.toLocaleString('es-MX')}
+                      ${withMarkup(product.precio_oferta).toLocaleString('es-MX')}
                     </span>
                     <span className="text-xl text-gray-400 line-through">
-                      ${product.precio.toLocaleString('es-MX')}
+                      ${withMarkup(product.precio).toLocaleString('es-MX')}
                     </span>
                     <span className="text-sm font-semibold text-red-500 bg-red-50 px-2 py-1 rounded">
                       -{Math.round(((product.precio - product.precio_oferta) / product.precio) * 100)}%
@@ -364,7 +365,7 @@ const ProductDetail = () => {
                   </div>
                 ) : (
                   <span className="text-3xl font-bold text-green-600">
-                    ${product.precio.toLocaleString('es-MX')}
+                    ${withMarkup(product.precio).toLocaleString('es-MX')}
                   </span>
                 )}
               </div>
@@ -471,15 +472,15 @@ const ProductDetail = () => {
             {/* Stock */}
             {product.stock !== null && product.stock !== undefined && (
               <div className="mb-4">
-                {product.stock > 0 ? (
+                {hasOnlineStock(product.stock) ? (
                   <span className="text-green-600 font-medium flex items-center gap-1">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
                     </svg>
-                    En stock ({product.stock} disponibles)
+                    En stock
                   </span>
                 ) : (
-                  <span className="text-yellow-600 font-medium">Requiere cotización</span>
+                  <span className="text-red-600 font-medium">Agotado</span>
                 )}
               </div>
             )}
@@ -638,7 +639,7 @@ function ConsumiblesSection({ consumibles, filtro, setFiltro }) {
             {c.precio && Number(c.precio) > 0 ? (
               <div className="border-t border-gray-100 pt-2 w-full">
                 <p className="text-base font-bold text-green-600 mb-2">
-                  ${Number(c.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                  ${withMarkup(Number(c.precio)).toLocaleString('es-MX', { minimumFractionDigits: 2 })}
                 </p>
                 {c.disponible && (
                   <AddToCartButton

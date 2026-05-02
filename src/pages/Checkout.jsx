@@ -46,13 +46,15 @@ const Checkout = () => {
   const shipping = shippingQuote.cost;
   const baseTotal = subtotal + tax + shipping;
   const roundCurrency = (value) => Math.round((value + Number.EPSILON) * 100) / 100;
-  const paymentSurchargeRate = Number(import.meta.env.VITE_MP_COMMISSION_RATE || 0.04);
-  const transferDiscountRate = Number(import.meta.env.VITE_TRANSFER_DISCOUNT_RATE || paymentSurchargeRate);
-  const paymentSurcharge = roundCurrency(baseTotal * paymentSurchargeRate);
+  // El markup del gateway ya está embebido en los precios de los productos.
+  // paymentSurcharge = 0 para no cobrar doble.
+  const paymentSurchargeRate = 0;
+  const transferDiscountRate = Number(import.meta.env.VITE_TRANSFER_DISCOUNT_RATE || import.meta.env.VITE_MP_COMMISSION_RATE || 0.04);
+  const paymentSurcharge = 0;
   const transferDiscount = paymentMethod === 'transfer'
     ? roundCurrency(baseTotal * transferDiscountRate)
     : 0;
-  const total = Math.max(0, roundCurrency(baseTotal + paymentSurcharge - transferDiscount));
+  const total = Math.max(0, roundCurrency(baseTotal - transferDiscount));
 
   const bankDetails = getBankDetails();
 
@@ -357,7 +359,7 @@ const Checkout = () => {
                     <div className="mt-3 bg-sky-50 rounded-md p-3 text-sm">
                       <p className="font-medium text-light-blue mb-1">Pago instantáneo</p>
                       <p className="text-gray-600">Hasta 12 MSI · Confirmacion inmediata</p>
-                      <p className="text-sky-700 font-medium mt-1">Incluye cargo digital de {(paymentSurchargeRate * 100).toFixed(0)}% ya integrado en tu total</p>
+                      <p className="text-sky-700 font-medium mt-1">Precio publicado incluye todos los cargos · Sin sorpresas</p>
                     </div>
                   </div>
                 </div>
@@ -447,10 +449,6 @@ const Checkout = () => {
                 <div className="rounded-md bg-slate-50 px-3 py-2 text-xs text-slate-600">
                   <p>Enviamos desde: {shippingQuote.branchName}</p>
                   <p>Zona: {shippingQuote.zoneLabel} · Entrega estimada: {shippingQuote.etaLabel}</p>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Cargo por pago digital ({(paymentSurchargeRate * 100).toFixed(0)}%)</span>
-                  <span>+${paymentSurcharge.toLocaleString('es-MX', { minimumFractionDigits: 2 })}</span>
                 </div>
                 {paymentMethod === 'transfer' && (
                   <div className="flex justify-between text-green-700">

@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AddToCartButton from "./AddToCartButton";
 import { getImagenUrl } from "../utils/productUrls";
+import { withMarkup } from "../utils/priceUtils";
 
 const ProductCard = ({ product, index = 0 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const defaultImage = "/img/noDisponible.jpg";
   const productImage = product.imagen ? getImagenUrl(product.imagen) : defaultImage;
   const tienePrec = product.precio && product.precio > 0 && String(product.disponible).toUpperCase() === "TRUE";
-  const precioMostrar = product.precio_oferta && product.precio_oferta > 0 ? product.precio_oferta : product.precio;
+  const precioBase = product.precio_oferta && product.precio_oferta > 0 ? product.precio_oferta : product.precio;
+  const precioMostrar = tienePrec ? withMarkup(precioBase) : precioBase;
   const tieneOferta = product.precio_oferta && product.precio_oferta > 0 && product.precio > product.precio_oferta;
   const categoryLabel = product.categoria || "Sin categoria";
   const rawDescription = product.descripcionCorta || "Equipo disponible con acompanamiento comercial y soporte especializado.";
@@ -116,27 +118,20 @@ const ProductCard = ({ product, index = 0 }) => {
                     <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">MXN</span>
                   </div>
                   <span className="text-sm text-slate-400 line-through">
-                    ${product.precio.toLocaleString('es-MX')}
+                    ${withMarkup(product.precio).toLocaleString('es-MX')}
                   </span>
                 </div>
               ) : (
                 <div className="flex items-baseline gap-1">
                   <span className="text-[1.9rem] font-extrabold text-emerald-600">
-                    ${product.precio.toLocaleString('es-MX')}
+                    ${precioMostrar.toLocaleString('es-MX')}
                   </span>
                   <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">MXN</span>
                 </div>
               )}
             </div>
           ) : (
-            <div className="flex items-center gap-2 rounded-2xl bg-amber-50 px-3 py-3 text-amber-700 border border-amber-100">
-              <svg className="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              </svg>
-              <span className="text-sm font-semibold">
-                Solicitar precio
-              </span>
-            </div>
+            <div className="h-10" />
           )}
         </div>
 

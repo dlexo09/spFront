@@ -1,5 +1,6 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
+import { withMarkup } from '../utils/priceUtils';
 
 const AddToCartButton = ({ product, className = "" }) => {
   const { addToCart } = useCart();
@@ -12,7 +13,7 @@ const AddToCartButton = ({ product, className = "" }) => {
       addToCart({
         sku: product.sku,
         name: product.name,
-        price: product.precio,
+        price: withMarkup(product.precio),
         image: product.image,
         description: product.description,
         marca: product.marca,
