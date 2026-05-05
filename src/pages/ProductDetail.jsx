@@ -6,7 +6,7 @@ import AddToCartButton from "../components/AddToCartButton";
 import { Link } from "react-router-dom";
 import { getProductoById, getProductoBySku, getConsumiblesDeProducto } from "../services/productosService";
 import { getImagenUrl, getGalleryImageUrl, getDatasheetUrl } from "../utils/productUrls";
-import { withMarkup } from "../utils/priceUtils";
+import { withMarkup, hasOnlineStock } from "../utils/priceUtils";
 
 import './ProductDetail.css';
 
