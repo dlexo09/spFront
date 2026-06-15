@@ -10,7 +10,7 @@ const Footer = () => {
                 {/* Left: Logo + tagline */}
                 <div className="flex-1 min-w-[250px] mb-5 footer-left">
                     <img
-                        src="/img/logoSiscom.png"
+                        src="/img/logoSiscoprint.png"
                         alt="Logo Siscoprint"
                         className="w-[200px] mt-0 rounded-md"
                     />
@@ -23,7 +23,7 @@ const Footer = () => {
                                         <ul className="footer-links text-base">
                                             <li>Mirto #2623, Col. Moderna, Monterrey, N.L.</li>
                                             <li>ventas@siscoprint.com</li>
-                                            <li>Teléfono: (81) 8040-7321</li>
+                                            <li>Teléfono: (81) 8040-7322</li>
                                         </ul>
                                 </div>
 

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard/
+Disallow: /cuenta/
+Disallow: /login/
+Disallow: /registro/
+
+Sitemap: https://siscoprint.com.mx/sitemap.xml
