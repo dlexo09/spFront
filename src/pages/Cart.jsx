@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
+import { withVat } from '../utils/priceUtils';
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity, getTotalItems, getTotalPrice, clearCart } = useCart();
@@ -9,6 +10,15 @@ const Cart = () => {
   const itemsWithPrice = cartItems.filter(item => item.price && item.price > 0);
   const itemsWithoutPrice = cartItems.filter(item => !item.price || item.price <= 0);
   const totalUnits = getTotalItems();
+  const purchaseSubtotal = getTotalPrice();
+  const purchaseTax = purchaseSubtotal * 0.16;
+  const purchaseTotal = purchaseSubtotal + purchaseTax;
+
+  const isConsumableItem = (item) =>
+    String(item?.marca || '').toLowerCase() === 'consumible';
+
+  const getDisplayUnitPrice = (item) =>
+    isConsumableItem(item) ? withVat(Number(item.price || 0)) : Number(item.price || 0);
 
   if (!cartItems || cartItems.length === 0) {
     return (
@@ -120,7 +130,7 @@ const Cart = () => {
                     
                     {item.price > 0 ? (
                       <p className="mt-3 text-2xl font-bold text-emerald-600">
-                        ${item.price.toLocaleString('es-MX')}
+                        ${getDisplayUnitPrice(item).toLocaleString('es-MX')}
                       </p>
                     ) : (
                       <p className="mt-3 text-sm font-semibold text-amber-600">Este producto se enviara por cotizacion.</p>
@@ -169,9 +179,17 @@ const Cart = () => {
                   <span>Productos:</span>
                   <span>{itemsWithPrice.reduce((total, item) => total + item.quantity, 0)}</span>
                 </div>
+                <div className="flex justify-between">
+                  <span>Subtotal:</span>
+                  <span>${purchaseSubtotal.toLocaleString('es-MX')}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>IVA (16%):</span>
+                  <span>${purchaseTax.toLocaleString('es-MX')}</span>
+                </div>
                 <div className="flex justify-between text-lg font-bold text-slate-900">
-                  <span>Total:</span>
-                  <span>${getTotalPrice().toLocaleString('es-MX')}</span>
+                  <span>Total estimado:</span>
+                  <span>${purchaseTotal.toLocaleString('es-MX')}</span>
                 </div>
               </div>
               

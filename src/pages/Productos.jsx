@@ -6,7 +6,7 @@ import './Productos.css'; // Importar el archivo CSS
 const featuredFamilies = ["Sublimación", "DTG", "Eco-solvente", "UV"];
 const valuePoints = [
   "Filtros por familia, marca y categoría",
-  "Compra directa o cotización según disponibilidad",
+  "Cotizacion asistida en todos los equipos (temporal)",
   "Cobertura comercial y soporte técnico en México",
 ];
 
@@ -37,7 +37,7 @@ const ProductPage = () => {
             Equipos y soluciones para imprimir mejor, operar con respaldo y crecer con criterio.
           </h1>
           <p className="products-hero__copy">
-            Explora impresoras, tecnologias y categorias listas para venta directa o cotizacion asistida. Usa los filtros para encontrar rapido la opcion que mejor se adapta a tu negocio.
+            Explora impresoras, tecnologias y categorias con cotizacion asistida. Usa los filtros para encontrar rapido la opcion que mejor se adapta a tu negocio.
           </p>
 
           <div className="products-hero__actions">

@@ -6,6 +6,7 @@ const Cotizacion = () => {
   const query = new URLSearchParams(useLocation().search);
   const sku = query.get("sku");
   const productName = query.get("nombre");
+  const productImage = query.get("imagen");
   const productosCarrito = query.get("productos");
   
   // Parsear productos del carrito si existen
@@ -77,14 +78,27 @@ const Cotizacion = () => {
   };
 
   return (
-    <div className="container container-mrg mx-auto max-w-lg p-4">
+    <div className="page-with-header-offset container container-mrg mx-auto max-w-2xl px-4">
       <h1 className="text-2xl font-bold mb-4">Solicitar Cotización</h1>
       
       {/* Mostrar producto individual */}
       {sku && (
-        <div className="mb-4 p-4 bg-gray-100 rounded">
-          <p className="mb-2">Producto SKU: <strong>{sku}</strong></p>
-          <p className="mb-2">Producto: <strong>{productName}</strong></p>
+        <div className="mb-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="flex items-center gap-4">
+            <div className="h-24 w-24 overflow-hidden rounded-lg border border-slate-100 bg-slate-50 p-2">
+              <img
+                src={productImage || '/img/noDisponible.jpg'}
+                alt={productName || sku || 'Producto'}
+                className="h-full w-full object-contain"
+                onError={(e) => { e.target.src = '/img/noDisponible.jpg'; }}
+              />
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Producto seleccionado</p>
+              <p className="mt-1 text-lg font-bold text-slate-900">{productName || 'Equipo a cotizar'}</p>
+              <p className="mt-1 text-sm text-slate-600">SKU: <strong>{sku}</strong></p>
+            </div>
+          </div>
         </div>
       )}
 
@@ -104,7 +118,7 @@ const Cotizacion = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-gray-100 p-4 rounded shadow">
+      <form onSubmit={handleSubmit} className="rounded-xl border border-slate-200 bg-slate-50 p-4 shadow-sm">
         <div className="mb-3">
           <label className="block mb-1 font-bold">Nombre*</label>
           <input

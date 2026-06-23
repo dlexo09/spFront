@@ -45,6 +45,17 @@ body{
   font-family: 'Outfit', sans-serif;
 }
 
+.page-with-header-offset {
+  padding-top: 128px;
+  padding-bottom: 48px;
+}
+
+@media (max-width: 768px) {
+  .page-with-header-offset {
+    padding-top: 108px;
+  }
+}
+
 /* Colores */
 
 

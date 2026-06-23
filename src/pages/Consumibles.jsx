@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getConsumibles } from '../services/productosService';
 import AddToCartButton from '../components/AddToCartButton';
-import { withMarkup } from '../utils/priceUtils';
+import { withConsumablesDisplayPrice } from '../utils/priceUtils';
 import './Consumibles.css';
 
 const Consumibles = () => {
@@ -133,6 +134,12 @@ const Consumibles = () => {
                   key={consumible.sku}
                   className="consumables-card"
                 >
+                  {(() => {
+                    const hasPrice = Number(consumible.precio) > 0;
+                    const canBuyOnline = String(consumible.disponible).toUpperCase() === 'TRUE';
+
+                    return (
+                      <>
                   <div className="consumables-card__image-wrap">
                     {consumible.imagen ? (
                       <img
@@ -156,10 +163,10 @@ const Consumibles = () => {
 
                   <p className="consumables-card__sku">SKU: {consumible.sku}</p>
 
-                  {consumible.precio && Number(consumible.precio) > 0 ? (
+                  {hasPrice ? (
                     <div className="consumables-card__price-wrap">
                       <p className="consumables-card__price">
-                        ${withMarkup(Number(consumible.precio)).toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                        ${withConsumablesDisplayPrice(Number(consumible.precio)).toLocaleString('es-MX', { minimumFractionDigits: 2 })}
                       </p>
                     </div>
                   ) : (
@@ -168,7 +175,7 @@ const Consumibles = () => {
                     </div>
                   )}
 
-                  {consumible.disponible && Number(consumible.precio) > 0 && (
+                  {canBuyOnline && hasPrice && (
                     <AddToCartButton
                       product={{
                         sku: consumible.sku,
@@ -183,6 +190,17 @@ const Consumibles = () => {
                       className="w-full text-xs py-1.5 mt-1"
                     />
                   )}
+                  {!canBuyOnline && hasPrice && (
+                    <Link
+                      to={`/cotizacion?sku=${consumible.sku}&nombre=${encodeURIComponent(consumible.nombre)}&imagen=${encodeURIComponent(consumible.imagen ? `${BASE_IMG}${consumible.imagen}` : '/img/noDisponible.jpg')}`}
+                      className="w-full rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-center text-xs font-semibold text-amber-700 transition-colors hover:bg-amber-100"
+                    >
+                      Solicitar cotizacion
+                    </Link>
+                  )}
+                      </>
+                    );
+                  })()}
                 </div>
               ))}
             </div>

@@ -3,15 +3,17 @@ import { Link } from "react-router-dom";
 import AddToCartButton from "./AddToCartButton";
 import { getImagenUrl } from "../utils/productUrls";
 import { withMarkup } from "../utils/priceUtils";
+import { FEATURES } from "../config";
 
 const ProductCard = ({ product, index = 0 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const defaultImage = "/img/noDisponible.jpg";
   const productImage = product.imagen ? getImagenUrl(product.imagen) : defaultImage;
-  const tienePrec = product.precio && product.precio > 0 && String(product.disponible).toUpperCase() === "TRUE";
+  const quotationOnly = FEATURES.PRODUCTS_QUOTATION_ONLY;
+  const tienePrec = !quotationOnly && product.precio && product.precio > 0 && String(product.disponible).toUpperCase() === "TRUE";
   const precioBase = product.precio_oferta && product.precio_oferta > 0 ? product.precio_oferta : product.precio;
   const precioMostrar = tienePrec ? withMarkup(precioBase) : precioBase;
-  const tieneOferta = product.precio_oferta && product.precio_oferta > 0 && product.precio > product.precio_oferta;
+  const tieneOferta = !quotationOnly && product.precio_oferta && product.precio_oferta > 0 && product.precio > product.precio_oferta;
   const categoryLabel = product.categoria || "Sin categoria";
   const rawDescription = product.descripcionCorta || "Equipo disponible con acompanamiento comercial y soporte especializado.";
   // Quitar etiquetas HTML para mostrar solo texto plano en la tarjeta
@@ -28,7 +30,7 @@ const ProductCard = ({ product, index = 0 }) => {
       <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sky-400 via-blue-500 to-amber-400" />
 
       <div className="absolute top-4 left-4 z-10 flex max-w-[75%] flex-wrap gap-2">
-        {tienePrec ? (
+        {!quotationOnly && (tienePrec ? (
           <span className="rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-emerald-700 border border-emerald-100">
             Disponible
           </span>
@@ -36,7 +38,7 @@ const ProductCard = ({ product, index = 0 }) => {
           <span className="rounded-full bg-amber-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-amber-700 border border-amber-100">
             Cotización
           </span>
-        )}
+        ))}
         {product.nuevo && (
           <span className="rounded-full bg-sky-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-sky-700 border border-sky-100">
             Nuevo
@@ -83,13 +85,13 @@ const ProductCard = ({ product, index = 0 }) => {
       </div>
 
       <div className="relative p-5 md:p-6">
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex min-h-[2.1rem] items-center gap-2 overflow-hidden whitespace-nowrap">
           <span className="rounded-full bg-sky-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-sky-700">
-            {categoryLabel}
+            <span className="block max-w-[170px] truncate">{categoryLabel}</span>
           </span>
           {product.marca && (
             <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-600">
-              {product.marca}
+              <span className="block max-w-[110px] truncate">{product.marca}</span>
             </span>
           )}
         </div>
@@ -106,8 +108,8 @@ const ProductCard = ({ product, index = 0 }) => {
           SKU: {product.sku || 'N/D'}
         </p>
 
-        <div className="mt-4 border-t border-slate-100 pt-4">
-          {tienePrec ? (
+        {tienePrec && (
+          <div className="mt-4 border-t border-slate-100 pt-4">
             <div className="space-y-1">
               {tieneOferta ? (
                 <div className="flex flex-col">
@@ -130,46 +132,58 @@ const ProductCard = ({ product, index = 0 }) => {
                 </div>
               )}
             </div>
-          ) : (
-            <div className="h-10" />
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="mt-5 flex flex-col gap-2.5">
-          <Link
-            to={`/producto/${product.idProducto}`}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-900 px-4 py-3 text-center text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-[0_18px_32px_rgba(29,78,216,0.24)] active:scale-[0.99]"
-          >
-            Ver detalles
-            <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
-
           {!tienePrec ? (
-            <Link
-              to={`/cotizacion?sku=${product.sku}&nombre=${encodeURIComponent(product.nombre)}`}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-center text-sm font-semibold text-amber-700 transition-all duration-300 hover:bg-amber-100 hover:shadow-[0_14px_26px_rgba(245,158,11,0.16)] active:scale-[0.99]"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2z" />
-              </svg>
-              Solicitar cotizacion
-            </Link>
+            <>
+              <Link
+                to={`/cotizacion?sku=${product.sku}&nombre=${encodeURIComponent(product.nombre)}&imagen=${encodeURIComponent(productImage)}`}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 px-4 py-3 text-center text-sm font-bold text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-[0_18px_32px_rgba(29,78,216,0.30)] active:scale-[0.99]"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2z" />
+                </svg>
+                Solicitar cotizacion
+              </Link>
+
+              <Link
+                to={`/producto/${product.idProducto}`}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-semibold text-slate-700 transition-all duration-300 hover:border-blue-200 hover:text-blue-700 hover:shadow-[0_14px_26px_rgba(15,23,42,0.10)] active:scale-[0.99]"
+              >
+                Ver detalles
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </>
           ) : (
-            <AddToCartButton
-              product={{
-                sku: product.sku,
-                name: product.nombre,
-                precio: precioMostrar,
-                image: productImage,
-                description: product.descripcionCorta,
-                marca: product.marca,
-                categoria: product.categoria,
-                disponible: product.disponible
-              }}
-              className="w-full rounded-2xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-emerald-700 hover:shadow-[0_16px_28px_rgba(5,150,105,0.24)] active:scale-[0.99]"
-            />
+            <>
+              <Link
+                to={`/producto/${product.idProducto}`}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-900 px-4 py-3 text-center text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-[0_18px_32px_rgba(29,78,216,0.24)] active:scale-[0.99]"
+              >
+                Ver detalles
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+
+              <AddToCartButton
+                product={{
+                  sku: product.sku,
+                  name: product.nombre,
+                  precio: precioMostrar,
+                  image: productImage,
+                  description: product.descripcionCorta,
+                  marca: product.marca,
+                  categoria: product.categoria,
+                  disponible: product.disponible
+                }}
+                className="w-full rounded-2xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-emerald-700 hover:shadow-[0_16px_28px_rgba(5,150,105,0.24)] active:scale-[0.99]"
+              />
+            </>
           )}
         </div>
       </div>

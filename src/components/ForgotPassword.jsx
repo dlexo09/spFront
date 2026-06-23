@@ -30,7 +30,7 @@ const ForgotPassword = () => {
         <div className="text-center">
           <img
             className="mx-auto h-16 w-auto"
-            src="/img/logoSiscom.png"
+            src="/img/logoSiscoprint.png"
             alt="Siscoprint"
           />
           <h2 className="mt-6 text-3xl font-extrabold text-blue-900">

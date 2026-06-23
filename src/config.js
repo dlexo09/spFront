@@ -11,4 +11,9 @@ const API_CONFIG = {
   RETRIES: 3
 };
 
+export const FEATURES = {
+  // Temporary commercial rule: all equipment/products go through quotation.
+  PRODUCTS_QUOTATION_ONLY: true
+};
+
 export default API_CONFIG;

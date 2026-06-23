@@ -6,6 +6,7 @@ import { AuthContext } from '../context/AuthContext';
 import { getBankDetails } from '../services/orderService';
 import API_CONFIG from '../config';
 import { calculateShippingQuote } from '../utils/shippingRules';
+import { withVat } from '../utils/priceUtils';
 
 const Checkout = () => {
   const { cartItems, clearCart } = useCart();
@@ -46,6 +47,12 @@ const Checkout = () => {
   const shipping = shippingQuote.cost;
   const baseTotal = subtotal + tax + shipping;
   const roundCurrency = (value) => Math.round((value + Number.EPSILON) * 100) / 100;
+  const isConsumableItem = (item) =>
+    String(item?.marca || '').toLowerCase() === 'consumible';
+  const getDisplayLineTotal = (item) => {
+    const lineTotal = Number(item.price || 0) * Number(item.quantity || 0);
+    return isConsumableItem(item) ? withVat(lineTotal) : lineTotal;
+  };
   // El markup del gateway ya está embebido en los precios de los productos.
   // paymentSurcharge = 0 para no cobrar doble.
   const paymentSurchargeRate = 0;
@@ -428,7 +435,7 @@ const Checkout = () => {
                         <p className="text-xs text-gray-500">Cant: {item.quantity}</p>
                       </div>
                     </div>
-                    <p className="font-medium text-sm ml-2 flex-shrink-0">${(item.price * item.quantity).toLocaleString('es-MX')}</p>
+                    <p className="font-medium text-sm ml-2 flex-shrink-0">${getDisplayLineTotal(item).toLocaleString('es-MX')}</p>
                   </div>
                 ))}
               </div>

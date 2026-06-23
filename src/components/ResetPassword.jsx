@@ -70,7 +70,7 @@ const ResetPassword = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
           <div className="text-center mb-6">
-            <img src="/img/logoSiscom.png" alt="Logo" className="h-16 mx-auto" />
+            <img src="/img/logoSiscoprint.png" alt="Logo" className="h-16 mx-auto" />
             <h2 className="text-2xl font-bold mt-4 text-red-600">Enlace no válido</h2>
           </div>
           <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg mb-6">
@@ -90,7 +90,7 @@ const ResetPassword = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
         <div className="text-center mb-6">
-          <img src="/img/logoSiscom.png" alt="Logo" className="h-16 mx-auto" />
+          <img src="/img/logoSiscoprint.png" alt="Logo" className="h-16 mx-auto" />
           <h2 className="text-2xl font-bold mt-4">Restablecer contraseña</h2>
         </div>
 

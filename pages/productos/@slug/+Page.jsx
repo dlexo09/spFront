@@ -28,20 +28,18 @@ export default function Page() {
     )
   }
 
-  const price = formatCurrency(product.precio_oferta || product.precio)
-
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
       <p className="text-sm uppercase tracking-wide text-slate-500">SKU: {product.sku || 'N/A'}</p>
       <h1 className="mt-2 text-4xl font-bold text-slate-900">{product.nombre}</h1>
       {!!product.marca && <p className="mt-2 text-slate-700">Marca: {product.marca}</p>}
       {!!product.pn && <p className="text-slate-700">PN: {product.pn}</p>}
-      {price && <p className="mt-5 text-3xl font-semibold text-emerald-700">{price}</p>}
+      <p className="mt-5 text-sm font-semibold uppercase tracking-wide text-amber-700">Solo cotizacion por tiempo limitado</p>
       <article className="prose mt-8 max-w-none text-slate-800">
         {product.descripcionLarga || product.descripcionCorta || 'Sin descripcion disponible.'}
       </article>
       <a className="mt-10 inline-block rounded-lg bg-slate-900 px-5 py-3 font-medium text-white" href="/contacto/">
-        Solicitar informacion
+        Solicitar cotizacion
       </a>
     </main>
   )

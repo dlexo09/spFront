@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import './Banner.css'; // Importar el archivo CSS personalizado
+import { getActiveBanners } from "../services/bannersService";
 
 const Banner = () => {
   const [banners, setBanners] = useState([]);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    fetch('/banners.json')
-      .then(response => response.json())
+    getActiveBanners()
       .then(data => setBanners(data))
       .catch(error => console.error('Error fetching banners:', error));
   }, []);
@@ -20,7 +20,7 @@ const Banner = () => {
   }, [banners]);
 
   if (banners.length === 0) {
-    return <div>Loading...</div>;
+    return null;
   }
 
   return (

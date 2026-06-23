@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductosRelacionados } from '../services/productosService';
 import { getImagenUrl } from '../utils/productUrls';
+import { FEATURES } from '../config';
 
 const RelatedProducts = ({ currentSku }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const quotationOnly = FEATURES.PRODUCTS_QUOTATION_ONLY;
 
   useEffect(() => {
     if (!currentSku) { setLoading(false); return; }
@@ -45,7 +47,11 @@ const RelatedProducts = ({ currentSku }) => {
               onError={e => { e.target.src = "/img/noDisponible.jpg"; }}
             />
             <p className="text-sm font-medium text-gray-800 leading-tight">{product.nombre}</p>
-            {Number(product.precio) > 0 ? (
+            {quotationOnly ? (
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-700">
+                Solo cotizacion
+              </p>
+            ) : Number(product.precio) > 0 ? (
               <p className="text-base font-bold text-green-600">
                 ${Number(product.precio).toLocaleString('es-MX', { minimumFractionDigits: 2 })}
               </p>

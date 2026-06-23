@@ -188,7 +188,7 @@ const Contacto = () => {
                   src={iconSrc}
                   alt={`icon ${sucursal.nombre}`}
                   className="w-10 h-10 object-contain"
-                  onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/img/logoSiscom.png'; }}
+                  onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/img/logoSiscoprint.png'; }}
                 />
                 <div className="flex-1">
                   <h3 className="text-base font-semibold mb-2 text-strong-blue">{sucursal.nombre}</h3>

@@ -1,0 +1,104 @@
+[
+  {
+    "route": "/",
+    "title": "Siscoprint | Soluciones de impresion, corte y tecnologia",
+    "description": "Equipos de impresion, consumibles y asesoria comercial para negocios en Mexico.",
+    "keywords": "siscoprint, impresion, plotter, uv, sublimacion, consumibles, mexico",
+    "priority": "1.0",
+    "changefreq": "daily",
+    "seo": {
+      "h1": "Siscoprint",
+      "intro": "Soluciones de impresion, corte y tecnologia para negocios en Mexico.",
+      "highlights": [
+        "Asesoria comercial y tecnica",
+        "Catalogo de equipos y consumibles",
+        "Cobertura nacional"
+      ]
+    }
+  },
+  {
+    "route": "/about",
+    "title": "Siscoprint | Nosotros",
+    "description": "Conoce la trayectoria, cobertura y propuesta de valor de Siscoprint.",
+    "keywords": "siscoprint, nosotros, historia, cobertura, impresion",
+    "priority": "0.8",
+    "changefreq": "weekly",
+    "seo": {
+      "h1": "Nosotros",
+      "intro": "Un aliado comercial y tecnico para tomar mejores decisiones de impresion.",
+      "highlights": [
+        "Mas de 20 anos de experiencia",
+        "6 sucursales con cobertura nacional",
+        "Acompanamiento antes y despues de la compra"
+      ]
+    }
+  },
+  {
+    "route": "/productos",
+    "title": "Siscoprint | Catalogo de productos",
+    "description": "Explora equipos de impresion digital, gran formato, UV y corte para tu negocio.",
+    "keywords": "catalogo, productos, impresion digital, gran formato, uv, plotter",
+    "priority": "0.9",
+    "changefreq": "daily",
+    "seo": {
+      "h1": "Catalogo de productos",
+      "intro": "Encuentra equipos por familia, marca y aplicacion.",
+      "highlights": [
+        "Sublimacion, UV, DTG y eco-solvente",
+        "Comparacion por categoria y marca",
+        "Acceso a fichas y recursos comerciales"
+      ]
+    }
+  },
+  {
+    "route": "/consumibles",
+    "title": "Siscoprint | Consumibles",
+    "description": "Tintas, papeles y repuestos compatibles para mantener tu operacion productiva.",
+    "keywords": "consumibles, tintas, papeles, repuestos, impresion",
+    "priority": "0.8",
+    "changefreq": "weekly",
+    "seo": {
+      "h1": "Consumibles",
+      "intro": "Consumibles compatibles para equipos de impresion y produccion visual.",
+      "highlights": [
+        "Filtrado por tipo y compatibilidad",
+        "Productos activos y disponibles",
+        "Soporte para seleccion tecnica"
+      ]
+    }
+  },
+  {
+    "route": "/contacto",
+    "title": "Siscoprint | Contacto",
+    "description": "Habla con asesoria comercial para cotizaciones y soporte preventa.",
+    "keywords": "contacto, cotizacion, asesoria comercial, siscoprint",
+    "priority": "0.8",
+    "changefreq": "weekly",
+    "seo": {
+      "h1": "Contacto",
+      "intro": "Te ayudamos a elegir equipos, consumibles y flujo de produccion.",
+      "highlights": [
+        "Cotizaciones personalizadas",
+        "Atencion comercial",
+        "Seguimiento tecnico"
+      ]
+    }
+  },
+  {
+    "route": "/cotizacion",
+    "title": "Siscoprint | Solicita cotizacion",
+    "description": "Solicita una cotizacion personalizada para equipos y soluciones de impresion.",
+    "keywords": "cotizacion, impresion, equipos, siscoprint",
+    "priority": "0.7",
+    "changefreq": "weekly",
+    "seo": {
+      "h1": "Solicitar cotizacion",
+      "intro": "Comparte tus necesidades y recibe una propuesta adaptada a tu operacion.",
+      "highlights": [
+        "Asesoria por aplicacion",
+        "Recomendacion por volumen",
+        "Acompanamiento comercial"
+      ]
+    }
+  }
+]

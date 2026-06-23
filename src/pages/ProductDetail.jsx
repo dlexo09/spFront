@@ -6,7 +6,8 @@ import AddToCartButton from "../components/AddToCartButton";
 import { Link } from "react-router-dom";
 import { getProductoById, getProductoBySku, getConsumiblesDeProducto } from "../services/productosService";
 import { getImagenUrl, getGalleryImageUrl, getDatasheetUrl } from "../utils/productUrls";
-import { withMarkup, hasOnlineStock } from "../utils/priceUtils";
+import { withMarkup, hasOnlineStock, withConsumablesDisplayPrice } from "../utils/priceUtils";
+import { FEATURES } from "../config";
 
 import './ProductDetail.css';
 
@@ -146,7 +147,8 @@ const ProductDetail = () => {
     );
   }
 
-  const tienePrec = product.precio && product.precio > 0 && String(product.disponible).toUpperCase() === "TRUE";
+  const quotationOnly = FEATURES.PRODUCTS_QUOTATION_ONLY;
+  const tienePrec = !quotationOnly && product.precio && product.precio > 0 && String(product.disponible).toUpperCase() === "TRUE";
 
   // Parsear videos: linkYoutube (string, puede estar vacío) + videos (jsonb array)
   let videosList = [];
@@ -341,7 +343,7 @@ const ProductDetail = () => {
                   Destacado
                 </span>
               )}
-              {product.precio_oferta && product.precio_oferta > 0 && (
+              {!quotationOnly && product.precio_oferta && product.precio_oferta > 0 && (
                 <span className="px-3 py-1 text-xs font-bold bg-red-500 text-white rounded-full">
                   Oferta
                 </span>
@@ -383,7 +385,7 @@ const ProductDetail = () => {
                 {!tienePrec && (
                   <button className="btn-quote">
                     <Link
-                      to={`/cotizacion?sku=${product.sku}&nombre=${product.nombre}`}
+                      to={`/cotizacion?sku=${product.sku}&nombre=${encodeURIComponent(product.nombre)}&imagen=${encodeURIComponent(imagenPrincipalUrl)}`}
                       style={{ color: "inherit", textDecoration: "none" }}
                     >
                       Solicitar Cotización
@@ -610,7 +612,11 @@ function ConsumiblesSection({ consumibles, filtro, setFiltro }) {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {visibles.map(c => (
+        {visibles.map(c => {
+          const hasPrice = Number(c.precio) > 0;
+          const canBuyOnline = String(c.disponible).toUpperCase() === 'TRUE';
+
+          return (
           <div
             key={c.sku}
             className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-4 flex flex-col items-center text-center gap-3"
@@ -636,12 +642,12 @@ function ConsumiblesSection({ consumibles, filtro, setFiltro }) {
               <p className="text-sm font-medium text-gray-800 leading-tight">{c.nombre}</p>
               <p className="text-xs text-gray-400 mt-0.5">SKU: {c.sku}</p>
             </div>
-            {c.precio && Number(c.precio) > 0 ? (
+            {hasPrice ? (
               <div className="border-t border-gray-100 pt-2 w-full">
                 <p className="text-base font-bold text-green-600 mb-2">
-                  ${withMarkup(Number(c.precio)).toLocaleString('es-MX', { minimumFractionDigits: 2 })}
+                  ${withConsumablesDisplayPrice(Number(c.precio)).toLocaleString('es-MX', { minimumFractionDigits: 2 })}
                 </p>
-                {c.disponible && (
+                {canBuyOnline && (
                   <AddToCartButton
                     product={{
                       sku: c.sku,
@@ -656,12 +662,20 @@ function ConsumiblesSection({ consumibles, filtro, setFiltro }) {
                     className="w-full text-xs py-1"
                   />
                 )}
+                {!canBuyOnline && (
+                  <Link
+                    to={`/cotizacion?sku=${c.sku}&nombre=${encodeURIComponent(c.nombre)}&imagen=${encodeURIComponent(c.imagen ? `${BASE_IMG}${c.imagen}` : '/img/noDisponible.jpg')}`}
+                    className="block w-full rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-center text-xs font-semibold text-amber-700 transition-colors hover:bg-amber-100"
+                  >
+                    Solicitar cotizacion
+                  </Link>
+                )}
               </div>
             ) : (
               <p className="text-xs text-gray-400 border-t border-gray-100 pt-2 w-full">Precio a consultar</p>
             )}
           </div>
-        ))}
+        )})}
       </div>
     </section>
   );

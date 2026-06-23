@@ -62,7 +62,7 @@ const SetPasswordPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
         <div className="text-center">
-          <img src="/img/logoSiscom.png" alt="Logo" className="h-16 mx-auto" />
+          <img src="/img/logoSiscoprint.png" alt="Logo" className="h-16 mx-auto" />
           <h2 className="text-2xl font-bold mt-6">Crea tu contraseña</h2>
           <p className="text-gray-600 mt-2">
             Establece una contraseña para acceder a tu cuenta

@@ -61,7 +61,7 @@ const Header = () => {
   return (
     <header ref={headerRef} className="header">
       <Link to="/" data-header-item>
-        <img src="/img/logoSiscom.png" alt="Siscoprint Logo" className="logo h-full" />
+        <img src="/img/logoSiscoprint.png" alt="Siscoprint Logo" className="logo h-full" />
       </Link>
       
       <div className="header-right">

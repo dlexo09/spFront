@@ -5,43 +5,15 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "./Swiper2.css";
+import { fillBannerSlots, getActiveBanners } from "../services/bannersService";
 
 const BannerStreamingHome = () => {
   const [banners, setBanners] = useState(Array(6).fill(null)); // 6 vacíos
 
   useEffect(() => {
-    fetch("/banners.json")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("No se pudo cargar el archivo banners.json");
-        }
-        return res.json();
-      })
+    getActiveBanners()
       .then((data) => {
-        const now = new Date();
-        const activos = data
-          .filter((b) => {
-            if (b.status !== 1) return false;
-            const inicio = new Date(b.fhInicio);
-            const fin = new Date(b.fhFin);
-            return now >= inicio && now <= fin;
-          });
-
-        let finalBanners = [];
-
-        if (activos.length > 0) {
-          // Si hay banners activos, repetirlos hasta llenar 6 espacios
-          while (finalBanners.length < 6) {
-            finalBanners = [...finalBanners, ...activos];
-          }
-          // Cortar a exactamente 6
-          finalBanners = finalBanners.slice(0, 6);
-        } else {
-          // Si no hay banners activos, llenar con null
-          finalBanners = Array(6).fill(null);
-        }
-
-        setBanners(finalBanners);
+        setBanners(fillBannerSlots(data, 6));
       })
       .catch((error) => {
         console.error("Error al cargar los banners:", error);
@@ -96,7 +68,7 @@ const BannerStreamingHome = () => {
                 <div className="swiper-img-container">
                   <img src={banner.imgUrl} alt={banner.title} className="w-full object-cover" />
                   <div className="swiper-content d-flex align-items-center flex-column justify-content-center">
-                    <a href={`/producto/${banner.idProducto}`} className="swiper-button">Conocer más</a>
+                    <a href={banner.idProducto ? `/producto/${banner.idProducto}` : "/productos"} className="swiper-button">Conocer más</a>
                   </div>
                 </div>
               ) : (

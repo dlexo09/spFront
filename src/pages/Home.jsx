@@ -18,7 +18,7 @@ const Home = () => {
       <AliadosTecnologia />
       <CtaDudas />
       {/* <AboutContent /> */}
-      <Banner />
+      {/* <Banner /> */}
       
 
       {/* <section className="p-6 text-center">
